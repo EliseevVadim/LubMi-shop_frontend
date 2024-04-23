@@ -1,0 +1,117 @@
+.home {
+    margin-top: 76px;
+
+    &-slider {
+        width: 100%;
+        height: 801px;
+
+        @media(max-width: 1024px) {
+            height: 700px;
+        }
+
+        .slick-track {
+            height: 801px;
+            @media(max-width: 1024px) {
+                height: 700px;
+            }
+        }
+
+        .slick-dots {
+            position: absolute;
+            bottom: 30px;
+
+            @media(max-width: 1024px) {
+                bottom: 10px;
+            }
+
+            .slick-active {
+
+                button {
+                    border: none !important;
+                    width: 16px;
+                    height: 16px;
+
+                    &::before {
+                        color: $white;
+                        opacity: 1;
+                        width: 16px;
+                        height: 16px;
+                        font-size: 16px;
+                    }
+                }
+            }
+
+            li {
+
+                button {
+                    width: 15px;
+                    height: 15px;
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 1px solid $white;
+                    border-radius: 50%;
+
+                    &::before {
+                        transform: translateY(-1px);
+                        width: 14px;
+                        height: 14px;
+                        font-size: 14px;
+                        color: $dark;
+                        opacity: 1;
+                    }
+                }
+            }
+
+        }
+
+        &-item {
+            width: 100%;
+            height: 801px;
+            position: relative;
+
+            @media(max-width: 1024px) {
+                height: 700px;
+            }
+
+            &-inner {
+                width: 100%;
+                position: absolute;
+                bottom: 70px;
+                left: 50%;
+                transform: translateX(-50%);
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 40px;
+
+                @media(max-width: 1024px) {
+                    bottom: 40px;
+                }
+
+                h2 {
+                    font-size: 120px;
+                    font-weight: 400;
+                    line-height: 120px;
+                    text-align: center;
+                    text-transform: uppercase;
+                    color: $white;
+
+                    @media(max-width: 1024px) {
+                        font-size: 54px;
+                        line-height: 54px;
+                        text-align: center;
+
+                    }
+                }
+            }
+        }
+
+    }
+
+    &-catalog {
+        margin-top: 100px;
+    }
+}

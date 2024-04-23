@@ -1,0 +1,18 @@
+@import 'slick-carousel/slick/slick.css';
+@import 'slick-carousel/slick/slick-theme.css';
+
+@import 'globals';
+@import 'variable';
+
+@import "./header/header";
+@import "./home/home";
+@import "./catalog/catalog";
+@import "./catalog/card";
+@import "./catalog/sort";
+
+#is-service-frame{
+    display: none;
+}
+
+
+
