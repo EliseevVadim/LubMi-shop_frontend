@@ -1,0 +1,123 @@
+.footer {
+    margin-top: 100px;
+    background-color: $white;
+
+    @media(max-width: 1024px) {
+        margin-top: 60px;
+    }
+
+    &-main {
+        display: flex;
+        justify-content: space-between;
+
+        @media(max-width: 800px) {
+            flex-direction: column;
+        }
+
+        &-info {
+            display: flex;
+            flex-direction: column;
+
+            &-img {
+                margin-bottom: 12px;
+                width: 236px;
+                height: 117px;
+                position: relative;
+            }
+
+            a {
+                margin-top: 4px;
+                font-size: 24px;
+                font-weight: 300;
+                line-height: 28.8px;
+                color: $dark;
+            }
+        }
+
+        &-menus {
+            display: flex;
+            gap: 80px;
+
+            @media(max-width: 800px) {
+                margin-top: 40px;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            &-block {
+
+                h3 {
+                    font-size: 14px;
+                    font-weight: 300;
+                    line-height: 19.6px;
+                    color: $greyWhite;
+                    text-transform: uppercase;
+                    margin-bottom: 16px;
+                }
+
+                &-list {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+
+                    a {
+                        font-size: 24px;
+                        font-weight: 300;
+                        line-height: 28.8px;
+                        color: $dark;
+                    }
+                }
+            }
+        }
+
+    }
+
+    &-bottom {
+        margin: 100px 0 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        p {
+            font-size: 14px;
+            font-weight: 100;
+            line-height: 18.2px;
+            color: $greyWhite;
+        }
+
+        &-social{
+            @media(max-width: 800px) {
+                display: none;
+            }
+        }
+
+        &-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            @media(max-width: 800px) {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            a {
+                font-size: 14px;
+                font-weight: 100;
+                line-height: 18.2px;
+                color: $greyWhite;
+            }
+        }
+
+        @media(max-width: 1024px) {
+            margin: 40px 0 20px;
+        }
+
+        @media(max-width: 800px) {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+    }
+}

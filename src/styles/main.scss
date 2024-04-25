@@ -4,7 +4,12 @@
 @import 'globals';
 @import 'variable';
 
+@import "./common/custom-button";
+@import "./common/social";
+
 @import "./header/header";
+@import "./footer/footer";
+
 @import "./home/home";
 @import "./catalog/catalog";
 @import "./catalog/card";

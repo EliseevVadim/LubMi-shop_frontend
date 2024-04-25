@@ -1,0 +1,28 @@
+.social {
+    padding: 12px 19px;
+    border-radius: 12px;
+    background-color: $dark;
+
+    display: flex;
+    align-items: center;
+
+    &-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-right: 27px;
+        border-right: 1px solid rgba(86, 85, 81, 1);
+    }
+
+    &-right {
+        padding-left: 27px;
+        display: flex;
+        align-items: center;
+    }
+
+    a {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
+}

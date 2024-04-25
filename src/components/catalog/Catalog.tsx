@@ -2,6 +2,7 @@ import React from 'react';
 import MaxWithLayout from "../../layouts/MaxWithLayout";
 import SortBloc from "./SortBloc";
 import Card from "./Card";
+import CustomButton from "../common/CustomButton";
 
 const Catalog = () => {
 
@@ -27,7 +28,12 @@ const Catalog = () => {
           }
         </div>
         <div className="catalog-show-more">
-
+          <CustomButton
+            title={'Загрузить еще'}
+            padding={'24px 0'}
+            maxWidth={300}
+            border={'2px solid rgba(34, 34, 34, 1)'}
+          />
         </div>
       </div>
     </MaxWithLayout>

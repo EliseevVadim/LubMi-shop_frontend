@@ -2,7 +2,21 @@ import React, { FC, PropsWithChildren } from 'react';
 import { LoadingOutlined } from "@ant-design/icons/lib";
 import { Spin } from "antd";
 
-const CustomButton: FC<PropsWithChildren<any>> = ({
+interface IButton {
+  isLoading: boolean,
+  title: string
+  padding: string,
+  width: string,
+  maxWidth: string,
+  onClick: () => {},
+  isTransperent: boolean,
+  isWithBorder: boolean,
+  backColor: string,
+  color: string,
+  border: string,
+}
+
+const CustomButton: FC<PropsWithChildren<IButton>> = ({
                                                     isLoading = false,
                                                     title = '',
                                                     padding = '22px 30px',
@@ -13,24 +27,21 @@ const CustomButton: FC<PropsWithChildren<any>> = ({
                                                     isTransperent = false,
                                                     isWithBorder = false,
                                                     backColor = 'rgba(255,255,255)',
-                                                    color = 'rgba(34, 34, 34, 1)'
+                                                    color = 'rgba(34, 34, 34, 1)',
+                                                    border = 'none',
                                                   }) => {
   return (
     <button
       onClick={onClick}
-      className='gold-button'
+      className='custom-button'
       style={{
         pointerEvents: isLoading ? 'none' : 'auto',
         opacity: isLoading ? 0.5 : 1,
-        padding,
         width,
         maxWidth,
         background: backColor ? backColor : isTransperent && 'transparent',
-        border: isWithBorder ? '1px solid rgba(0, 0, 0, 1)' : 'none',
-        color: color,
-        fontWeight: 300,
-        fontSize: 24,
-        borderRadius: 6
+        border,
+        borderRadius: 6,
       }}
     >
       {
@@ -39,7 +50,17 @@ const CustomButton: FC<PropsWithChildren<any>> = ({
           <Spin
             indicator={<LoadingOutlined style={{ fontSize: 25, color: '#000' }} />}
           />
-          : title
+          : <p
+          style={{
+            padding,
+            color: color,
+            fontWeight: 300,
+            fontSize: 24,
+            width: '100%'
+          }}
+          >
+            {title}
+          </p>
 
       }
     </button>

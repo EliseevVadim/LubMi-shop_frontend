@@ -114,4 +114,52 @@
     &-catalog {
         margin-top: 100px;
     }
+
+    &-banner {
+        margin-top: 100px;
+        height: 890px;
+        width: 100%;
+        background-image: url(../../../public/home-banner.png);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        @media(max-width: 1024px) {
+            height: 800px;
+        }
+
+
+        &-inner {
+            h2 {
+                font-size: 120px;
+                font-weight: 400;
+                line-height: 120px;
+                color: $dark;
+                text-transform: uppercase;
+
+                @media(max-width: 1024px) {
+                    font-size: 45px;
+                    line-height: 45px;
+                }
+            }
+
+            button {
+                box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
+            }
+
+            padding: 40px 0;
+            height: 100%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 40px;
+
+            @media(max-width: 1024px) {
+                gap: 20px;
+            }
+        }
+
+    }
+
 }

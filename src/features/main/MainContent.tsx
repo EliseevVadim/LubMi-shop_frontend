@@ -5,6 +5,7 @@ import homeIntroOne from '../../../public/home-intro-1.png'
 import homeIntroTwo from '../../../public/home-intro-2.png'
 import Image from "next/dist/client/legacy/image";
 import Catalog from "../../components/catalog/Catalog";
+import MaxWithLayout from "../../layouts/MaxWithLayout";
 
 const MainContent = () => {
 
@@ -61,7 +62,7 @@ const MainContent = () => {
                   objectFit={'cover'}
                   src={item?.image}
                 />
-                <div className="home-slider-item-inner" >
+                <div className="home-slider-item-inner">
                   <h2 style={item.style}>
                     {item.text}
                   </h2>
@@ -79,11 +80,28 @@ const MainContent = () => {
       </div>
 
       <div className="home-catalog">
-        <Catalog/>
+        <Catalog />
       </div>
 
       <div className="home-catalog">
-        <Catalog/>
+        <Catalog />
+      </div>
+
+      <div className="home-banner">
+        <MaxWithLayout>
+          <div className="home-banner-inner">
+            <h2>
+              Парфюмерия
+            </h2>
+            <CustomButton
+              title={'Перейти в каталог'}
+              padding={'24px 0'}
+              maxWidth={300}
+              backColor={'rgba(34, 34, 34, 1)'}
+              color={'rgba(255, 255, 255, 1)'}
+            />
+          </div>
+        </MaxWithLayout>
       </div>
     </div>
   );

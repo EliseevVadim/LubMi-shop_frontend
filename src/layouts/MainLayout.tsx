@@ -1,5 +1,6 @@
 import React, { FC, PropsWithChildren, useEffect } from 'react';
 import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
 
 
 const MainLayout: FC<PropsWithChildren<any>> = ({
@@ -20,6 +21,7 @@ const MainLayout: FC<PropsWithChildren<any>> = ({
       <div className="main-block">
         {children}
       </div>
+      <Footer/>
     </div>
   );
 };
