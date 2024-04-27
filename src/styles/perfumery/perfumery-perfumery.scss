@@ -1,0 +1,134 @@
+.perfumery-perfumery{
+    margin-top: 100px;
+
+    @media(max-width: 1024px) {
+        margin-top: 60px;
+    }
+
+    &-line {
+        width: 100%;
+        height: 1px;
+        background-color: $dark;
+        position: relative;
+
+        &-extra {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 12px;
+            background-color: $dark;
+        }
+    }
+
+
+    h2 {
+        margin-top: 40px;
+        font-size: 120px;
+        font-weight: 400;
+        line-height: 120px;
+        color: $dark;
+        text-transform: uppercase;
+
+        @media(max-width: 1024px) {
+            margin-top: 20px;
+            font-size: 24px;
+            line-height: 24px;
+        }
+
+    }
+
+    &-mob {
+        display: none;
+
+        @media(max-width: 1024px) {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px
+        }
+
+        p {
+            font-size: 16px;
+            font-weight: 100;
+            line-height: 16px;
+            color: $grey;
+        }
+    }
+
+    &-inside {
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 20px;
+
+        @media(max-width: 1024px) {
+            gap: 5px;
+        }
+
+        &-left {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            p {
+                font-size: 24px;
+                font-weight: 300;
+                line-height: 30px;
+                color: $grey;
+
+                &:first-child {
+                    margin-bottom: 30px;
+                }
+
+                @media(max-width: 1024px) {
+                    display: none;
+                }
+            }
+
+            &-img {
+                width: 100%;
+                min-height: 837px;
+                height: 100%;
+                position: relative;
+
+                @media(max-width: 1024px) {
+                    min-height: 237px;
+                }
+            }
+
+        }
+
+        &-right {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            @media(max-width: 1024px) {
+                gap: 5px;
+            }
+
+            &-img-one {
+                width: 100%;
+                min-height: 769px;
+                height: 100%;
+                position: relative;
+                @media(max-width: 1024px) {
+                    min-height: 167px;
+                }
+            }
+
+            &-img-two {
+                width: 100%;
+                min-height: 458px;
+                height: 100%;
+                position: relative;
+
+                @media(max-width: 1024px) {
+                    min-height: 130px;
+                }
+            }
+        }
+    }
+}

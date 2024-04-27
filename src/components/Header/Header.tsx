@@ -1,5 +1,4 @@
 import React from 'react';
-import MaxWithLayout from "../../layouts/MaxWithLayout";
 import headerLogo from '../../../public/header-logo.png'
 import Image from "next/dist/client/legacy/image";
 import Link from "next/link";
@@ -7,18 +6,24 @@ import SearchIcon from "../../assets/icons/SearchIcon";
 import FavoriteIcon from "../../assets/icons/FavoriteIcon";
 import BucketIcon from "../../assets/icons/BucketIcon";
 import BurgerIcon from "../../assets/icons/BurgerIcon";
+import { useRouter } from "next/router";
 
 const Header = () => {
+
+  const router = useRouter()
+
+
+  console.log(router.pathname)
 
   const nav: any = [
     {
       id: 1,
-      path: '/',
+      path: '/catalog',
       title: 'Каталог'
     },
     {
       id: 2,
-      path: '/',
+      path: '/perfumery',
       title: 'Парфюмерия'
     },
     {
@@ -46,16 +51,21 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header-wrap">
-        <div className="header-logo">
+        <Link href='/' className="header-logo">
           <Image
             src={headerLogo}
           />
-        </div>
+        </Link>
         <ul className="header-nav">
           {
             nav.map((item: any) =>
               <li>
-                <Link href={item.path}>
+                <Link
+                  href={item.path}
+                  style={{
+                    fontWeight: router.pathname === item.path ? 400 : 300
+                  }}
+                >
                   {item.title}
                 </Link>
               </li>

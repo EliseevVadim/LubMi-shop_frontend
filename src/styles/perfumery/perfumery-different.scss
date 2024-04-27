@@ -1,0 +1,80 @@
+.perfumery-different {
+    margin-top: 100px;
+
+    @media(max-width: 1024px) {
+        margin-top: 60px;
+    }
+
+    h2 {
+        margin-top: 40px;
+
+        font-size: 60px;
+        font-weight: 400;
+        line-height: 60px;
+        color: $dark;
+        text-transform: uppercase;
+
+        @media(max-width: 1024px) {
+            margin-top: 20px;
+            font-size: 24px;
+            line-height: 24px;
+        }
+    }
+
+    &-inside {
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+
+        @media(max-width: 1024px) {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        &-img {
+            position: relative;
+            min-height: 930px;
+            height: 100%;
+            width: 100%;
+
+            @media(max-width: 1024px) {
+                min-height: 468px;
+            }
+        }
+
+        &-text {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            h3 {
+                font-size: 24px;
+                font-weight: 600;
+                line-height: 24px;
+                color: $dark;
+
+                @media(max-width: 1024px) {
+                    font-size: 16px;
+                }
+            }
+
+            p {
+                font-size: 24px;
+                font-weight: 300;
+                line-height: 24px;
+                letter-spacing: -0.04em;
+                color: $dark;
+
+                @media(max-width: 1024px) {
+                    font-size: 16px;
+                }
+
+                span {
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}
