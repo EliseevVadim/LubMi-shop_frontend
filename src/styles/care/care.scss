@@ -1,0 +1,105 @@
+.care {
+    margin-top: 60px;
+
+    @media(max-width: 1024px) {
+        margin-top: 40px;
+    }
+
+    h1 {
+        margin-top: 20px;
+        font-size: 32px;
+        font-weight: 300;
+        line-height: 32px;
+        letter-spacing: -0.04em;
+        color: $dark;
+
+        @media(max-width: 1024px) {
+            margin-bottom: 40px;
+            font-size: 24px;
+            line-height: 24px;
+        }
+    }
+
+    &-inside {
+        margin-top: 80px;
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 80px;
+
+        @media(max-width: 1024px) {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 20px;
+        }
+
+        &-text {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+
+            @media(max-width: 1024px) {
+                gap: 40px;
+            }
+
+            &-block {
+
+                h2 {
+                    margin-bottom: 40px;
+                    font-size: 32px;
+                    font-weight: 300;
+                    line-height: 32px;
+                    letter-spacing: -0.04em;
+                    color: $dark;
+
+                    @media(max-width: 1024px) {
+                        margin-bottom: 20px;
+                        font-size: 24px;
+                        line-height: 24px;
+                    }
+                }
+
+                ul {
+                    li {
+                        padding-left: 20px;
+                        position: relative;
+                        font-size: 24px;
+                        font-weight: 300;
+                        line-height: 24px;
+                        letter-spacing: -0.04em;
+                        color: $dark;
+
+                        @media(max-width: 1024px) {
+                            font-size: 16px;
+                            line-height: 16px;
+                        }
+
+                        &:before {
+                            position: absolute;
+                            left: 0;
+                            top: 10px;
+                            content: '';
+                            width: 5px;
+                            height: 5px;
+                            border-radius: 50%;
+
+                            background-color: $dark;
+                            margin-left: 5px;
+                        }
+                    }
+                }
+            }
+        }
+
+        &-img {
+            position: relative;
+            width: 100%;
+            min-height: 750px;
+
+            @media(max-width: 1024px) {
+                min-height: 562px;
+            }
+        }
+    }
+
+}

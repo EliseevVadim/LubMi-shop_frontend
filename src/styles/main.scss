@@ -6,11 +6,25 @@
 
 @import "./common/custom-button";
 @import "./common/social";
+@import "./common/line-block";
 
 @import "./header/header";
 @import "./footer/footer";
 
 @import "./home/home";
+
+@import "./delivery/delivery";
+
+@import "./care/care";
+
+@import "./sizes/sizes";
+
+@import "./about/about";
+@import "./about/about-main";
+@import "./about/about-we";
+@import "./about/about-partner";
+
+@import "./contact/contact";
 
 @import "./perfumery/perfumery-intro";
 @import "./perfumery/perfumery-perfumery";
@@ -18,7 +32,7 @@
 @import "./perfumery/perfumery-benefit";
 @import "./perfumery/perfumery-order";
 @import "./perfumery/perfumery-info";
-@import "./perfumery/perfumer-drop-down";
+@import "common/spoller";
 
 @import "./catalog/catalog-page";
 @import "./catalog/catalog";

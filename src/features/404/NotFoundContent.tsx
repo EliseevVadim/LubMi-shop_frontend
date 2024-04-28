@@ -6,7 +6,7 @@ const NotFoundContent = () => {
 
   return (
     <MaxWithLayout>
-
+404
     </MaxWithLayout>
   );
 };

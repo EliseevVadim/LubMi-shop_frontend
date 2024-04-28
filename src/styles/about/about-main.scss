@@ -1,0 +1,42 @@
+.about-main {
+    margin: 40px 0 50px;
+
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 80px;
+
+    @media(max-width: 1024px) {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 20px;
+    }
+
+    &-text {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        p {
+            font-size: 24px;
+            font-weight: 300;
+            line-height: 24px;
+            letter-spacing: -0.04em;
+            color: $dark;
+
+            @media(max-width: 1024px) {
+                font-size: 16px;
+                line-height: 16px;
+            }
+        }
+    }
+
+    &-img {
+        position: relative;
+        min-height: 750px;
+        width: 100%;
+
+        @media(max-width: 1024px) {
+            min-height: 560px;
+        }
+    }
+}

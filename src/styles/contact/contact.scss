@@ -1,0 +1,88 @@
+.contact {
+    margin: 60px 0 50px;
+
+    @media(max-width: 1024px) {
+        margin: 40px 0;
+    }
+
+    h1 {
+        margin-top: 20px;
+        font-size: 32px;
+        font-weight: 300;
+        line-height: 32px;
+        letter-spacing: -0.04em;
+        color: $dark;
+        text-align: center;
+        text-transform: uppercase;
+
+        @media(max-width: 1024px) {
+            margin-bottom: 40px;
+            font-size: 24px;
+            line-height: 24px;
+        }
+    }
+
+    &-inside {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &-phone {
+            margin-top: 88px;
+            font-size: 24px;
+            font-weight: 300;
+            line-height: 24px;
+            letter-spacing: -0.04em;
+            color: $dark;
+            text-align: center;
+
+            a{
+                font-weight: 400;
+                @media(max-width: 1024px) {
+                    display: block;
+                }
+            }
+
+            @media(max-width: 1024px) {
+                margin-top: 60px;
+                font-size: 18px;
+                line-height: 18px;
+            }
+        }
+
+        &-schedule{
+            font-size: 24px;
+            font-weight: 300;
+            line-height: 24px;
+            letter-spacing: -0.04em;
+            color: $dark;
+
+            @media(max-width: 1024px) {
+                font-size: 18px;
+                line-height: 18px;
+            }
+        }
+
+        &-about{
+            margin: 60px 0 20px;
+            font-size: 24px;
+            font-weight: 300;
+            line-height: 24px;
+            letter-spacing: -0.04em;
+            color: $dark;
+            text-align: center;
+
+            @media(max-width: 1024px) {
+                font-size: 18px;
+                line-height: 18px;
+                margin: 40px 0 20px;
+            }
+        }
+
+        &-button {
+            width: 100%;
+            max-width: 400px;
+        }
+    }
+}

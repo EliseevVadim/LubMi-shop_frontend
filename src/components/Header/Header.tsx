@@ -12,9 +12,6 @@ const Header = () => {
 
   const router = useRouter()
 
-
-  console.log(router.pathname)
-
   const nav: any = [
     {
       id: 1,
@@ -28,22 +25,22 @@ const Header = () => {
     },
     {
       id: 3,
-      path: '/',
+      path: '/delivery',
       title: 'Доставка и оплата'
     },
     {
       id: 4,
-      path: '/',
+      path: '/care',
       title: 'Уход'
     },
     {
       id: 5,
-      path: '/',
+      path: '/contacts',
       title: 'Контакты'
     },
     {
-      id: 5,
-      path: '/',
+      id: 6,
+      path: '/about',
       title: 'О компании'
     },
   ]

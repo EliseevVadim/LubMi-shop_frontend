@@ -14,22 +14,24 @@ interface IButton {
   backColor: string,
   color: string,
   border: string,
+  icon?: any,
 }
 
 const CustomButton: FC<PropsWithChildren<IButton>> = ({
-                                                    isLoading = false,
-                                                    title = '',
-                                                    padding = '22px 30px',
-                                                    width = '100%',
-                                                    maxWidth = 200,
-                                                    onClick = () => {
-                                                    },
-                                                    isTransperent = false,
-                                                    isWithBorder = false,
-                                                    backColor = 'rgba(255,255,255)',
-                                                    color = 'rgba(34, 34, 34, 1)',
-                                                    border = 'none',
-                                                  }) => {
+                                                        isLoading = false,
+                                                        title = '',
+                                                        padding = '22px 30px',
+                                                        width = '100%',
+                                                        maxWidth = 200,
+                                                        onClick = () => {
+                                                        },
+                                                        isTransperent = false,
+                                                        isWithBorder = false,
+                                                        backColor = 'rgba(255,255,255)',
+                                                        color = 'rgba(34, 34, 34, 1)',
+                                                        border = 'none',
+                                                        icon
+                                                      }) => {
   return (
     <button
       onClick={onClick}
@@ -51,15 +53,20 @@ const CustomButton: FC<PropsWithChildren<IButton>> = ({
             indicator={<LoadingOutlined style={{ fontSize: 25, color: '#000' }} />}
           />
           : <p
-          style={{
-            padding,
-            color: color,
-            fontWeight: 300,
-            fontSize: 24,
-            width: '100%'
-          }}
+            style={{
+              padding,
+              color: color,
+              fontWeight: 300,
+              fontSize: 24,
+              width: '100%',
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: 20,
+            }}
           >
             {title}
+            {icon}
           </p>
 
       }

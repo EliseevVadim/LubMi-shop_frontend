@@ -31,15 +31,15 @@ const Footer = () => {
               </h3>
 
               <div className="footer-main-menus-block-list">
-                <Link href={''}>
+                <Link href={'/delivery'}>
                   Доставка и оплата
                 </Link>
-                <Link href={''}>
+                <Link href={'/sizes'}>
                   Таблица размеров
                 </Link>
-                <Link href={''}>
+                <a href={'https://goodiets.com/base'}>
                   База поставщиков
-                </Link>
+                </a>
               </div>
             </div>
             <div className="footer-main-menus-block">

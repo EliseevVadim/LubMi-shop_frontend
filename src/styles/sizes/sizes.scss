@@ -1,0 +1,112 @@
+.sizes {
+    margin-top: 60px;
+
+    @media(max-width: 1024px) {
+        margin-top: 40px;
+    }
+
+    h1 {
+        margin-top: 20px;
+        font-size: 32px;
+        font-weight: 300;
+        line-height: 32px;
+        letter-spacing: -0.04em;
+        color: $dark;
+        text-align: center;
+        text-transform: uppercase;
+
+        @media(max-width: 1024px) {
+            margin-bottom: 40px;
+            font-size: 24px;
+            line-height: 24px;
+        }
+    }
+
+    h2 {
+        margin-top: 40px;
+        font-size: 24px;
+        font-weight: 300;
+        line-height: 24px;
+        letter-spacing: -0.04em;
+        text-align: center;
+        text-transform: uppercase;
+        color: $dark;
+
+        @media(max-width: 1000px) {
+            margin-top: 20px;
+            font-size: 18px;
+            line-height: 18px;
+        }
+
+    }
+
+    &-inside {
+        margin-top: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow-x: auto;
+        position: relative;
+
+
+        @media(max-width: 1000px) {
+            margin-top: 40px;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        &::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: rgba(34, 34, 34, 0.2);
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $dark;
+        }
+
+        table {
+            border-collapse: collapse;
+            min-width: 930px;
+
+            @media(max-width: 1000px) {
+                width: 800px;
+                min-width: 800px;
+            }
+        }
+
+        th, td {
+            text-align: center;
+            padding: 20px;
+        }
+
+        th {
+            border-bottom: 1px solid black;
+
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 14.4px;
+            letter-spacing: -0.01em;
+            text-align: center;
+            color: $dark;
+        }
+
+        td {
+            border-bottom: 1px solid black;
+
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 14.4px;
+            letter-spacing: -0.01em;
+            text-align: center;
+            color: $dark;
+
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+    }
+}
