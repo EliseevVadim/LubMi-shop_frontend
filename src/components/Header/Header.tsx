@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import headerLogo from '../../../public/header-logo.png'
 import Image from "next/dist/client/legacy/image";
 import Link from "next/link";
@@ -7,6 +7,12 @@ import FavoriteIcon from "../../assets/icons/FavoriteIcon";
 import BucketIcon from "../../assets/icons/BucketIcon";
 import BurgerIcon from "../../assets/icons/BurgerIcon";
 import { useRouter } from "next/router";
+import {
+  onChangeIsOpenBucket,
+  onChangeIsOpenFavorite,
+  onChangeIsOpenMobMenu,
+  onChangeIsOpenSearch
+} from "../../entety/modals/model/index";
 
 const Header = () => {
 
@@ -15,32 +21,32 @@ const Header = () => {
   const nav: any = [
     {
       id: 1,
-      path: '/catalog',
+      path: 'catalog',
       title: 'Каталог'
     },
     {
       id: 2,
-      path: '/perfumery',
+      path: 'perfumery',
       title: 'Парфюмерия'
     },
     {
       id: 3,
-      path: '/delivery',
+      path: 'delivery',
       title: 'Доставка и оплата'
     },
     {
       id: 4,
-      path: '/care',
+      path: 'care',
       title: 'Уход'
     },
     {
       id: 5,
-      path: '/contacts',
+      path: 'contacts',
       title: 'Контакты'
     },
     {
       id: 6,
-      path: '/about',
+      path: 'about',
       title: 'О компании'
     },
   ]
@@ -70,16 +76,25 @@ const Header = () => {
           }
         </ul>
         <div className="header-icons">
-          <button>
+          <button
+            onClick={() => onChangeIsOpenSearch(true)}
+          >
             <SearchIcon />
           </button>
-          <button>
+          <button
+            onClick={() => onChangeIsOpenFavorite(true)}
+          >
             <FavoriteIcon />
           </button>
-          <button>
+          <button
+            onClick={() => onChangeIsOpenBucket(true)}
+          >
             <BucketIcon />
           </button>
-          <button className="header-icons-burger">
+          <button
+            className="header-icons-burger"
+            onClick={() => onChangeIsOpenMobMenu(true)}
+          >
             <BurgerIcon />
           </button>
         </div>

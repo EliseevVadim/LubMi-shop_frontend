@@ -1,0 +1,32 @@
+.counter {
+    display: flex;
+    align-items: center;
+    width: 65px;
+    gap: 5px;
+    justify-content: space-between;
+
+    &-input {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+
+        font-size: 24px;
+        font-weight: 300;
+        line-height: 23px;
+        letter-spacing: -0.02em;
+        color: $dark;
+
+        input {
+            max-width: 25px;
+            text-align: center;
+
+            font-size: 24px;
+            font-weight: 300;
+            line-height: 23px;
+            letter-spacing: -0.02em;
+            color: $dark;
+        }
+    }
+
+}

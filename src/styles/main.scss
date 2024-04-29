@@ -7,9 +7,15 @@
 @import "./common/custom-button";
 @import "./common/social";
 @import "./common/line-block";
+@import "./common/counter";
 
 @import "./header/header";
 @import "./footer/footer";
+
+@import "modals/mob-menu";
+@import "modals/favorite";
+@import "modals/bucket";
+@import "modals/search-modal";
 
 @import "./home/home";
 
@@ -38,6 +44,8 @@
 @import "./catalog/catalog";
 @import "./catalog/card";
 @import "./catalog/sort";
+
+@import "./bucket/bucket-card";
 
 #is-service-frame{
     display: none;
