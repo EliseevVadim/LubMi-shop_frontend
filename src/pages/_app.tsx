@@ -6,6 +6,7 @@ import { NextFonts } from "../components/common/NextFonts";
 import Head from "next/head";
 import { ConfigProvider } from "antd";
 import locale from "antd/locale/ru_RU";
+import { AlertProvider } from "../controllers/AlertNotification/index";
 
 export default function App({ Component, pageProps }: AppProps){
 
@@ -56,7 +57,9 @@ export default function App({ Component, pageProps }: AppProps){
               content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
       </Head>
       <ConfigProvider theme={antdTheme} locale={locale}>
-        <Component {...pageProps} />
+        <AlertProvider>
+          <Component {...pageProps} />
+        </AlertProvider>
       </ConfigProvider>
     </div>
   )

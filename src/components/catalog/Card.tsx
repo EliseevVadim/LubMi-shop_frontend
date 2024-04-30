@@ -3,11 +3,18 @@ import testImage from '../../../public/test-image-card.png'
 import Image from "next/dist/client/legacy/image";
 import FavoriteWhite from "../../assets/icons/FavoriteWhite";
 import FavoriteWhiteFill from "../../assets/icons/FavoriteWhiteFill";
+import { useAlert } from "../../controllers/AlertNotification/index";
 
 const Card = () => {
 
+  const uAlert = useAlert()
+
   return (
-    <div className="card">
+    <div className="card" onClick={() =>
+      uAlert({
+        message: 'Товар добавлен в избранное'
+      })
+    }>
       <div className="card-img">
         <Image
           layout={'fill'}

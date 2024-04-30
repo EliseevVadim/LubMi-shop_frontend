@@ -11,7 +11,8 @@ const MaxWithLayout: FC<PropsWithChildren<any>> = ({
         margin: '0 auto',
         padding: '0 20px',
         width: '100%',
-        height: '100%'
+        height: '100%',
+        position: "relative"
       }}
     >
       {children}
