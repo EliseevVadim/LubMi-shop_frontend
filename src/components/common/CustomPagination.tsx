@@ -1,35 +1,43 @@
 import React, { FC, PropsWithChildren } from 'react';
 import { Pagination, PaginationProps } from "antd";
-// import ArrowToRight from "../../assets/icons/pagination/ArrowToRight";
-// import ArrowToLeft from "../../assets/icons/pagination/ArrowToLeft";
+import PaginationArrowRoLeft from "../../assets/icons/PaginationArrowRoLeft";
+import PaginationArrowRoRight from "../../assets/icons/PaginationArrowRoRight";
 
 const CustomPagination: FC<PropsWithChildren<any>> = ({
-                            total,
+                            total = 100,
                             limit,
-                            page,
+                            page = 10,
                             changePage
                           }) => {
 
-  // const itemRender: PaginationProps['itemRender'] = (_, type, originalElement) => {
-  //   if (type === 'prev') {
-  //     return <ArrowToLeft />;
-  //   }
-  //   if (type === 'next') {
-  //     return <ArrowToRight />;
-  //   }
-  //   return originalElement;
-  // };
+  const itemRender: PaginationProps['itemRender'] = (_, type, originalElement) => {
+    if (type === 'prev') {
+      return (
+        <div className="pagination-to-left">
+          <PaginationArrowRoLeft />
+        </div>
+      );
+    }
+    if (type === 'next') {
+      return (
+        <div className="pagination-to-right">
+          <PaginationArrowRoRight />
+        </div>
+      );
+    }
+    return originalElement;
+  };
 
   return (
     <Pagination
       className='pagination'
-      onChange={(page, pageSize): any => changePage(page)}
+      // onChange={(page, pageSize): any => changePage(page)}
       defaultCurrent={1}
       current={page}
       pageSize={limit}
       total={total}
       showSizeChanger={false}
-      // itemRender={itemRender}
+      itemRender={itemRender}
     />
   );
 };

@@ -16,7 +16,7 @@ const Catalog = () => {
         </div>
         <div className="catalog-top">
           <h2>
-            Бестселлеры
+            Каталог
           </h2>
           <SortBloc />
         </div>
