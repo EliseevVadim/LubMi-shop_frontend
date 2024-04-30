@@ -5,6 +5,8 @@ import MobMenu from "../entety/modals/UI/MobMenu";
 import Favorite from "../entety/modals/UI/Favorite";
 import Bucket from "../entety/modals/UI/Bucket";
 import Search from "../entety/modals/UI/Search";
+import NotificationModal from "../entety/modals/UI/NotificationModal";
+import { onSetNotification } from "../entety/modals/model/index";
 
 
 const MainLayout: FC<PropsWithChildren<any>> = ({
@@ -21,15 +23,26 @@ const MainLayout: FC<PropsWithChildren<any>> = ({
       justifyContent: "space-between",
       marginTop: 76,
     }}>
-      <Header/>
-      <MobMenu/>
-      <Favorite/>
-      <Bucket/>
-      <Search/>
+      <Header />
+      <MobMenu />
+      <Favorite />
+      <Bucket />
+      <Search />
+      <NotificationModal />
+      <div
+        style={{
+          width: 40,
+          height: 50,
+          backgroundColor: '#000'
+        }}
+        onClick={() => onSetNotification({title: '1', message: '2'})}
+      >
+
+      </div>
       <div className="main-block">
         {children}
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

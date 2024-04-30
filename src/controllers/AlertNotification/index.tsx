@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { v4 as uuid } from 'uuid';
 import CrossIcon from "../../assets/icons/CrossIcon";
-import MaxWithLayout from "../../layouts/MaxWithLayout";
 
 const Context = React.createContext();
 

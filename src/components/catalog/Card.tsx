@@ -7,14 +7,8 @@ import { useAlert } from "../../controllers/AlertNotification/index";
 
 const Card = () => {
 
-  const uAlert = useAlert()
-
   return (
-    <div className="card" onClick={() =>
-      uAlert({
-        message: 'Товар добавлен в избранное'
-      })
-    }>
+    <div className="card">
       <div className="card-img">
         <Image
           layout={'fill'}

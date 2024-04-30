@@ -19,3 +19,13 @@ $isOpenBucket.on(onChangeIsOpenBucket, (_, t) => t)
 export const $isOpenSearch = createStore<boolean>(false)
 export const onChangeIsOpenSearch = createEvent<boolean>()
 $isOpenSearch.on(onChangeIsOpenSearch, (_, t) => t)
+
+// notification
+export const $notification = createStore<any>({
+  title: '',
+  message: ''
+})
+export const onSetNotification = createEvent<any>()
+export const onResetNotification = createEvent<any>()
+$notification.on(onSetNotification, (_, t) => t)
+$notification.on(onResetNotification, () => ({title: '', message: ''}))
