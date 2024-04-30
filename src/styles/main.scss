@@ -19,6 +19,9 @@
 @import "modals/search-modal";
 @import "modals/allert";
 @import "modals/notification";
+@import "modals/product-modal";
+
+@import "./form/form";
 
 @import "./home/home";
 
@@ -47,6 +50,7 @@
 @import "./catalog/catalog";
 @import "./catalog/card";
 @import "./catalog/sort";
+@import "./catalog/selector";
 
 @import "./bucket/bucket-card";
 

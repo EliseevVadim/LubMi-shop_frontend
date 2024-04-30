@@ -1,8 +1,13 @@
 .ant-modal-content {
     border-radius: 0 !important;
-    padding: 80px 50px 60px 50px !important;
+    padding: 80px 50px 60px !important;
     width: 90%;
     margin: 0 auto;
+
+    @media(max-width: 1024px) {
+        padding: 50px 30px 20px  !important;
+    }
+
 }
 
 .notification-title {
@@ -12,6 +17,11 @@
     letter-spacing: -0.04em;
     text-align: center;
     color: $dark;
+
+    @media(max-width: 1024px) {
+        font-size: 24px;
+        line-height: 24px;
+    }
 }
 
 .notification-text {
@@ -22,5 +32,11 @@
     line-height: 23px;
     letter-spacing: -0.02em;
     text-align: center;
+
+    @media(max-width: 1024px) {
+        padding: 20px 0;
+        font-size: 18px;
+        line-height: 23px;
+    }
 
 }

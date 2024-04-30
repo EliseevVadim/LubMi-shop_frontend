@@ -4,6 +4,7 @@ import Image from "next/dist/client/legacy/image";
 import FavoriteWhite from "../../assets/icons/FavoriteWhite";
 import FavoriteWhiteFill from "../../assets/icons/FavoriteWhiteFill";
 import { useAlert } from "../../controllers/AlertNotification/index";
+import { onChangeIsOpenLeaveMessage, setProductModal } from "../../entety/modals/model/index";
 
 const Card = () => {
 
@@ -11,6 +12,7 @@ const Card = () => {
     <div className="card">
       <div className="card-img">
         <Image
+          onClick={() => setProductModal('1')}
           layout={'fill'}
           objectFit={'cover'}
           src={testImage}
@@ -19,11 +21,14 @@ const Card = () => {
           Новинка
         </div>
         <div className="card-img-favorite">
-          <FavoriteWhite/>
-          <FavoriteWhiteFill/>
+          <FavoriteWhite />
+          <FavoriteWhiteFill />
         </div>
       </div>
-      <div className="card-title">
+      <div
+        className="card-title"
+        onClick={() => setProductModal('1')}
+      >
         Костюм шелковый (черный)
       </div>
       <div className="card-price">
@@ -38,7 +43,7 @@ const Card = () => {
         <p>
           Нет в наличии
         </p>
-        <button>
+        <button onClick={() => onChangeIsOpenLeaveMessage(true)}>
           Сообщить о поступлении
         </button>
       </div>

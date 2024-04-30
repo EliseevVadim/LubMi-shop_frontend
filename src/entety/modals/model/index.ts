@@ -20,6 +20,16 @@ export const $isOpenSearch = createStore<boolean>(false)
 export const onChangeIsOpenSearch = createEvent<boolean>()
 $isOpenSearch.on(onChangeIsOpenSearch, (_, t) => t)
 
+// leave message modal
+export const $isOpenLeaveMessage = createStore<boolean>(false)
+export const onChangeIsOpenLeaveMessage = createEvent<boolean>()
+$isOpenLeaveMessage.on(onChangeIsOpenLeaveMessage, (_, t) => t)
+
+// leave message modal
+export const $productModal = createStore<string>('')
+export const setProductModal = createEvent<string>()
+$productModal.on(setProductModal, (_, t) => t)
+
 // notification
 export const $notification = createStore<any>({
   title: '',

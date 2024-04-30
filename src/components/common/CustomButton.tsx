@@ -30,7 +30,7 @@ const CustomButton: FC<PropsWithChildren<IButton>> = ({
                                                         backColor = 'rgba(255,255,255)',
                                                         color = 'rgba(34, 34, 34, 1)',
                                                         border = 'none',
-                                                        icon
+                                                        icon,
                                                       }) => {
   return (
     <button

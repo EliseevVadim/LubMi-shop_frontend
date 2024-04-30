@@ -7,6 +7,8 @@ import Bucket from "../entety/modals/UI/Bucket";
 import Search from "../entety/modals/UI/Search";
 import NotificationModal from "../entety/modals/UI/NotificationModal";
 import { onSetNotification } from "../entety/modals/model/index";
+import LeaveMessageModal from "../entety/modals/UI/LeaveMessageModal";
+import ProductModal from "../entety/modals/UI/ProductModal";
 
 
 const MainLayout: FC<PropsWithChildren<any>> = ({
@@ -29,16 +31,19 @@ const MainLayout: FC<PropsWithChildren<any>> = ({
       <Bucket />
       <Search />
       <NotificationModal />
-      <div
-        style={{
-          width: 40,
-          height: 50,
-          backgroundColor: '#000'
-        }}
-        onClick={() => onSetNotification({title: '1', message: '2'})}
-      >
+      <LeaveMessageModal />
+      <ProductModal />
 
-      </div>
+      {/*<div*/}
+      {/*  style={{*/}
+      {/*    width: 40,*/}
+      {/*    height: 50,*/}
+      {/*    backgroundColor: '#000'*/}
+      {/*  }}*/}
+      {/*  onClick={() => onSetNotification({title: '1', message: '2'})}*/}
+      {/*>*/}
+      {/*</div>*/}
+
       <div className="main-block">
         {children}
       </div>
