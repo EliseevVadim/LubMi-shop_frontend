@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useUnit } from "effector-react";
 import {
   $isOpenBucket,
-  onChangeIsOpenBucket
+  onChangeIsOpenBucket, onChangeIsOpenCheckout
 } from "../model/index";
 import CrossIcon from "../../../assets/icons/CrossIcon";
 import LineBlock from "../../../components/common/LineBlock";
@@ -80,6 +80,7 @@ const Bucket = () => {
             Сумма к оплате: 35 700 руб
           </h4>
           <CustomButton
+            onClick={() => onChangeIsOpenCheckout(true)}
             title={'Оформить заказ'}
             padding={'24px 0'}
             maxWidth={"100%"}

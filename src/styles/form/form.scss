@@ -1,19 +1,22 @@
-.ant-form-item-control-input {
-    border: 1.36px solid rgba(34, 34, 34, 1) !important;
+.leave-message{
+    .ant-form-item-control-input {
+        border: 1.36px solid rgba(34, 34, 34, 1) !important;
 
-    input {
-        padding: 15px 20px !important;
+        input {
+            padding: 15px 20px !important;
 
-        font-size: 16px;
-        font-weight: 300;
-        line-height: 14.4px;
-        letter-spacing: -0.02em;
-        color: $dark;
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 14.4px;
+            letter-spacing: -0.02em;
+            color: $dark;
 
-        &::placeholder {
-            color: rgba(34, 34, 34, 0.5) !important;
+            &::placeholder {
+                color: rgba(34, 34, 34, 0.5) !important;
+            }
         }
     }
+
 }
 
 .form-title {

@@ -49,6 +49,7 @@ const LeaveMessageModal = () => {
         form={form}
         layout={"vertical"}
         onFinish={onFinish}
+        className="leave-message"
       >
         <Form.Item
           name="phone"

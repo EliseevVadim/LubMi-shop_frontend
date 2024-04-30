@@ -12,18 +12,10 @@ export default function App({ Component, pageProps }: AppProps){
 
   const antdTheme: any = {
     token: {
-      colorPrimary: 'rgba(75, 103, 233, 1)',
+      colorPrimary: 'rgba(34, 34, 34, 1)',
       controlInteractiveSize: 16,
       fontSize: 16,
       borderRadius: 13,
-    },
-    Pagination: {
-      itemActiveBg: '#4B67E9',
-      itemActiveBgDisabled: '#4B67E9',
-      itemActiveColorDisabled: '#4B67E9',
-      itemBg: '#4B67E9',
-      itemInputBg: '#4B67E9',
-      itemLinkBg: '#4B67E9',
     },
     Select: {
       optionFontSize: 200,

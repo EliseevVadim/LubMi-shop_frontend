@@ -15,6 +15,11 @@ export const $isOpenBucket = createStore<boolean>(false)
 export const onChangeIsOpenBucket = createEvent<boolean>()
 $isOpenBucket.on(onChangeIsOpenBucket, (_, t) => t)
 
+// checkout
+export const $isOpenCheckout = createStore<boolean>(false)
+export const onChangeIsOpenCheckout = createEvent<boolean>()
+$isOpenCheckout.on(onChangeIsOpenCheckout, (_, t) => t)
+
 // search
 export const $isOpenSearch = createStore<boolean>(false)
 export const onChangeIsOpenSearch = createEvent<boolean>()

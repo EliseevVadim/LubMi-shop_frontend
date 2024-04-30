@@ -9,6 +9,7 @@ import NotificationModal from "../entety/modals/UI/NotificationModal";
 import { onSetNotification } from "../entety/modals/model/index";
 import LeaveMessageModal from "../entety/modals/UI/LeaveMessageModal";
 import ProductModal from "../entety/modals/UI/ProductModal";
+import CheckoutModal from "../entety/modals/UI/CheckoutModal";
 
 
 const MainLayout: FC<PropsWithChildren<any>> = ({
@@ -33,6 +34,8 @@ const MainLayout: FC<PropsWithChildren<any>> = ({
       <NotificationModal />
       <LeaveMessageModal />
       <ProductModal />
+      <CheckoutModal />
+
 
       {/*<div*/}
       {/*  style={{*/}

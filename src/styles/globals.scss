@@ -42,7 +42,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     -webkit-locale: auto;
-    font-family: var(--font-base);
+    font-family: $fontBase !important;
 }
 
 input[type=number] {
