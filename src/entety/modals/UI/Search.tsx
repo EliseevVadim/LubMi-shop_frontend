@@ -16,7 +16,7 @@ const Search = () => {
   useEffect(() => {
     if (isOpenSearch) {
       document.body.style.overflow = 'hidden';
-      document.body.style.paddingRight = '10px';
+      document.body.style.paddingRight = '0';
     } else {
       document.body.style.overflow = 'auto';
       document.body.style.paddingRight = '0px';

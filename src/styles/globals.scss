@@ -19,7 +19,7 @@ body {
     background-color: $white;
 
     &::-webkit-scrollbar {
-        width: 10px;
+        width: 4px;
     }
 
     &::-webkit-scrollbar-track {
@@ -62,6 +62,9 @@ button {
     border: none;
     outline: none;
     border-radius: 0;
+
+    font-weight: 100;
+    letter-spacing: -0.04em;
 }
 
 button {
@@ -142,7 +145,7 @@ li {
 input::placeholder {
     color: #2C2C2C !important;
     font-size: 18px;
-    font-weight: 300;
+    font-weight: 100;
     font-family: $fontBase,
 }
 

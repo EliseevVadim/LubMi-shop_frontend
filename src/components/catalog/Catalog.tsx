@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import MaxWithLayout from "../../layouts/MaxWithLayout";
 import SortBloc from "./SortBloc";
 import Card from "./Card";
 import CustomButton from "../common/CustomButton";
 
-const Catalog = () => {
+const Catalog: FC<PropsWithChildren<{title?: string}>> = ({title= 'Каталог'}) => {
 
   const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
@@ -16,7 +16,7 @@ const Catalog = () => {
         </div>
         <div className="catalog-top">
           <h2>
-            Каталог
+            {title}
           </h2>
           <SortBloc />
         </div>

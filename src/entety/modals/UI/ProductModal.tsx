@@ -40,7 +40,7 @@ const ProductModal = () => {
   useEffect(() => {
     if (!!productModal) {
       document.body.style.overflow = 'hidden';
-      document.body.style.paddingRight = '10px';
+      document.body.style.paddingRight = '4px';
     } else {
       document.body.style.overflow = 'auto';
       document.body.style.paddingRight = '0px';

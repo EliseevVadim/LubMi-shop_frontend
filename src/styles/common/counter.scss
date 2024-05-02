@@ -5,6 +5,10 @@
     gap: 5px;
     justify-content: space-between;
 
+    &-icon{
+        cursor: pointer;
+    }
+
     &-input {
         display: flex;
         justify-content: center;

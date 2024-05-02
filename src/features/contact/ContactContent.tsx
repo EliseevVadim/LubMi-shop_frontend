@@ -23,7 +23,7 @@ const ContactContent = () => {
             пн-пт с 11:00 до 21:00
           </div>
           <div className="contact-inside-about">
-            Также, вы можете связаться с нами
+            Также, вы можете связаться с нами <br/>
             другим способом:
           </div>
           <div className="contact-inside-button">

@@ -33,7 +33,7 @@ const MainContent = () => {
 
   const settings = {
     arrows: false,
-    autoplay: true,
+    // autoplay: true,
     dots: true,
     infinite: true,
     speed: 500,
@@ -84,7 +84,7 @@ const MainContent = () => {
       </div>
 
       <div className="home-catalog">
-        <Catalog />
+        <Catalog title={'Бестселлеры'}/>
       </div>
 
       <div className="home-banner">
@@ -94,7 +94,7 @@ const MainContent = () => {
               Парфюмерия
             </h2>
             <CustomButton
-              title={'Перейти в каталог'}
+              title={'Ознакомиться'}
               padding={'24px 0'}
               maxWidth={300}
               backColor={'rgba(34, 34, 34, 1)'}

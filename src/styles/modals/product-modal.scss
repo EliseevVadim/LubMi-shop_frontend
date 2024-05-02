@@ -136,6 +136,7 @@
         }
 
         &-text {
+            padding-top: 10px;
 
             h1 {
                 font-size: 32px;
@@ -154,6 +155,7 @@
                 margin-top: 20px;
                 font-size: 20px;
                 font-weight: 300;
+                opacity: 0.5;
                 line-height: 19.11px;
                 letter-spacing: -0.02em;
                 color: $dark;
@@ -178,7 +180,7 @@
             &-size {
                 margin-top: 40px;
                 font-size: 24px;
-                font-weight: 300;
+                font-weight: 100;
                 line-height: 23px;
                 letter-spacing: -0.02em;
                 color: $dark;
@@ -213,7 +215,7 @@
                 gap: 40px;
 
                 @media(max-width: 1024px) {
-                  gap: 10px;
+                    gap: 10px;
                 }
 
                 p {

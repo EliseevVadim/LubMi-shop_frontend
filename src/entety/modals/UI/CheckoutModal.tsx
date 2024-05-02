@@ -17,7 +17,7 @@ const CheckoutModal = () => {
   useEffect(() => {
     if (isOpenCheckout) {
       document.body.style.overflow = 'hidden';
-      document.body.style.paddingRight = '10px';
+      document.body.style.paddingRight = '4px';
     } else {
       document.body.style.overflow = 'auto';
       document.body.style.paddingRight = '0px';
@@ -94,7 +94,7 @@ const CheckoutModal = () => {
                 <InputMask
                   mask="+7 (999) 999-99-99"
                   maskChar=""
-                  placeholder='Введите Ваш номер телефона'
+                  placeholder='+7 (999) 999-99-99'
                   style={{
                     backgroundColor: 'transparent',
                     border: 'none',
@@ -263,7 +263,8 @@ const CheckoutModal = () => {
               </div>
 
               <div className="checkout-modal-main-form-check-box">
-                <Checkbox>
+                <Checkbox
+                >
                   Я согласен/а с политикой конфиденциальности
                 </Checkbox>
               </div>

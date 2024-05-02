@@ -4,6 +4,11 @@ import React from "react";
 const fontInter = localFont({
     src: [
         {
+            path: '../../assets/fonts/Geologica-Thin.ttf',
+            weight: '100',
+            style: 'normal',
+        },
+        {
             path: '../../assets/fonts/Geologica-Light.ttf',
             weight: '300',
             style: 'normal',

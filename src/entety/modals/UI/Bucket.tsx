@@ -30,7 +30,7 @@ const Bucket = () => {
   useEffect(() => {
     if (isOpenBucket) {
       document.body.style.overflow = 'hidden';
-      document.body.style.paddingRight = '10px';
+      document.body.style.paddingRight = '4px';
     } else {
       document.body.style.overflow = 'auto';
       document.body.style.paddingRight = '0px';
@@ -80,7 +80,10 @@ const Bucket = () => {
             Сумма к оплате: 35 700 руб
           </h4>
           <CustomButton
-            onClick={() => onChangeIsOpenCheckout(true)}
+            onClick={() =>{
+              onChangeIsOpenCheckout(true)
+              onChangeIsOpenBucket(false)
+            }}
             title={'Оформить заказ'}
             padding={'24px 0'}
             maxWidth={"100%"}

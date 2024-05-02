@@ -3,24 +3,29 @@ import CounterMinusIcon from "../../assets/icons/CounterMinusIcon";
 import CounterPlusIcon from "../../assets/icons/CounterPlusIcon";
 
 const Counter = () => {
+  const [value, setValue] = useState<number>(1);
 
-  const [value, setValue] = useState<number>(1)
+  const decrement = () => {
+    if (value > 1) {
+      setValue(value - 1);
+    }
+  };
+
+  const increment = () => {
+    if (value < 100) {
+      setValue(value + 1);
+    }
+  };
 
   return (
     <div className="counter">
-      <div className="counter-icon" onClick={() => setValue(value - 1)}>
+      <div className="counter-icon" onClick={decrement}>
         <CounterMinusIcon />
       </div>
       <div className="counter-input">
         {value}
-        {/*<input*/}
-        {/*  type="number"*/}
-        {/*  disabled={true}*/}
-        {/*  value={value}*/}
-        {/*  onChange={(e) => setValue(e?.target?.value)}*/}
-        {/*/>*/}
       </div>
-      <div className="counter-icon" onClick={() => setValue(value + 1)}>
+      <div className="counter-icon" onClick={increment}>
         <CounterPlusIcon />
       </div>
     </div>

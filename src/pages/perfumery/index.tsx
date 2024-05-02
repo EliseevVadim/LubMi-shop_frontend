@@ -6,7 +6,7 @@ import PerfumeryContent from "../../features/perfumery/PerfumeryContent";
 const PerfumeryPage = () => {
 
   return (
-    <Meta title={'Парфумерия'}>
+    <Meta title={'Парфюмерия'}>
       <MainLayout>
         <PerfumeryContent />
       </MainLayout>

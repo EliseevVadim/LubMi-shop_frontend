@@ -24,40 +24,48 @@
             }
 
             .slick-active {
-
                 button {
                     border: none !important;
-                    width: 16px;
-                    height: 16px;
+                    width: 12px;
+                    height: 12px;
 
                     &::before {
-                        color: $white;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-75%, -75%);
+                        border: 1px solid $white;
+
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                        font-size: 0 !important;
+                        background-color: $white;
                         opacity: 1;
-                        width: 16px;
-                        height: 16px;
-                        font-size: 16px;
                     }
                 }
             }
 
             li {
-
+                width: 12px;
+                height: 12px;
                 button {
-                    width: 15px;
-                    height: 15px;
-
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    border: 1px solid $white;
-                    border-radius: 50%;
+                    border: none !important;
+                    width: 12px;
+                    height: 12px;
 
                     &::before {
-                        transform: translateY(-1px);
-                        width: 14px;
-                        height: 14px;
-                        font-size: 14px;
-                        color: $dark;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-75%, -75%);
+                        border: 1px solid $white;
+
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                        font-size: 0 !important;
+                        background-color: $dark;
                         opacity: 1;
                     }
                 }

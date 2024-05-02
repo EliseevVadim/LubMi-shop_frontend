@@ -105,7 +105,7 @@
         }
 
         &-form {
-            &-button{
+            &-button {
                 margin-top: 40px;
             }
 
@@ -126,6 +126,16 @@
 
             &-check-box {
                 margin: 0px 0 20px;
+
+                .ant-checkbox-checked .ant-checkbox-inner {
+                    background-color: $white;
+                }
+                .ant-checkbox-checked .ant-checkbox-inner:after {
+                    border-color: $dark !important;
+                }
+                .ant-checkbox-wrapper:hover .ant-checkbox-inner{
+                    background-color: $white !important;
+                }
             }
 
             &-block {
@@ -194,7 +204,7 @@
 
         &-order {
 
-            &-mob{
+            &-mob {
                 margin: 20px 0;
                 display: none;
 
@@ -251,7 +261,7 @@
 
                 @media(max-width: 1024px) {
                     margin-top: 20px;
-                    p{
+                    p {
                         display: none;
                     }
                 }

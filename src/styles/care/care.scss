@@ -12,6 +12,7 @@
         line-height: 32px;
         letter-spacing: -0.04em;
         color: $dark;
+        text-transform: uppercase;
 
         @media(max-width: 1024px) {
             margin-bottom: 40px;
@@ -64,7 +65,7 @@
                         padding-left: 20px;
                         position: relative;
                         font-size: 24px;
-                        font-weight: 300;
+                        font-weight: 100;
                         line-height: 24px;
                         letter-spacing: -0.04em;
                         color: $dark;
