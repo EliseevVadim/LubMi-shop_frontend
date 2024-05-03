@@ -21,32 +21,32 @@ const Header = () => {
   const nav: any = [
     {
       id: 1,
-      path: 'catalog',
+      path: '/catalog',
       title: 'Каталог'
     },
     {
       id: 2,
-      path: 'perfumery',
+      path: '/perfumery',
       title: 'Парфюмерия'
     },
     {
       id: 3,
-      path: 'delivery',
+      path: '/delivery',
       title: 'Доставка и оплата'
     },
     {
       id: 4,
-      path: 'care',
+      path: '/care',
       title: 'Уход'
     },
     {
       id: 5,
-      path: 'contacts',
+      path: '/contacts',
       title: 'Контакты'
     },
     {
       id: 6,
-      path: 'about',
+      path: '/about',
       title: 'О компании'
     },
   ]
