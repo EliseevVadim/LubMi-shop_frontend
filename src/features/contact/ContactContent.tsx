@@ -1,7 +1,7 @@
 import React from 'react';
 import MaxWithLayout from "../../layouts/MaxWithLayout";
-import LineBlock from "../../components/common/LineBlock";
-import CustomButton from "../../components/common/CustomButton";
+import LineBlock from "../../components/client/common/LineBlock";
+import CustomButton from "../../components/client/common/CustomButton";
 import TelegramIcon from "../../assets/icons/TelegramIcon";
 
 const ContactContent = () => {

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useUnit } from "effector-react";
 import { $notification, onResetNotification, onSetNotification } from "../model/index";
 import { Modal } from "antd";
-import CustomButton from "../../../components/common/CustomButton";
+import CustomButton from "../../../components/client/common/CustomButton";
 
 const NotificationModal = () => {
 

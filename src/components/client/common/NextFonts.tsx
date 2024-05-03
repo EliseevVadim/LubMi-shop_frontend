@@ -4,32 +4,32 @@ import React from "react";
 const fontInter = localFont({
     src: [
         {
-            path: '../../assets/fonts/Geologica-Thin.ttf',
+            path: '../../../assets/fonts/Geologica-Thin.ttf',
             weight: '100',
             style: 'normal',
         },
         {
-            path: '../../assets/fonts/Geologica-Light.ttf',
+            path: '../../../assets/fonts/Geologica-Light.ttf',
             weight: '300',
             style: 'normal',
         },
         {
-            path: '../../assets/fonts/Geologica-Regular.ttf',
+            path: '../../../assets/fonts/Geologica-Regular.ttf',
             weight: '400',
             style: 'normal',
         },
         {
-            path: '../../assets/fonts/Geologica-Medium.ttf',
+            path: '../../../assets/fonts/Geologica-Medium.ttf',
             weight: '500',
             style: 'normal',
         },
         {
-            path: '../../assets/fonts/Geologica-SemiBold.ttf',
+            path: '../../../assets/fonts/Geologica-SemiBold.ttf',
             weight: '600',
             style: 'normal',
         },
         {
-            path: '../../assets/fonts/Geologica-Bold.ttf',
+            path: '../../../assets/fonts/Geologica-Bold.ttf',
             weight: '700',
             style: 'normal',
         },

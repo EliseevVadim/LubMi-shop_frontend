@@ -5,9 +5,9 @@ import {
   onChangeIsOpenBucket, onChangeIsOpenCheckout
 } from "../model/index";
 import CrossIcon from "../../../assets/icons/CrossIcon";
-import LineBlock from "../../../components/common/LineBlock";
-import BucketCard from "../../../components/bucket/BucketCard";
-import CustomButton from "../../../components/common/CustomButton";
+import LineBlock from "../../../components/client/common/LineBlock";
+import BucketCard from "../../../components/client/bucket/BucketCard";
+import CustomButton from "../../../components/client/common/CustomButton";
 
 const Bucket = () => {
 

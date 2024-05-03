@@ -4,11 +4,11 @@ import { $isOpenBucket, $isOpenCheckout, $productModal, onChangeIsOpenCheckout, 
 import MaxWithLayout from "../../../layouts/MaxWithLayout";
 import ProductArrowToLeft from "../../../assets/icons/ProductArrowToLeft";
 import CrossIcon from "../../../assets/icons/CrossIcon";
-import BucketCard from "../../../components/bucket/BucketCard";
+import BucketCard from "../../../components/client/bucket/BucketCard";
 import { Checkbox, Form, Input, Radio, Space } from "antd";
 import InputMask from "react-input-mask";
-import CustomButton from "../../../components/common/CustomButton";
-import LineBlock from "../../../components/common/LineBlock";
+import CustomButton from "../../../components/client/common/CustomButton";
+import LineBlock from "../../../components/client/common/LineBlock";
 
 const CheckoutModal = () => {
 

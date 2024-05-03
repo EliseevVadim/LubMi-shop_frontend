@@ -1,7 +1,7 @@
 import React from 'react';
 import MaxWithLayout from "../../layouts/MaxWithLayout";
-import LineBlock from "../../components/common/LineBlock";
-import Spoller from "../../components/common/Spoller";
+import LineBlock from "../../components/client/common/LineBlock";
+import Spoller from "../../components/client/common/Spoller";
 
 const DeliveryContent = () => {
 

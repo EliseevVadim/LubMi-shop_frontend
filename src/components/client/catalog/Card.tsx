@@ -1,10 +1,10 @@
 import React from 'react';
-import testImage from '../../../public/test-image-card.png'
+import testImage from '../../../../public/test-image-card.png'
 import Image from "next/dist/client/legacy/image";
-import FavoriteWhite from "../../assets/icons/FavoriteWhite";
-import FavoriteWhiteFill from "../../assets/icons/FavoriteWhiteFill";
-import { useAlert } from "../../controllers/AlertNotification/index";
-import { onChangeIsOpenLeaveMessage, setProductModal } from "../../entety/modals/model/index";
+import FavoriteWhite from "../../../assets/icons/FavoriteWhite";
+import FavoriteWhiteFill from "../../../assets/icons/FavoriteWhiteFill";
+import { useAlert } from "../../../controllers/AlertNotification/index";
+import { onChangeIsOpenLeaveMessage, setProductModal } from "../../../entety/modals/model/index";
 
 const Card = () => {
 

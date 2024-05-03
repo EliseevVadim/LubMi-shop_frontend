@@ -1,6 +1,6 @@
 import React from 'react';
 import MaxWithLayout from "../../layouts/MaxWithLayout";
-import Catalog from "../../components/catalog/Catalog";
+import Catalog from "../../components/client/catalog/Catalog";
 
 const SearchContent = () => {
 

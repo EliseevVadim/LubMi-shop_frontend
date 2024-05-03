@@ -2,8 +2,8 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import styles from './style.module.scss';
 import { theme, Typography } from "antd";
 import { useUnit } from "effector-react";
-import { $user, logout } from "../../entety/admin/user/model/index";
-import BurgerIcon from "../../assets/icons/BurgerIcon";
+import { $user, logout } from "../../../entety/admin/user/model/index";
+import BurgerIcon from "../../../assets/icons/BurgerIcon";
 import Link from "next/link";
 
 const { Title } = Typography;

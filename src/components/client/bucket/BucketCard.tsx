@@ -1,7 +1,7 @@
 import React, { FC, PropsWithChildren } from 'react';
-import bucketTest from '../../../public/bucket-test-img.png'
+import bucketTest from '../../../../public/bucket-test-img.png'
 import Image from "next/dist/client/legacy/image";
-import BucketCrossIcon from "../../assets/icons/BucketCrossIcon";
+import BucketCrossIcon from "../../../assets/icons/BucketCrossIcon";
 import Counter from "../common/Counter";
 
 interface ICount {

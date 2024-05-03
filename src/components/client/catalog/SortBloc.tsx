@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import SearchIcon from "../../assets/icons/SearchIcon";
-import ArrowToBottom from "../../assets/icons/ArrowToBottom";
+import SearchIcon from "../../../assets/icons/SearchIcon";
+import ArrowToBottom from "../../../assets/icons/ArrowToBottom";
 
 const SortBloc = () => {
 

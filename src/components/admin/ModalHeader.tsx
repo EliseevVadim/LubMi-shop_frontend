@@ -1,7 +1,7 @@
 import { Col, Row } from "antd";
 import { UnorderedListOutlined } from "@ant-design/icons";
 import React from "react";
-import CloseIcon from "../assets/Icons/CloseIcon";
+import CloseIcon from "../../assets/icons/CloseIcon";
 
 export default function ModalHeader({ title, subtitle, onClose, isWithCircle = true }: any) {
     return (

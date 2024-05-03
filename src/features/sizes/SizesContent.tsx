@@ -1,6 +1,6 @@
 import React from 'react';
 import MaxWithLayout from "../../layouts/MaxWithLayout";
-import LineBlock from "../../components/common/LineBlock";
+import LineBlock from "../../components/client/common/LineBlock";
 
 const SizesContent = () => {
 
@@ -23,7 +23,7 @@ const SizesContent = () => {
               <th>ОБХВАТ ГРУДИ</th>
               <th>ОБХВАТ ТАЛИИ</th>
               <th>ОБХВАТ БЕДЕР</th>
-              <th>РОСИИЯ</th>
+              <th>РОССИЯ</th>
             </tr>
             </thead>
             <tbody>

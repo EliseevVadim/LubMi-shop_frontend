@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PerfumerArrowToBottom from "../../assets/icons/PerfumerArrowToBottom";
+import PerfumerArrowToBottom from "../../../assets/icons/PerfumerArrowToBottom";
 
 const Spoller = ({
                    title,
@@ -27,8 +27,7 @@ const Spoller = ({
       </div>
       <div className={`spoller-sub ${isActive && 'sub-active'}`}
            dangerouslySetInnerHTML={{ __html: desc || '' }}
-      >
-      </div>
+      />
     </div>
   );
 };

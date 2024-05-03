@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './style.module.scss';
 import { theme, Typography } from "antd";
 import Link from "next/link";
-import { logout } from "../../entety/admin/user/model/index";
+import { logout } from "../../../entety/admin/user/model/index";
 
 const { useToken } = theme;
 const { Title } = Typography;

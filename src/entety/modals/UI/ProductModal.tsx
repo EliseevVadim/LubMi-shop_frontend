@@ -7,9 +7,9 @@ import CrossIcon from "../../../assets/icons/CrossIcon";
 import Slider from "react-slick";
 import testImage from '../../../../public/test-image-card.png'
 import Image from "next/dist/client/legacy/image";
-import CustomButton from "../../../components/common/CustomButton";
+import CustomButton from "../../../components/client/common/CustomButton";
 import FavoriteIcon from "../../../assets/icons/FavoriteIcon";
-import SelectorBlock from "../../../components/catalog/SelectorBlock";
+import SelectorBlock from "../../../components/client/catalog/SelectorBlock";
 
 const ProductModal = () => {
 
@@ -51,6 +51,18 @@ const ProductModal = () => {
       document.body.style.paddingRight = '0px';
     };
   }, [productModal])
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.keyCode === 27) {
+        setProductModal('')
+      }
+    };
+    document.addEventListener('keydown', handleKeyPress);
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, []);
 
   return (
     <div className={`product-modal ${productModal ? 'product-modal-open' : ''}`}>

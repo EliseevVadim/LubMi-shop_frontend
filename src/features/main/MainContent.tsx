@@ -1,10 +1,10 @@
 import React from 'react';
-import CustomButton from "../../components/common/CustomButton";
+import CustomButton from "../../components/client/common/CustomButton";
 import Slider from 'react-slick';
 import homeIntroOne from '../../../public/home-intro-1.png'
 import homeIntroTwo from '../../../public/home-intro-2.png'
 import Image from "next/dist/client/legacy/image";
-import Catalog from "../../components/catalog/Catalog";
+import Catalog from "../../components/client/catalog/Catalog";
 import MaxWithLayout from "../../layouts/MaxWithLayout";
 
 const MainContent = () => {

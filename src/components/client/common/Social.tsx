@@ -1,7 +1,7 @@
 import React from 'react';
-import WhatsAppIcon from "../../assets/icons/WhatsAppIcon";
-import TelegramIcon from "../../assets/icons/TelegramIcon";
-import YouTubeIcon from "../../assets/icons/YouTubeIcon";
+import WhatsAppIcon from "../../../assets/icons/WhatsAppIcon";
+import TelegramIcon from "../../../assets/icons/TelegramIcon";
+import YouTubeIcon from "../../../assets/icons/YouTubeIcon";
 
 const Social = () => {
 

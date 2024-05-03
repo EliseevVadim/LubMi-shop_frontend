@@ -6,7 +6,7 @@ import {
 } from "antd";
 
 import React, { useEffect } from "react";
-import ModalHeader from "../../../shared/ModalHeader";
+import ModalHeader from "../../../components/admin/ModalHeader";
 
 export default function AddModal({
                                    onClose,

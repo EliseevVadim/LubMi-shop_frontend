@@ -4,7 +4,7 @@ import { $isOpenMobMenu, onChangeIsOpenMobMenu } from "../model/index";
 import CrossIcon from "../../../assets/icons/CrossIcon";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Social from "../../../components/common/Social";
+import Social from "../../../components/client/common/Social";
 
 const MobMenu = () => {
 

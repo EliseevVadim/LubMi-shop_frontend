@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import CounterMinusIcon from "../../assets/icons/CounterMinusIcon";
-import CounterPlusIcon from "../../assets/icons/CounterPlusIcon";
+import CounterMinusIcon from "../../../assets/icons/CounterMinusIcon";
+import CounterPlusIcon from "../../../assets/icons/CounterPlusIcon";
 
 const Counter = () => {
   const [value, setValue] = useState<number>(1);

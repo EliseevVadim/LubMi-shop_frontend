@@ -1,7 +1,7 @@
 import React, { FC, PropsWithChildren } from 'react';
 import { Pagination, PaginationProps } from "antd";
-import PaginationArrowRoLeft from "../../assets/icons/PaginationArrowRoLeft";
-import PaginationArrowRoRight from "../../assets/icons/PaginationArrowRoRight";
+import PaginationArrowRoLeft from "../../../assets/icons/PaginationArrowRoLeft";
+import PaginationArrowRoRight from "../../../assets/icons/PaginationArrowRoRight";
 
 const CustomPagination: FC<PropsWithChildren<any>> = ({
                             total = 100,

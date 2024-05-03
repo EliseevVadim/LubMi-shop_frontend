@@ -3,9 +3,9 @@ import { useUnit } from "effector-react";
 import { $isOpenSearch, onChangeIsOpenMobMenu, onChangeIsOpenSearch } from "../model/index";
 import CrossIcon from "../../../assets/icons/CrossIcon";
 import SearchIcon from "../../../assets/icons/SearchIcon";
-import Card from "../../../components/catalog/Card";
-import CustomButton from "../../../components/common/CustomButton";
-import CustomPagination from "../../../components/common/CustomPagination";
+import Card from "../../../components/client/catalog/Card";
+import CustomButton from "../../../components/client/common/CustomButton";
+import CustomPagination from "../../../components/client/common/CustomPagination";
 
 const Search = () => {
 

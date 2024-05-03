@@ -4,7 +4,7 @@ import {
   Form,
   Input, message, Spin,
 } from "antd";
-import ModalHeader from "../../../shared/ModalHeader";
+import ModalHeader from "../../../components/admin/ModalHeader";
 import React, { useEffect } from "react";
 
 export default function EditModal({

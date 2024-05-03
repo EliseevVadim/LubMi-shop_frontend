@@ -1,6 +1,6 @@
 import React from 'react';
 import MaxWithLayout from "../../../layouts/MaxWithLayout";
-import CustomButton from "../../../components/common/CustomButton";
+import CustomButton from "../../../components/client/common/CustomButton";
 
 const PerfumeryIntro = () => {
   return (

@@ -3,7 +3,7 @@ import { useUnit } from "effector-react";
 import { $isOpenLeaveMessage, onChangeIsOpenLeaveMessage } from "../model/index";
 import { Form, Input, Modal } from "antd";
 import InputMask from "react-input-mask";
-import CustomButton from "../../../components/common/CustomButton";
+import CustomButton from "../../../components/client/common/CustomButton";
 
 const LeaveMessageModal = () => {
 

@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from 'react';
-import MaxWithLayout from "../../layouts/MaxWithLayout";
+import MaxWithLayout from "../../../layouts/MaxWithLayout";
 import SortBloc from "./SortBloc";
 import Card from "./Card";
 import CustomButton from "../common/CustomButton";

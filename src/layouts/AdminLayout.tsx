@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react';
 import { useUnit } from "effector-react";
-import SideBarNav from "../shared/SideBarNav/index";
+import SideBarNav from "../components/admin/SideBarNav/index";
 import { $user } from "../entety/admin/user/model/index";
-import Header from "../shared/Header/index";
+import Header from "../components/admin/Header/index";
 import { useRouter } from "next/router";
 
 const AdminLayout: FC = ({

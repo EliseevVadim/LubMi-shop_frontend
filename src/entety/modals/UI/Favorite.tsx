@@ -5,8 +5,8 @@ import {
   onChangeIsOpenFavorite,
 } from "../model/index";
 import CrossIcon from "../../../assets/icons/CrossIcon";
-import LineBlock from "../../../components/common/LineBlock";
-import BucketCard from "../../../components/bucket/BucketCard";
+import LineBlock from "../../../components/client/common/LineBlock";
+import BucketCard from "../../../components/client/bucket/BucketCard";
 
 const Favorite = () => {
 

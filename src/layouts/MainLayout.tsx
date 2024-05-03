@@ -1,6 +1,6 @@
 import React, { FC, PropsWithChildren, useEffect } from 'react';
-import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
+import Header from "../components/client/Header/Header";
+import Footer from "../components/client/Footer/Footer";
 import MobMenu from "../entety/modals/UI/MobMenu";
 import Favorite from "../entety/modals/UI/Favorite";
 import Bucket from "../entety/modals/UI/Bucket";

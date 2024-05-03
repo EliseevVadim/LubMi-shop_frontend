@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import headerLogo from '../../../public/header-logo.png'
+import headerLogo from '../../../../public/header-logo.png'
 import Image from "next/dist/client/legacy/image";
 import Link from "next/link";
-import SearchIcon from "../../assets/icons/SearchIcon";
-import FavoriteIcon from "../../assets/icons/FavoriteIcon";
-import BucketIcon from "../../assets/icons/BucketIcon";
-import BurgerIcon from "../../assets/icons/BurgerIcon";
+import SearchIcon from "../../../assets/icons/SearchIcon";
+import FavoriteIcon from "../../../assets/icons/FavoriteIcon";
+import BucketIcon from "../../../assets/icons/BucketIcon";
+import BurgerIcon from "../../../assets/icons/BurgerIcon";
 import { useRouter } from "next/router";
 import {
   onChangeIsOpenBucket,
   onChangeIsOpenFavorite,
   onChangeIsOpenMobMenu,
   onChangeIsOpenSearch
-} from "../../entety/modals/model/index";
+} from "../../../entety/modals/model/index";
 
 const Header = () => {
 

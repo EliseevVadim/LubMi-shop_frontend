@@ -2,7 +2,7 @@ import '../styles/main.scss'
 
 import React from 'react';
 import { AppProps } from "next/app";
-import { NextFonts } from "../components/common/NextFonts";
+import { NextFonts } from "../components/client/common/NextFonts";
 import Head from "next/head";
 import { ConfigProvider } from "antd";
 import locale from "antd/locale/ru_RU";

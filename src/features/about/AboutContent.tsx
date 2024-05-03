@@ -1,6 +1,6 @@
 import React from 'react';
 import MaxWithLayout from "../../layouts/MaxWithLayout";
-import LineBlock from "../../components/common/LineBlock";
+import LineBlock from "../../components/client/common/LineBlock";
 import AboutMain from "./components/AboutMain";
 import AboutWe from "./components/AboutWe";
 import AboutPartner from "./components/AboutPartner";
