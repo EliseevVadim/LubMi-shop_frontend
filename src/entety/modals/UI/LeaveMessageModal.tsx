@@ -93,7 +93,6 @@ const LeaveMessageModal = () => {
           ]}
         >
           <Input
-            bordered={false}
             placeholder={'Введите Ваш email'}
             style={{
               height: 47

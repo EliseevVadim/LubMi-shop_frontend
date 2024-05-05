@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
+    "@types/uuid": "^9.0.8",
     "antd": "^5.10.3",
     "axios": "^1.6.0",
     "dayjs": "^1.11.10",

@@ -591,6 +591,7 @@ const PerfumerInfo = () => {
         '        </ul>',
     },
   ]
+
   return (
     <MaxWithLayout>
       <div className="perfumery-info">

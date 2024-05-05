@@ -31,8 +31,8 @@ export const onChangeIsOpenLeaveMessage = createEvent<boolean>()
 $isOpenLeaveMessage.on(onChangeIsOpenLeaveMessage, (_, t) => t)
 
 // leave message modal
-export const $productModal = createStore<string>('')
-export const setProductModal = createEvent<string>()
+export const $productModal = createStore<any>({})
+export const setProductModal = createEvent<any>()
 $productModal.on(setProductModal, (_, t) => t)
 
 // notification

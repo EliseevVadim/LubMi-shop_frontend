@@ -139,8 +139,8 @@ const DeliveryContent = () => {
             mobData?.map((item: any) =>
               <Spoller
                 isWithBorder={false}
-                title={item.title}
-                desc={item.desc}
+                title={item?.title}
+                desc={item?.desc}
               />
             )
           }

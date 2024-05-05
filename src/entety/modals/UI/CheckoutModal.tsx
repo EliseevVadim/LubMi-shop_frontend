@@ -65,7 +65,6 @@ const CheckoutModal = () => {
                 ]}
               >
                 <Input
-                  bordered={false}
                   placeholder={'Введите имя'}
                   style={{
                     height: 38
@@ -82,7 +81,6 @@ const CheckoutModal = () => {
                 ]}
               >
                 <Input
-                  bordered={false}
                   placeholder={'Введите фамилию'}
                   style={{
                     height: 38
@@ -147,7 +145,7 @@ const CheckoutModal = () => {
                   count={5}
                   selectOnBlur={true}
                   value={value}
-                  onChange={setValue}
+                  onChange={setValue as any}
                   autoload={true}
                   delay={500}
                   inputProps={{
@@ -185,7 +183,6 @@ const CheckoutModal = () => {
                 ]}
               >
                 <Input
-                  bordered={false}
                   placeholder={'Введите Ваше ФИО полностью'}
                   style={{
                     height: 38
@@ -202,7 +199,6 @@ const CheckoutModal = () => {
                 ]}
               >
                 <Input
-                  bordered={false}
                   placeholder={'Улица'}
                   style={{
                     height: 38
@@ -221,7 +217,6 @@ const CheckoutModal = () => {
                   ]}
                 >
                   <Input
-                    bordered={false}
                     placeholder={'Дом'}
                     style={{
                       height: 38
@@ -238,7 +233,6 @@ const CheckoutModal = () => {
                   ]}
                 >
                   <Input
-                    bordered={false}
                     placeholder={'Квартира/офис'}
                     style={{
                       height: 38
@@ -258,7 +252,6 @@ const CheckoutModal = () => {
                   ]}
                 >
                   <Input
-                    bordered={false}
                     placeholder={'Подъезд'}
                     style={{
                       height: 38
@@ -275,7 +268,6 @@ const CheckoutModal = () => {
                   ]}
                 >
                   <Input
-                    bordered={false}
                     placeholder={'Этаж'}
                     style={{
                       height: 38

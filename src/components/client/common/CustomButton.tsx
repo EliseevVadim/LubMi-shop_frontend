@@ -3,17 +3,18 @@ import { LoadingOutlined } from "@ant-design/icons/lib";
 import { Spin } from "antd";
 
 interface IButton {
-  isLoading: boolean,
-  title: string
-  padding: string,
-  width: string,
-  maxWidth: string,
-  onClick: () => {},
-  isTransperent: boolean,
-  isWithBorder: boolean,
-  backColor: string,
-  color: string,
-  border: string,
+  isLoading?: boolean,
+  title?: string
+  padding?: string,
+  width?: string,
+  maxWidth?: string | number,
+  onClick?: any,
+  isTransperent?: boolean,
+  disable: boolean,
+  isWithBorder?: boolean,
+  backColor?: any,
+  color?: string,
+  border?: string,
   icon?: any,
 }
 
@@ -26,7 +27,7 @@ const CustomButton: FC<PropsWithChildren<IButton>> = ({
                                                         onClick = () => {
                                                         },
                                                         isTransperent = false,
-                                                        isWithBorder = false,
+                                                        disable = false,
                                                         backColor = 'rgba(255,255,255)',
                                                         color = 'rgba(34, 34, 34, 1)',
                                                         border = 'none',
@@ -34,11 +35,12 @@ const CustomButton: FC<PropsWithChildren<IButton>> = ({
                                                       }) => {
   return (
     <button
+      disabled={disable}
       onClick={onClick}
       className='custom-button'
       style={{
         pointerEvents: isLoading ? 'none' : 'auto',
-        opacity: isLoading ? 0.5 : 1,
+        opacity: isLoading || disable? 0.5 : 1,
         width,
         maxWidth,
         background: backColor ? backColor : isTransperent && 'transparent',

@@ -7,14 +7,14 @@ const Meta: FC<PropsWithChildren<IMeta>> = ({
                                             }) => {
 
   return (
-    <>
+    <div>
       <Head>
         <title>{title}</title>
       </Head>
       <main>
         {children}
       </main>
-    </>
+    </div>
   );
 };
 

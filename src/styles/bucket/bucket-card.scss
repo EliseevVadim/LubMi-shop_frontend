@@ -43,6 +43,39 @@
             }
         }
 
+        &-price {
+            margin-top: 12px;
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+
+            &-descount {
+                font-size: 16px;
+                font-weight: 300;
+                line-height: 23px;
+                opacity: 0.5;
+                color: $dark;
+                text-decoration: line-through;
+
+                @media(max-width: 1024px) {
+                    font-size: 10px;
+                    line-height: 14.27px;
+                }
+            }
+
+            &-main {
+                font-size: 24px;
+                font-weight: 300;
+                line-height: 23px;
+                color: $dark;
+
+                @media(max-width: 1024px) {
+                    font-size: 16px;
+                    line-height: 14.27px;
+                }
+            }
+        }
+
         p {
             margin-top: 10px;
             font-size: 24px;

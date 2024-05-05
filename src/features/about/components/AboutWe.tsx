@@ -7,8 +7,6 @@ const AboutWe = () => {
 
   const slides = [1,2,3]
 
-  let slider: any;
-
   const settings = {
     arrows: false,
     dots: false,
@@ -23,7 +21,7 @@ const AboutWe = () => {
         нас выбирают
       </h2>
 
-      <Slider ref={(c) => (slider = c)} {...settings}>
+      <Slider {...settings}>
         {
           slides?.map((item: any) =>
             <div className="about-we-slide" id={item?.id}>

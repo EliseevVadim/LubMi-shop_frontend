@@ -3,7 +3,7 @@ import { api } from "./ApiWithoutToken";
 import { $user, setUser } from "../entety/admin/user/model/index";
 
 const apiToken = axios.create({
-  baseURL: '',
+  baseURL: 'https://lubmi.ru/api',
   headers: {
     "Cache-Control": "no-cache",
     "Content-Type": "application/x-www-form-urlencoded",
@@ -13,7 +13,6 @@ const apiToken = axios.create({
     withCredentials: false,
   },
   timeout: 10000,
-  withCredentials: true,
   timeoutErrorMessage: "Превышено время ожидания ответа от сервера",
   validateStatus: function (status){
     return (

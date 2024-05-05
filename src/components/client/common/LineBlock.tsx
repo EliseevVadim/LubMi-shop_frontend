@@ -4,7 +4,8 @@ const LineBlock = () => {
 
   return (
     <div className="line-block">
-      <div className="line-block-extra"/>
+      <div className="line-block-extra">
+      </div>
     </div>
   );
 };

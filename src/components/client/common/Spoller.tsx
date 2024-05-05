@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { FC, PropsWithChildren, useState } from 'react';
 import PerfumerArrowToBottom from "../../../assets/icons/PerfumerArrowToBottom";
 
-const Spoller = ({
+interface ISpoller {
+  title?: string,
+  desc?: string,
+  isWithBorder?: boolean
+}
+
+const Spoller: FC<PropsWithChildren<ISpoller>> = ({
                    title,
                    desc,
                    isWithBorder = true

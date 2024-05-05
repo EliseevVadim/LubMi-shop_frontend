@@ -63,18 +63,11 @@ const Bucket = () => {
         <div className="bucket-inside-empty">
           Корзина пуста. Добавьте в корзину хотя бы один товар
         </div>
-
         <LineBlock />
-
         <div className="bucket-inside-main">
           <BucketCard isWithCounter={true}/>
-          <BucketCard isWithCounter={true}/>
-          <BucketCard isWithCounter={true}/>
-          <BucketCard isWithCounter={true}/>
         </div>
-
         <LineBlock />
-
         <div className="bucket-inside-bottom">
           <h4>
             Сумма к оплате: 35 700 руб

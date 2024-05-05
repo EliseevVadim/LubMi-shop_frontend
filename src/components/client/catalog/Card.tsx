@@ -1,52 +1,69 @@
-import React from 'react';
-import testImage from '../../../../public/test-image-card.png'
+import React, { FC, PropsWithChildren } from 'react';
 import Image from "next/dist/client/legacy/image";
 import FavoriteWhite from "../../../assets/icons/FavoriteWhite";
 import FavoriteWhiteFill from "../../../assets/icons/FavoriteWhiteFill";
-import { useAlert } from "../../../controllers/AlertNotification/index";
 import { onChangeIsOpenLeaveMessage, setProductModal } from "../../../entety/modals/model/index";
+import { $favorites, onChangeFavorite } from "../../../entety/client/favorite/model/index";
+import { useStoreMap } from "effector-react";
 
-const Card = () => {
+const Card: FC<PropsWithChildren<{ item?: any }>> = ({ item }) => {
+
+
+  const isFavorite = useStoreMap({
+    store: $favorites,
+    keys: [item?.article],
+    fn: (favorite, [itemArticle]) => favorite?.find(({ article }) => article === itemArticle) ?? null,
+  });
 
   return (
     <div className="card">
       <div className="card-img">
         <Image
-          onClick={() => setProductModal('1')}
-          layout={'fill'}
+          onClick={() => setProductModal(item)}
+          layout='fill'
           objectFit={'cover'}
-          src={testImage}
+          src={item?.primary_image?.image}
+          alt={'img-card'}
         />
-        <div className="card-img-new">
-          Новинка
-        </div>
-        <div className="card-img-favorite">
-          <FavoriteWhite />
-          <FavoriteWhiteFill />
+        {
+          item?.novelty &&
+          <p className="card-img-new">
+              Новинка
+          </p>
+        }
+        <div className="card-img-favorite" onClick={() => onChangeFavorite(item)}>
+          {isFavorite
+            ? <FavoriteWhiteFill />
+            : <FavoriteWhite />
+          }
         </div>
       </div>
-      <div
+      <p
         className="card-title"
-        onClick={() => setProductModal('1')}
+        onClick={() => setProductModal(item)}
       >
-        Костюм шелковый (черный)
-      </div>
+        {item?.title}
+      </p>
       <div className="card-price">
-        <div className="card-price-descount">
-          15 900 руб.
-        </div>
-        <div className="card-price-main">
-          11 900 руб.
-        </div>
-      </div>
-      <div className="card-is-exist">
-        <p>
-          Нет в наличии
+        {item?.old_price &&
+        <p className="card-price-descount">
+          {item?.old_price?.split('.')[0]} руб.
         </p>
-        <button onClick={() => onChangeIsOpenLeaveMessage(true)}>
-          Сообщить о поступлении
-        </button>
+        }
+        <p className="card-price-main">
+          {item?.actual_price?.split('.')[0]} руб.
+        </p>
       </div>
+      {!item?.in_stock &&
+      <div className="card-is-exist">
+          <p>
+              Нет в наличии
+          </p>
+          <button onClick={() => onChangeIsOpenLeaveMessage(true)}>
+              Сообщить о поступлении
+          </button>
+      </div>
+      }
     </div>
   );
 };

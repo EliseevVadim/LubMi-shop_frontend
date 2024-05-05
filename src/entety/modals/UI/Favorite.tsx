@@ -7,10 +7,12 @@ import {
 import CrossIcon from "../../../assets/icons/CrossIcon";
 import LineBlock from "../../../components/client/common/LineBlock";
 import BucketCard from "../../../components/client/bucket/BucketCard";
+import { $favorites } from "../../client/favorite/model/index";
 
 const Favorite = () => {
 
-  const isOpenFavorite = useUnit($isOpenFavorite)
+
+  const [isOpenFavorite, favorites] = useUnit([$isOpenFavorite, $favorites])
   const ref = useRef<any>(null);
 
   useEffect(() => {
@@ -62,13 +64,11 @@ const Favorite = () => {
         <LineBlock />
 
         <div className="favorite-inside-main">
-          <BucketCard />
-          <BucketCard />
-          <BucketCard />
-          <BucketCard />
-          <BucketCard />
-          <BucketCard />
-          <BucketCard />
+          {
+            favorites?.map((item: any) =>
+              <BucketCard item={item}/>
+            )
+          }
         </div>
 
       </div>

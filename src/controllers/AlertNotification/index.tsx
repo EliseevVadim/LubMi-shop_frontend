@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, FC, PropsWithChildren } from 'react';
 import { v4 as uuid } from 'uuid';
 import CrossIcon from "../../assets/icons/CrossIcon";
 
-const Context = React.createContext();
+
+const Context = React.createContext<any |undefined>(undefined);
 
 const useAlert = () => {
   const {
@@ -11,7 +12,7 @@ const useAlert = () => {
 
   return ({ message = '' }) => {
     const id = uuid();
-    setList((prev) => [
+    setList((prev: any) => [
       ...prev,
       {
         id,
@@ -21,7 +22,7 @@ const useAlert = () => {
   };
 }
 
-const AlertItem = ({ item, onDeletListItem }) => {
+const AlertItem = ({ item, onDeletListItem }: any) => {
   const onDelete = () => {
     onDeletListItem(item.id);
   }
@@ -45,18 +46,18 @@ const AlertItem = ({ item, onDeletListItem }) => {
   );
 }
 
-const AlertProvider = ({ children }) => {
+const AlertProvider: FC<PropsWithChildren<{children : React.ReactNode}>> = ({ children }) => {
   const [list, setList] = useState<any>([]);
 
-  const onDeletListItem = (id) => {
-    setList((prev) => prev.filter((item) => item.id !== id));
+  const onDeletListItem = (id: any) => {
+    setList((prev: any) => prev.filter((item: any) => item.id !== id));
   }
 
   return (
     <Context.Provider value={{ setList }}>
       <div className="alert-notification">
-        {list.map((item) => (
-          <AlertItem key={item.id} item={item} onDeletListItem={onDeletListItem} />
+        {list.map((item: any) => (
+          <AlertItem key={item?.id} item={item} onDeletListItem={onDeletListItem} />
         ))}
       </div>
       {children}

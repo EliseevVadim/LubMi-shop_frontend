@@ -7,12 +7,12 @@ import {
   Dropdown,
   MenuProps,
 } from "antd";
-import EditIcon from "../../../assets/Icons/EditIcon";
-import BucketIcon from "../../../assets/Icons/BucketIcon";
 import { MoreOutlined } from "@ant-design/icons/lib";
 import AddModal from "../modal/AddModal";
 import EditModal from "../modal/EditModal";
 import MaxWithLayout from "../../../layouts/MaxWithLayout";
+import EditIcon from "../../../assets/icons/EditIcon";
+import BucketIcon from "../../../assets/icons/BucketIcon";
 
 const CategoryContent = () => {
 

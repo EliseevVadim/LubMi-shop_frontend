@@ -29,8 +29,6 @@ const MainContent = () => {
     },
   ]
 
-  let slider: any;
-
   const settings = {
     arrows: false,
     // autoplay: true,
@@ -53,7 +51,7 @@ const MainContent = () => {
   return (
     <div className="home">
       <div className="home-slider">
-        <Slider ref={(c) => (slider = c)} {...settings} >
+        <Slider {...settings} >
           {
             slides?.map((item: any, index: any) =>
               <div className="home-slider-item">
