@@ -9,10 +9,16 @@ import { Checkbox, Form, Input, Radio, Space } from "antd";
 import InputMask from "react-input-mask";
 import CustomButton from "../../../components/client/common/CustomButton";
 import LineBlock from "../../../components/client/common/LineBlock";
+import { AddressSuggestions } from 'react-dadata';
+import 'react-dadata/dist/react-dadata.css';
 
 const CheckoutModal = () => {
 
   const [isOpenBucket, isOpenCheckout] = useUnit([$isOpenBucket, $isOpenCheckout])
+
+  const onFinish = (values: any) =>{
+    console.log(values)
+  }
 
   useEffect(() => {
     if (isOpenCheckout) {
@@ -28,6 +34,7 @@ const CheckoutModal = () => {
       document.body.style.paddingRight = '0px';
     };
   }, [isOpenCheckout])
+  const [value, setValue] = useState();
 
   return (
     <div className={`checkout-modal ${isOpenCheckout ? 'checkout-modal-open' : ''}`}>
@@ -46,7 +53,7 @@ const CheckoutModal = () => {
             <Form
               // form={form}
               layout={"vertical"}
-              // onFinish={onFinish}
+              onFinish={onFinish}
             >
               <Form.Item
                 name="name"
@@ -125,11 +132,26 @@ const CheckoutModal = () => {
                   },
                 ]}
               >
-                <Input
-                  bordered={false}
-                  placeholder={'Введите Ваш город'}
-                  style={{
-                    height: 38
+                {/*<Input*/}
+                {/*  bordered={false}*/}
+                {/*  placeholder={'Введите Ваш город'}*/}
+                {/*  style={{*/}
+                {/*    height: 38*/}
+                {/*  }}*/}
+                {/*/>*/}
+                <AddressSuggestions
+                  token="596489711c19cb126026c3017de07bcdd6d5367c"
+                  containerClassName='dadata-input'
+                  suggestionClassName={'datata-suggestion'}
+                  highlightClassName={'datata-highlight'}
+                  count={5}
+                  selectOnBlur={true}
+                  value={value}
+                  onChange={setValue}
+                  autoload={true}
+                  delay={500}
+                  inputProps={{
+                    placeholder: 'Введите Ваш город'
                   }}
                 />
               </Form.Item>
