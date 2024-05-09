@@ -19,6 +19,7 @@ export default function App({ Component, pageProps }: AppProps){
     },
     Select: {
       optionFontSize: 200,
+      optionPadding: 100
     },
   };
 

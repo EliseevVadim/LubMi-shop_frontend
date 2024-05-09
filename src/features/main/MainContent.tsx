@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
 import CustomButton from "../../components/client/common/CustomButton";
 import Slider from 'react-slick';
 import homeIntroOne from '../../../public/home-intro-1.png'
@@ -6,8 +6,10 @@ import homeIntroTwo from '../../../public/home-intro-2.png'
 import Image from "next/dist/client/legacy/image";
 import Catalog from "../../components/client/catalog/Catalog";
 import MaxWithLayout from "../../layouts/MaxWithLayout";
+import { api } from "../../api/ApiWithoutToken";
+import { Spin } from "antd";
 
-const MainContent = () => {
+const MainContent: FC = () => {
 
   const slides = [
     {
@@ -47,6 +49,49 @@ const MainContent = () => {
     ]
   };
 
+  const [data, setData] = useState<any>([])
+  const [isLoading, setIsLoading] = useState<any>(true)
+  const [page, setPage] = useState<any>(1)
+  const [limit, setLimit] = useState<any>(10)
+  const [sort, setSort] = useState<any>('novelties-first')
+  const [totalCount, setTotalCount] = useState<any>(0)
+
+  const [data1, setData1] = useState<any>([])
+  const [isLoading1, setIsLoading1] = useState<any>(true)
+  const [page1, setPage1] = useState<any>(1)
+  const [limit1, setLimit1] = useState<any>(10)
+  const [sort1, setSort1] = useState<any>('novelties-first')
+  const [totalCount1, setTotalCount1] = useState<any>(0)
+
+  useEffect(() => {
+    setIsLoading(true)
+    api.get(`/products/${sort}/${limit}/${page}/`)
+      .then((response) => {
+        setData(response?.data?.data)
+        setTotalCount(response?.data?.['total-count'])
+      })
+      .catch(() => {
+
+      })
+      .finally(() => {
+        setIsLoading(false)
+      });
+  }, [limit, sort])
+
+  useEffect(() => {
+    setIsLoading1(true)
+    api.get(`/products/bestsellers/${limit1}/${page1}/`)
+      .then((response) => {
+        setData1(response?.data?.data)
+        setTotalCount1(response?.data?.['total-count'])
+      })
+      .catch(() => {
+
+      })
+      .finally(() => {
+        setIsLoading1(false)
+      });
+  }, [limit1, sort1])
 
   return (
     <div className="home">
@@ -78,11 +123,27 @@ const MainContent = () => {
       </div>
 
       <div className="home-catalog">
-        <Catalog />
+        <Spin spinning={isLoading}>
+          <Catalog
+            products={data}
+            replaceUrl={false}
+            totalCount={totalCount}
+            setSort={setSort}
+          />
+        </Spin>
       </div>
 
       <div className="home-catalog">
-        <Catalog title={'Бестселлеры'}/>
+        <Spin spinning={isLoading1}>
+          <Catalog
+            title={'Бестселлеры'}
+            products={data1}
+            replaceUrl={false}
+            totalCount={totalCount1}
+            setSort={setSort1}
+            isWithSort={false}
+          />
+        </Spin>
       </div>
 
       <div className="home-banner">

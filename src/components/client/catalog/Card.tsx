@@ -15,6 +15,9 @@ const Card: FC<PropsWithChildren<{ item?: any }>> = ({ item }) => {
     fn: (favorite, [itemArticle]) => favorite?.find(({ article }) => article === itemArticle) ?? null,
   });
 
+  console.log('item')
+  console.log(item)
+
   return (
     <div className="card">
       <div className="card-img">
@@ -59,7 +62,7 @@ const Card: FC<PropsWithChildren<{ item?: any }>> = ({ item }) => {
           <p>
               Нет в наличии
           </p>
-          <button onClick={() => onChangeIsOpenLeaveMessage(true)}>
+          <button onClick={() => onChangeIsOpenLeaveMessage(item?.article)}>
               Сообщить о поступлении
           </button>
       </div>

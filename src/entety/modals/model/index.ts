@@ -26,8 +26,8 @@ export const onChangeIsOpenSearch = createEvent<boolean>()
 $isOpenSearch.on(onChangeIsOpenSearch, (_, t) => t)
 
 // leave message modal
-export const $isOpenLeaveMessage = createStore<boolean>(false)
-export const onChangeIsOpenLeaveMessage = createEvent<boolean>()
+export const $isOpenLeaveMessage = createStore<string>('')
+export const onChangeIsOpenLeaveMessage = createEvent<string>()
 $isOpenLeaveMessage.on(onChangeIsOpenLeaveMessage, (_, t) => t)
 
 // leave message modal

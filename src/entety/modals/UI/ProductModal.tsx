@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useStoreMap, useUnit } from "effector-react";
-import { $productModal, setProductModal } from "../model/index";
+import { $productModal, onChangeIsOpenBucket, setProductModal } from "../model/index";
 import MaxWithLayout from "../../../layouts/MaxWithLayout";
 import ProductArrowToLeft from "../../../assets/icons/ProductArrowToLeft";
 import CrossIcon from "../../../assets/icons/CrossIcon";
@@ -15,6 +15,7 @@ import { useAlert } from "../../../controllers/AlertNotification/index";
 import { Spin } from "antd";
 import { $favorites, onChangeFavorite } from "../../client/favorite/model/index";
 import FavoriteIconFill from "../../../assets/icons/FavoriteIconFill";
+import { addToBucketEvent } from "../../client/bucket/model/index";
 
 const ProductModal = () => {
 
@@ -44,15 +45,11 @@ const ProductModal = () => {
   const [selectedSize, setSelectedSize] = useState<any>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
-  console.log('productModal')
-  console.log(productModal)
-
   const isFavorite = useStoreMap({
     store: $favorites,
     keys: [productData?.article],
     fn: (favorite, [itemArticle]) => favorite?.find(({ article }) => article === itemArticle) ?? null,
   });
-
 
   const settings = {
     vertical: true,
@@ -178,7 +175,22 @@ const ProductModal = () => {
               </div>
               <div className="product-modal-main-text-buttons">
                 <CustomButton
-                  disable={selectedSize?.quantity <= 0}
+                  disable={selectedSize?.quantity <= 0 || !selectedSize}
+                  // onClick={() => console.log({
+                  //   article: productModal.article,
+                  //   size: selectedSize?.id,
+                  //   quantity: 1
+                  // })}
+                  onClick={() => {
+                    addToBucketEvent({
+                      ...productModal,
+                      article: productModal.article,
+                      size: selectedSize,
+                      quantity: 1,
+                    })
+                    setProductModal(false)
+                    onChangeIsOpenBucket(true)
+                  }}
                   title={'Добавить в корзину'}
                   padding={'24px 0'}
                   maxWidth={359}

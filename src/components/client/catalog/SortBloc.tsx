@@ -37,7 +37,7 @@ const items: SortTimes[] = [
   },
 ]
 
-const SortBloc: FC<PropsWithChildren<{replaceUrl?: boolean}>> = ({ replaceUrl= false}) => {
+const SortBloc: FC<PropsWithChildren<{ replaceUrl?: boolean, setCurrentSort?: string | undefined }>> = ({ replaceUrl = false, setCurrentSort }) => {
 
   const ref = useRef<any>(null);
   const router = useRouter();
@@ -45,11 +45,11 @@ const SortBloc: FC<PropsWithChildren<{replaceUrl?: boolean}>> = ({ replaceUrl= f
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [selectedItem, setSelectedItem] = useState<SortTimes>(items[0])
 
-  const handleSelect = (item: any) =>{
+  const handleSelect = (item: any) => {
     setIsOpen(false)
     setSelectedItem(item)
 
-    if (replaceUrl){
+    if (replaceUrl) {
       const { pathname, query } = router;
       const newQuery = { ...query, sort: item?.type };
       const href = {
@@ -57,6 +57,8 @@ const SortBloc: FC<PropsWithChildren<{replaceUrl?: boolean}>> = ({ replaceUrl= f
         query: newQuery,
       };
       router.push(href);
+    } else {
+      setCurrentSort(item?.type)
     }
   }
 

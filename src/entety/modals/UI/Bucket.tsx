@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useUnit } from "effector-react";
+import { useStoreMap, useUnit } from "effector-react";
 import {
   $isOpenBucket,
   onChangeIsOpenBucket, onChangeIsOpenCheckout
@@ -8,11 +8,15 @@ import CrossIcon from "../../../assets/icons/CrossIcon";
 import LineBlock from "../../../components/client/common/LineBlock";
 import BucketCard from "../../../components/client/bucket/BucketCard";
 import CustomButton from "../../../components/client/common/CustomButton";
+import { $bucket, $bucketCalculated } from "../../client/bucket/model/index";
 
 const Bucket = () => {
 
-  const isOpenBucket = useUnit($isOpenBucket)
+  const [isOpenBucket, bucket, bucketCalculated] = useUnit([$isOpenBucket, $bucket, $bucketCalculated])
   const ref = useRef<any>(null);
+
+  console.log('bucketCalculated')
+  console.log(bucketCalculated)
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
@@ -60,30 +64,42 @@ const Bucket = () => {
           </div>
         </div>
 
-        <div className="bucket-inside-empty">
-          Корзина пуста. Добавьте в корзину хотя бы один товар
-        </div>
         <LineBlock />
-        <div className="bucket-inside-main">
-          <BucketCard isWithCounter={true}/>
-        </div>
-        <LineBlock />
-        <div className="bucket-inside-bottom">
-          <h4>
-            Сумма к оплате: 35 700 руб
-          </h4>
-          <CustomButton
-            onClick={() =>{
-              onChangeIsOpenCheckout(true)
-              onChangeIsOpenBucket(false)
-            }}
-            title={'Оформить заказ'}
-            padding={'24px 0'}
-            maxWidth={"100%"}
-            backColor={'rgba(34, 34, 34, 1)'}
-            color={'rgba(255, 255, 255, 1)'}
-          />
-        </div>
+        {bucket?.length !== 0
+          ?
+          <>
+            <div className="bucket-inside-main">
+              {
+                bucket?.map((item: any) =>
+                  <BucketCard isWithCounter={true} item={item}/>
+                )
+              }
+            </div>
+            <LineBlock />
+            <div className="bucket-inside-bottom">
+              <h4>
+                Сумма к оплате: 35 700 руб
+              </h4>
+              <CustomButton
+                onClick={() =>{
+                  onChangeIsOpenCheckout(true)
+                  onChangeIsOpenBucket(false)
+                }}
+                title={'Оформить заказ'}
+                padding={'24px 0'}
+                maxWidth={"100%"}
+                backColor={'rgba(34, 34, 34, 1)'}
+                color={'rgba(255, 255, 255, 1)'}
+              />
+            </div>
+          </>
+          :
+          <div className="bucket-inside-empty">
+            Корзина пуста. Добавьте в корзину хотя бы один товар
+          </div>
+        }
+
+
       </div>
     </div>
   );

@@ -8,13 +8,11 @@ const CatalogPage: FC<PropsWithChildren<any>> = ({
                                                    products
                                                  }) => {
 
-  console.log(products)
-
   return (
     <Meta title={'Каталог'}>
       <MainLayout>
         <CatalogContent
-          products={products.data}
+          products={products?.data}
           totalCount={products['total-count']}
         />
       </MainLayout>
@@ -26,11 +24,12 @@ export async function getServerSideProps(context: any){
 
   const sort: any = {
     page: context?.query?.page || 1,
+    limit: context?.query?.limit || 10,
     sort: context?.query?.sort || 'novelties-first',
   }
 
   try {
-    const data: any = await api.get(`/products/${sort.sort}/10/${sort.page}`);
+    const data: any = await api.get(`/products/${sort.sort}/${sort.limit}/${sort.page}`);
     return {
       props: {
         products: data.data || {},

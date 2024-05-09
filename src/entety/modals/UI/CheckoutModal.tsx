@@ -5,19 +5,61 @@ import MaxWithLayout from "../../../layouts/MaxWithLayout";
 import ProductArrowToLeft from "../../../assets/icons/ProductArrowToLeft";
 import CrossIcon from "../../../assets/icons/CrossIcon";
 import BucketCard from "../../../components/client/bucket/BucketCard";
-import { Checkbox, Form, Input, Radio, Space } from "antd";
+import { Checkbox, Form, Input, Radio, Select, Space } from "antd";
 import InputMask from "react-input-mask";
 import CustomButton from "../../../components/client/common/CustomButton";
 import LineBlock from "../../../components/client/common/LineBlock";
 import { AddressSuggestions } from 'react-dadata';
 import 'react-dadata/dist/react-dadata.css';
+import {
+  $bucket,
+  $cities,
+  $selectedCities,
+  BucketCheckoutFx,
+  CityFX,
+  onSelectCity
+} from "../../client/bucket/model/index";
+import {useDebounce} from "use-debounce";
 
 const CheckoutModal = () => {
 
-  const [isOpenBucket, isOpenCheckout] = useUnit([$isOpenBucket, $isOpenCheckout])
+  const [
+    isOpenCheckout,
+    selectedCities,
+    cities,
+    bucket
+  ] = useUnit([
+    $isOpenCheckout,
+    $selectedCities,
+    $cities,
+    $bucket
+  ])
+  const [radio, setRadio] = useState('cd');
+  const [searchCity, setSearchCity] = useState<any>('');
+  const [debouncedSearchCity] = useDebounce(searchCity, 1000);
+
+  useEffect(() =>{
+    CityFX(debouncedSearchCity)
+  },[debouncedSearchCity])
 
   const onFinish = (values: any) =>{
     console.log(values)
+
+    const data = {
+      cu_first_name: values?.name,
+      cu_last_name:  values?.surname,
+      cu_phone: values?.phone,
+      cu_city_uuid: selectedCities?.city,
+      cu_street: values?.street,
+      cu_building: values?.building,
+      cu_entrance: values?.entrance,
+      cu_floor: values?.floor,
+      cu_apartment: values?.apartment,
+      cu_fullname: values?.fullName,
+      cu_confirm: true
+    }
+    console.log(data)
+    // BucketCheckoutFx(values)
   }
 
   useEffect(() => {
@@ -34,7 +76,6 @@ const CheckoutModal = () => {
       document.body.style.paddingRight = '0px';
     };
   }, [isOpenCheckout])
-  const [value, setValue] = useState();
 
   return (
     <div className={`checkout-modal ${isOpenCheckout ? 'checkout-modal-open' : ''}`}>
@@ -112,6 +153,7 @@ const CheckoutModal = () => {
                       {...inputProps}
                       type="tel"
                       disableUnderline
+                      maxLength={18}
                     />
                   }) as any}
                 </InputMask>
@@ -130,38 +172,36 @@ const CheckoutModal = () => {
                   },
                 ]}
               >
-                {/*<Input*/}
-                {/*  bordered={false}*/}
-                {/*  placeholder={'Введите Ваш город'}*/}
-                {/*  style={{*/}
-                {/*    height: 38*/}
-                {/*  }}*/}
-                {/*/>*/}
-                <AddressSuggestions
-                  token="596489711c19cb126026c3017de07bcdd6d5367c"
-                  containerClassName='dadata-input'
-                  suggestionClassName={'datata-suggestion'}
-                  highlightClassName={'datata-highlight'}
-                  count={5}
-                  selectOnBlur={true}
-                  value={value}
-                  onChange={setValue as any}
-                  autoload={true}
-                  delay={500}
-                  inputProps={{
-                    placeholder: 'Введите Ваш город'
+                <Select
+                  style={{
+                    width: '100%'
                   }}
-                />
+                  className={'test-test'}
+                  placeholder={'Введите Ваш город'}
+                  filterOption={false}
+                  value={selectedCities}
+                  onChange={(e, y) => onSelectCity({id: y?.key, city: y?.children})}
+                  showSearch
+                  onSearch={(e) => setSearchCity(e)}
+                >
+                  {cities?.map((option: any) => {
+                    return (
+                      <Select.Option key={option?.uuid?.toString()} value={option?.uuid?.toString()}>
+                        {`${option?.city}, ${option?.region}`}
+                      </Select.Option>
+                    );
+                  })}
+                </Select>
               </Form.Item>
 
-              <Radio.Group>
+              <Radio.Group onChange={(e) => setRadio(e.target.value)} value={radio} defaultValue={'cd'}>
                 <Space direction="vertical">
-                  <Radio value={1}>
+                  <Radio value={'cd'}>
                     <div className="checkout-modal-main-form-radio">
                       СДЭК, <span>от 3 дней, от 459 руб.</span>
                     </div>
                   </Radio>
-                  <Radio value={2}>
+                  <Radio value={'pr'}>
                     <div className="checkout-modal-main-form-radio">
                       Доставка почтой России, <span> от 3 дней, от 459 руб.</span>
                     </div>
@@ -208,7 +248,7 @@ const CheckoutModal = () => {
 
               <div className="checkout-modal-main-form-block">
                 <Form.Item
-                  name="home1"
+                  name="building"
                   rules={[
                     {
                       required: true,
@@ -224,7 +264,7 @@ const CheckoutModal = () => {
                   />
                 </Form.Item>
                 <Form.Item
-                  name="home2"
+                  name="apartment"
                   rules={[
                     {
                       required: true,
@@ -243,7 +283,7 @@ const CheckoutModal = () => {
 
               <div className="checkout-modal-main-form-block">
                 <Form.Item
-                  name="home3"
+                  name="entrance"
                   rules={[
                     {
                       required: true,
@@ -259,7 +299,7 @@ const CheckoutModal = () => {
                   />
                 </Form.Item>
                 <Form.Item
-                  name="home4"
+                  name="floor"
                   rules={[
                     {
                       required: true,
@@ -322,9 +362,11 @@ const CheckoutModal = () => {
               <LineBlock/>
             </div>
             <div className="checkout-modal-main-order-list">
-              <BucketCard isWithCounter={true} />
-              <BucketCard isWithCounter={true} />
-              <BucketCard isWithCounter={true} />
+              {
+                bucket?.map((item: any) =>
+                  <BucketCard isWithCounter={true} item={item}/>
+                )
+              }
             </div>
             <div className="checkout-modal-main-order-mob">
               <LineBlock/>

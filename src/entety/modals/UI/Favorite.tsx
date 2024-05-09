@@ -11,7 +11,6 @@ import { $favorites } from "../../client/favorite/model/index";
 
 const Favorite = () => {
 
-
   const [isOpenFavorite, favorites] = useUnit([$isOpenFavorite, $favorites])
   const ref = useRef<any>(null);
 

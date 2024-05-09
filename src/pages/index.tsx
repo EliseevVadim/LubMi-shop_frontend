@@ -3,7 +3,8 @@ import Meta from "../seo/Meta";
 import MainLayout from "../layouts/MainLayout";
 import MainContent from "../features/main/MainContent";
 
-const Home: FC<PropsWithChildren<any>> = ({}) => {
+const Home: FC<PropsWithChildren<any>> = ({
+                                          }) => {
 
   return (
     <Meta title={'Главная'}>

@@ -150,3 +150,58 @@ input::placeholder {
 }
 
 
+.ant-select-arrow {
+    display: none !important;
+}
+
+.ant-select-selector {
+    border: none !important;
+    box-shadow: none !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+
+    .ant-select-selection-search {
+        inset-inline-start: 0 !important;
+        inset-block-end: 0 !important;
+    }
+}
+
+.ant-select-selection {
+    background-color: green !important;
+}
+
+.rc-virtual-list-holder-inner {
+    .ant-select-item {
+        padding: 0px;
+    }
+
+    .ant-select-item-option-content {
+        font-size: 24px !important;
+        font-weight: 100 !important;
+        line-height: 23px !important;
+        letter-spacing: -0.02em !important;
+        color: $dark !important;
+    }
+
+}
+
+.ant-select-item-option-active, .ant-select-item-option-selected {
+    background-color: transparent !important;
+
+    &:hover {
+        background-color: transparent !important;
+    }
+}
+
+.ant-select-dropdown {
+    border: 1px solid $dark;
+    border-radius: 0 !important;
+}
+
+.ant-modal-mask{
+    z-index: 990 !important;
+}
+
+.ant-modal-wrap{
+    z-index: 990 !important;
+}

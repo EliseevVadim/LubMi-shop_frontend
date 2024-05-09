@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import CounterMinusIcon from "../../../assets/icons/CounterMinusIcon";
 import CounterPlusIcon from "../../../assets/icons/CounterPlusIcon";
+import { changeCountEvent } from "../../../entety/client/bucket/model/index";
 
-const Counter = () => {
-  const [value, setValue] = useState<number>(1);
+const Counter = ({ item }) => {
 
   const decrement = () => {
-    if (value > 1) {
-      setValue(value - 1);
+    if (item?.quantity > 1) {
+      changeCountEvent({ ...item, quantity: item?.quantity - 1 })
     }
   };
 
   const increment = () => {
-    if (value < 100) {
-      setValue(value + 1);
+    if (item?.quantity < 100) {
+      changeCountEvent({ ...item, quantity: item?.quantity + 1 })
     }
   };
 
@@ -23,7 +23,7 @@ const Counter = () => {
         <CounterMinusIcon />
       </div>
       <div className="counter-input">
-        {value}
+        {item?.quantity}
       </div>
       <div className="counter-icon" onClick={increment}>
         <CounterPlusIcon />

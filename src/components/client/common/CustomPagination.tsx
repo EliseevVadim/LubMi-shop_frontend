@@ -31,7 +31,7 @@ const CustomPagination: FC<PropsWithChildren<any>> = ({
   return (
     <Pagination
       className='pagination'
-      // onChange={(page, pageSize): any => changePage(page)}
+      onChange={(page, pageSize): any => changePage(page)}
       defaultCurrent={1}
       current={page}
       pageSize={limit}

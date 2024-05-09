@@ -1,19 +1,45 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useUnit } from "effector-react";
 import { $isOpenLeaveMessage, onChangeIsOpenLeaveMessage } from "../model/index";
 import { Form, Input, Modal } from "antd";
 import InputMask from "react-input-mask";
 import CustomButton from "../../../components/client/common/CustomButton";
+import { api } from "../../../api/ApiWithoutToken";
+import { postFeedBack } from "../api/index";
+import { useAlert } from "../../../controllers/AlertNotification/index";
 
 const LeaveMessageModal = () => {
 
   const isOpenLeaveMessage = useUnit($isOpenLeaveMessage)
 
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
   const [form] = Form.useForm();
+  const uAlert = useAlert()
 
   const onFinish = (values: any) => {
-    form.resetFields()
+    setIsLoading(true)
+    postFeedBack({
+      ppk: isOpenLeaveMessage,
+      phone: values?.phone,
+      email: values?.email
+    })
+      .then(() =>{
+        uAlert({
+          message: 'Запрос успешно отправлен'
+        })
+        form.resetFields()
+      })
+      .catch(() =>{
+        uAlert({
+          message: 'Произошла ошибка при попытке отправить запрос'
+        })
+      })
+      .finally(() =>{
+        setIsLoading(false)
+      })
   }
+
 
   useEffect(() => {
     if (isOpenLeaveMessage) {
@@ -37,12 +63,15 @@ const LeaveMessageModal = () => {
       open={isOpenLeaveMessage}
       onCancel={() => onChangeIsOpenLeaveMessage(false)}
       footer={null}
+      style={{
+        zIndex: 990,
+      }}
     >
       <div className="form-title">
         Сообщить о поступлении товара
       </div>
       <div className="form-desc">
-        Выберите удобный способ для оповещения о повторном наличии данного товара
+        Выберите удобный способ для оповещения о повторном наличии данного товара
       </div>
 
       <Form
@@ -75,6 +104,7 @@ const LeaveMessageModal = () => {
                 {...inputProps}
                 type="tel"
                 disableUnderline
+                maxLength={18}
               />
             }) as any}
           </InputMask>
@@ -102,6 +132,7 @@ const LeaveMessageModal = () => {
 
         <div className="form-button">
           <CustomButton
+            isLoading={isLoading}
             title={'Получить уведомление'}
             padding={'24px 0'}
             maxWidth={359}
