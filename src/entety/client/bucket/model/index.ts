@@ -19,20 +19,22 @@ persist({
 
 export const addToBucketEvent = createEvent<any>();
 export const removeFromBucketEvent = createEvent<any>();
+export const resetBucket = createEvent<any>();
 export const changeCountEvent = createEvent<any>();
 
+
 export const BucketCheckoutFx = createEffect<any, any, Error>(async(data) => {
-  const res = await bucketCheckout($bucket?.getState());
-  if (!res.success) throw new Error(res.message);
+  const res = await bucketCheckout(data);
+  if (res?.status !== 200) throw new Error(res.message);
   return res.data;
 });
-$bucketCalculated.on(BucketCheckoutFx, (_, t) => t)
 
 export const CalculateBucketFx = createEffect<any, any, Error>(async(data) => {
   const res = await bucketCalculate($bucket?.getState());
-  if (!res.success) throw new Error(res.message);
+  if (res?.status !== 200) throw new Error(res.message);
   return res.data;
 });
+$bucketCalculated.on(CalculateBucketFx.doneData, (_, t) => t)
 
 $bucket.on(addToBucketEvent, (state, payload) => {
   const doctorExists: any = state?.find(item => item?.article === payload?.article && item?.size?.id === payload?.size?.id);
@@ -54,6 +56,26 @@ $bucket.on(changeCountEvent, (state, payload) => {
 $bucket.on(removeFromBucketEvent, (state, payload) => {
   return state.filter((item: any) => item?.article !== payload?.article && item?.size?.id !== payload?.article?.size?.id)
 })
+$bucket.on(resetBucket, () => [])
+
+//города
+export const $cities = createStore<any[]>([]);
+export const $selectedCities = createStore<any>(null);
+
+export const onSelectCity = createEvent<any>();
+$selectedCities.on(onSelectCity, (_, t) => t)
+
+export const $selectedDelivery = createStore<any>('cd');
+export const onSelectDelivery = createEvent<any>();
+$selectedDelivery.on(onSelectDelivery, (_, t) => t)
+
+export const CityFX = createEffect<any, any, Error>(async(data) => {
+  const res = await bucketCities(data);
+  if (!res.success) throw new Error(res.message);
+  return res.cities;
+});
+$cities.on(CityFX.doneData, (_, t) => t)
+//города
 
 
 const CalcDebounce = createEvent<any>();
@@ -64,23 +86,9 @@ const CalculateDebounce = debounce({
 });
 
 sample({
-  clock: [removeFromBucketEvent, changeCountEvent, addToBucketEvent],
+  clock: [removeFromBucketEvent, changeCountEvent, addToBucketEvent, onSelectCity],
   target: CalcDebounce,
 });
 
 
-//города
-
-export const $cities = createStore<any[]>([]);
-export const $selectedCities = createStore<any>(null);
-
-export const onSelectCity = createEvent<any>();
-$selectedCities.on(onSelectCity, (_, t) => t)
-
-export const CityFX = createEffect<any, any, Error>(async(data) => {
-  const res = await bucketCities(data);
-  if (!res.success) throw new Error(res.message);
-  return res.cities;
-});
-$cities.on(CityFX.doneData, (_, t) => t)
 

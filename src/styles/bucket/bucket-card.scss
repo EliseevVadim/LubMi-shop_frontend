@@ -109,3 +109,34 @@
         }
     }
 }
+
+
+.bucket-timer {
+    display: flex;
+    justify-content: space-between;
+
+    &-left {
+        h5 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 300;
+            line-height: 23px;
+            letter-spacing: -0.02em;
+            color: $dark;
+        }
+
+    }
+
+    &-right {
+        font-size: 24px;
+        font-weight: 300;
+        line-height: 23px;
+        letter-spacing: -0.02em;
+        color: $dark;
+
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}

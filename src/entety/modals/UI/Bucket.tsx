@@ -8,15 +8,27 @@ import CrossIcon from "../../../assets/icons/CrossIcon";
 import LineBlock from "../../../components/client/common/LineBlock";
 import BucketCard from "../../../components/client/bucket/BucketCard";
 import CustomButton from "../../../components/client/common/CustomButton";
-import { $bucket, $bucketCalculated } from "../../client/bucket/model/index";
+import { $bucket, $bucketCalculated, CalculateBucketFx } from "../../client/bucket/model/index";
+import { Skeleton } from "antd";
 
 const Bucket = () => {
 
-  const [isOpenBucket, bucket, bucketCalculated] = useUnit([$isOpenBucket, $bucket, $bucketCalculated])
+  const [
+    isOpenBucket,
+    bucket,
+    bucketCalculated,
+    isLoadingCalculate
+  ] = useUnit([
+    $isOpenBucket,
+    $bucket,
+    $bucketCalculated,
+    CalculateBucketFx.pending
+  ])
   const ref = useRef<any>(null);
 
-  console.log('bucketCalculated')
-  console.log(bucketCalculated)
+  useEffect(() => {
+    CalculateBucketFx()
+  }, [])
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
@@ -52,7 +64,6 @@ const Bucket = () => {
         className={`bucket-inside ${isOpenBucket ? 'bucket-inside-active' : ''}`}
         ref={ref}
       >
-
         <div className="bucket-inside-top">
           <h2>
             ваш заказ
@@ -71,17 +82,22 @@ const Bucket = () => {
             <div className="bucket-inside-main">
               {
                 bucket?.map((item: any) =>
-                  <BucketCard isWithCounter={true} item={item}/>
+                  <BucketCard isWithCounter={true} item={item} />
                 )
               }
             </div>
             <LineBlock />
             <div className="bucket-inside-bottom">
               <h4>
-                Сумма к оплате: 35 700 руб
+                Сумма к оплате: {' '}
+                {
+                  isLoadingCalculate
+                    ? <Skeleton.Button active={false} size={'small'} />
+                    : `${bucketCalculated?.price} руб`
+                }
               </h4>
               <CustomButton
-                onClick={() =>{
+                onClick={() => {
                   onChangeIsOpenCheckout(true)
                   onChangeIsOpenBucket(false)
                 }}
@@ -95,7 +111,7 @@ const Bucket = () => {
           </>
           :
           <div className="bucket-inside-empty">
-            Корзина пуста. Добавьте в корзину хотя бы один товар
+            Корзина пуста. Добавьте в корзину хотя бы один товар
           </div>
         }
 

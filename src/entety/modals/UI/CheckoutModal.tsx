@@ -1,66 +1,114 @@
 import React, { useEffect, useState } from 'react';
 import { useUnit } from "effector-react";
-import { $isOpenBucket, $isOpenCheckout, $productModal, onChangeIsOpenCheckout, setProductModal } from "../model/index";
+import {
+  $isOpenBucket,
+  $isOpenCheckout,
+  $productModal,
+  onChangeIsOpenCheckout,
+  onSetNotification,
+  setProductModal
+} from "../model/index";
 import MaxWithLayout from "../../../layouts/MaxWithLayout";
 import ProductArrowToLeft from "../../../assets/icons/ProductArrowToLeft";
 import CrossIcon from "../../../assets/icons/CrossIcon";
 import BucketCard from "../../../components/client/bucket/BucketCard";
-import { Checkbox, Form, Input, Radio, Select, Space } from "antd";
+import { Checkbox, Form, Input, Radio, Select, Skeleton, Space } from "antd";
 import InputMask from "react-input-mask";
 import CustomButton from "../../../components/client/common/CustomButton";
 import LineBlock from "../../../components/client/common/LineBlock";
 import { AddressSuggestions } from 'react-dadata';
 import 'react-dadata/dist/react-dadata.css';
 import {
-  $bucket,
+  $bucket, $bucketCalculated,
   $cities,
-  $selectedCities,
-  BucketCheckoutFx,
+  $selectedCities, $selectedDelivery,
+  BucketCheckoutFx, CalculateBucketFx,
   CityFX,
-  onSelectCity
+  onSelectCity, onSelectDelivery, resetBucket
 } from "../../client/bucket/model/index";
-import {useDebounce} from "use-debounce";
+import { useDebounce } from "use-debounce";
 
 const CheckoutModal = () => {
+
+  const [form] = Form.useForm<{}>();
 
   const [
     isOpenCheckout,
     selectedCities,
     cities,
-    bucket
+    bucket,
+    bucketCalculated,
+    isLoadingCalculate,
+    selectedDelivery,
+    isLoadingCheckout,
   ] = useUnit([
     $isOpenCheckout,
     $selectedCities,
     $cities,
-    $bucket
+    $bucket,
+    $bucketCalculated,
+    CalculateBucketFx.pending,
+    $selectedDelivery,
+    BucketCheckoutFx.pending,
   ])
-  const [radio, setRadio] = useState('cd');
+
   const [searchCity, setSearchCity] = useState<any>('');
+  const [isAgree, setIsAgree] = useState<any>(false);
   const [debouncedSearchCity] = useDebounce(searchCity, 1000);
 
-  useEffect(() =>{
+  useEffect(() => {
     CityFX(debouncedSearchCity)
-  },[debouncedSearchCity])
+  }, [debouncedSearchCity])
 
-  const onFinish = (values: any) =>{
-    console.log(values)
+  const onFinish = (values: any) => {
 
     const data = {
+      delivery: selectedDelivery,
       cu_first_name: values?.name,
-      cu_last_name:  values?.surname,
+      cu_last_name: values?.surname,
       cu_phone: values?.phone,
-      cu_city_uuid: selectedCities?.city,
+      cu_city_uuid: selectedCities?.id,
+      cu_city: selectedCities?.city,
       cu_street: values?.street,
       cu_building: values?.building,
       cu_entrance: values?.entrance,
       cu_floor: values?.floor,
       cu_apartment: values?.apartment,
       cu_fullname: values?.fullName,
-      cu_confirm: true
+      cu_confirm: true,
+      scart: bucket?.map((item: any) => ({ppk: item.article, size_id: item?.size?.id, quantity: item?.quantity}))
     }
+
     console.log(data)
-    // BucketCheckoutFx(values)
+
+    BucketCheckoutFx(data)
+      .then((res) =>{
+        console.log(res)
+
+        if (res?.success){
+          onSetNotification({
+            title: 'Спасибо за покупку',
+            message: 'нужно добавить текст'
+          })
+          window.open(res.redirect)
+          form.resetFields()
+          onSelectCity(null)
+          onSelectDelivery(null)
+          onChangeIsOpenCheckout(false)
+          resetBucket([])
+        } else {
+          onSetNotification({
+            title: 'Произошла ошибка',
+            message: res?.why
+          })
+        }
+      })
+      .catch((e) =>{
+        console.log(e)
+      })
   }
+
+  const isDisablePay = !selectedCities || !isAgree || !selectedDelivery
 
   useEffect(() => {
     if (isOpenCheckout) {
@@ -92,7 +140,7 @@ const CheckoutModal = () => {
         <div className="checkout-modal-main">
           <div className="checkout-modal-main-form">
             <Form
-              // form={form}
+              form={form}
               layout={"vertical"}
               onFinish={onFinish}
             >
@@ -180,7 +228,7 @@ const CheckoutModal = () => {
                   placeholder={'Введите Ваш город'}
                   filterOption={false}
                   value={selectedCities}
-                  onChange={(e, y) => onSelectCity({id: y?.key, city: y?.children})}
+                  onChange={(e, y) => onSelectCity({ id: y?.key, city: y?.children })}
                   showSearch
                   onSearch={(e) => setSearchCity(e)}
                 >
@@ -193,21 +241,34 @@ const CheckoutModal = () => {
                   })}
                 </Select>
               </Form.Item>
-
-              <Radio.Group onChange={(e) => setRadio(e.target.value)} value={radio} defaultValue={'cd'}>
-                <Space direction="vertical">
-                  <Radio value={'cd'}>
-                    <div className="checkout-modal-main-form-radio">
-                      СДЭК, <span>от 3 дней, от 459 руб.</span>
-                    </div>
-                  </Radio>
-                  <Radio value={'pr'}>
-                    <div className="checkout-modal-main-form-radio">
-                      Доставка почтой России, <span> от 3 дней, от 459 руб.</span>
-                    </div>
-                  </Radio>
-                </Space>
+              {!!selectedCities
+                ?
+              <Radio.Group onChange={(e) => onSelectDelivery(e.target.value)} value={selectedDelivery}>
+                  <Space direction="vertical">
+                    {
+                      bucketCalculated?.['cd']?.cost &&
+                      <Radio value={'cd'}>
+                          <div className="checkout-modal-main-form-radio">
+                              СДЭК, <span>от {bucketCalculated?.['cd']?.days} дней, от {bucketCalculated?.['cd']?.cost} руб.</span>
+                          </div>
+                      </Radio>
+                    }
+                    {
+                      bucketCalculated?.['pr']?.cost &&
+                      <Radio value={'pr'}>
+                          <div className="checkout-modal-main-form-radio">
+                              Доставка почтой
+                              России, <span> от {bucketCalculated?.['pr']?.days} дней, от {bucketCalculated?.['pr']?.cost} руб.</span>
+                          </div>
+                      </Radio>
+                    }
+                  </Space>
               </Radio.Group>
+                :
+                <p style={{color: 'red', fontSize: 16}}>
+                  В данном городе нет доставки
+                </p>
+              }
 
               <h3>
                 Получатель
@@ -318,6 +379,8 @@ const CheckoutModal = () => {
 
               <div className="checkout-modal-main-form-check-box">
                 <Checkbox
+                  value={isAgree}
+                  onChange={(e) => setIsAgree(e?.target?.checked)}
                 >
                   Я согласен/а с политикой конфиденциальности
                 </Checkbox>
@@ -343,6 +406,8 @@ const CheckoutModal = () => {
 
               <div className="checkout-modal-main-form-button">
                 <CustomButton
+                  disable={isDisablePay}
+                  isLoading={isLoadingCheckout}
                   title={'Оформить заказ'}
                   padding={'24px 0'}
                   maxWidth={'100%'}
@@ -359,27 +424,65 @@ const CheckoutModal = () => {
               <h3>
                 ваш заказ
               </h3>
-              <LineBlock/>
+              <LineBlock />
             </div>
             <div className="checkout-modal-main-order-list">
               {
                 bucket?.map((item: any) =>
-                  <BucketCard isWithCounter={true} item={item}/>
+                  <BucketCard isWithCounter={true} item={item} />
                 )
               }
             </div>
             <div className="checkout-modal-main-order-mob">
-              <LineBlock/>
+              <LineBlock />
             </div>
             <div className="checkout-modal-main-order-sum">
               <h2>
-                Сумма к оплате: 35 700 руб
+                Сумма к оплате: {' '}
+                {
+                  isLoadingCalculate
+                    ? <Skeleton.Button active={false} size={'small'} />
+                    : `${bucketCalculated?.price} руб`
+                }
               </h2>
               <p>
-                Сумма: 35 700 руб
+                Сумма: {' '}
+                {
+                  isLoadingCalculate
+                    ? <Skeleton.Button active={false} size={'small'} />
+                    : `${bucketCalculated?.price} руб`
+                }
               </p>
+              {
+                !!bucketCalculated?.[selectedDelivery]?.cost &&
+                <p>
+                  {
+                    selectedDelivery === 'cd' ? 'СДЭК' : 'Почта России'
+                  }: {' '}
+                  {
+                    isLoadingCalculate
+                      ? <Skeleton.Button active={false} size={'small'} />
+                      : `${bucketCalculated?.[selectedDelivery]?.cost} руб`
+                  }
+                </p>
+              }
+              {
+                selectedCities?.city &&
+                <p>
+                  {
+                    isLoadingCalculate
+                      ? <Skeleton.Button active={false} size={'small'} />
+                      : `${selectedCities?.city}`
+                  }
+                </p>
+              }
               <p>
-                Итоговая сумма: 35 700 руб
+                Итоговая сумма: {' '}
+                {
+                  isLoadingCalculate
+                    ? <Skeleton.Button active={false} size={'small'} />
+                    : `${Number(bucketCalculated?.price) + Number(bucketCalculated?.[selectedDelivery]?.cost)} руб`
+                }
               </p>
             </div>
           </div>
