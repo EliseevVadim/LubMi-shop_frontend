@@ -60,7 +60,7 @@ const Catalog: FC<PropsWithChildren<{
             )
           }
         </div>
-        {products?.length >= totalCount
+        {products && products?.length >= totalCount
           ?
           null
           :

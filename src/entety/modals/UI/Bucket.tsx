@@ -27,7 +27,7 @@ const Bucket = () => {
   const ref = useRef<any>(null);
 
   useEffect(() => {
-    CalculateBucketFx()
+    CalculateBucketFx(undefined)
   }, [])
 
   useEffect(() => {
@@ -82,7 +82,7 @@ const Bucket = () => {
             <div className="bucket-inside-main">
               {
                 bucket?.map((item: any) =>
-                  <BucketCard isWithCounter={true} item={item} />
+                  <BucketCard isWithCounter={true} withOldPrice={false} withTimerLogic={true} item={item} />
                 )
               }
             </div>

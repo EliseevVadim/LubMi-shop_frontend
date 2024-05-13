@@ -4,7 +4,7 @@ import { bucketCalculate, bucketCheckout, bucketCities } from "../api/index";
 import { debounce } from "patronum";
 
 export const $bucket = createStore<any[]>([]);
-export const $bucketCalculated = createStore<any[]>([]);
+export const $bucketCalculated = createStore<any>(null);
 
 persist({
   store: $bucket,
@@ -29,7 +29,7 @@ export const BucketCheckoutFx = createEffect<any, any, Error>(async(data) => {
   return res.data;
 });
 
-export const CalculateBucketFx = createEffect<any, any, Error>(async(data) => {
+export const CalculateBucketFx = createEffect<any, any, Error>(async() => {
   const res = await bucketCalculate($bucket?.getState());
   if (res?.status !== 200) throw new Error(res.message);
   return res.data;
@@ -48,7 +48,7 @@ $bucket.on(addToBucketEvent, (state, payload) => {
   }
 })
 $bucket.on(changeCountEvent, (state, payload) => {
-  return state.map((item: any) => item.article === payload?.article
+  return state.map((item: any) => item.article === payload?.article && item?.size?.id === payload?.size?.id
     ? payload
     : item
   );

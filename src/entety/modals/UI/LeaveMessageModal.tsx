@@ -132,6 +132,7 @@ const LeaveMessageModal = () => {
 
         <div className="form-button">
           <CustomButton
+            fontWeight={100}
             isLoading={isLoading}
             title={'Получить уведомление'}
             padding={'24px 0'}

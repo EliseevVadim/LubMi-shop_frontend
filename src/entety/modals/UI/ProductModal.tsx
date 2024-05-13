@@ -45,6 +45,13 @@ const ProductModal = () => {
   const [selectedSize, setSelectedSize] = useState<any>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
+  const addToFavorite = () => {
+    uAlert({
+      message: 'Товар добавлен в избранное'
+    })
+    onChangeFavorite(productModal)
+  }
+
   const isFavorite = useStoreMap({
     store: $favorites,
     keys: [productData?.article],
@@ -158,15 +165,20 @@ const ProductModal = () => {
                 {productData?.actual_price?.split('.')?.[0]} руб.
               </p>
               <div className="product-modal-main-text-size">
-                Размер:
+                {
+                    productData?.sizes?.length !== 0 && 'Размер:'
+                }
                 <div className="product-modal-main-text-size-inside">
-                  <SelectorBlock
-                    items={productData?.sizes}
-                    setSelectedItem={setSelectedSize}
-                    selectedItem={selectedSize}
-                  />
                   {
-                    selectedSize?.quantity <= 0 &&
+                    productData?.sizes?.length !== 0 &&
+                    <SelectorBlock
+                        items={productData?.sizes}
+                        setSelectedItem={setSelectedSize}
+                        selectedItem={selectedSize}
+                    />
+                  }
+                  {
+                    selectedSize?.quantity <= 0 ||  productData?.sizes?.length === 0 &&
                     <h6>
                         Нет в наличии
                     </h6>
@@ -175,7 +187,7 @@ const ProductModal = () => {
               </div>
               <div className="product-modal-main-text-buttons">
                 <CustomButton
-                  disable={selectedSize?.quantity <= 0 || !selectedSize}
+                  disable={selectedSize?.quantity <= 0 || !selectedSize || productData?.sizes?.length === 0}
                   // onClick={() => console.log({
                   //   article: productModal.article,
                   //   size: selectedSize?.id,
@@ -198,7 +210,7 @@ const ProductModal = () => {
                   color={'rgba(255, 255, 255, 1)'}
                 />
                 <div className="product-modal-main-text-buttons-favorite"
-                     onClick={() => onChangeFavorite(productModal)}>
+                     onClick={addToFavorite}>
                   {
                     isFavorite
                       ?

@@ -11,24 +11,33 @@ import TimeIcon from "../../../assets/icons/TimeIcon";
 
 interface ICount {
   isWithCounter?: boolean,
+  withTimerLogic?: boolean,
+  withOldPrice?: boolean,
   item?: any
 }
 
 const BucketCard: FC<PropsWithChildren<ICount>> = ({
                                                      isWithCounter = false,
+                                                     withOldPrice = true,
+                                                     withTimerLogic = false,
                                                      item
                                                    }) => {
+
 
   const [isTimer, setIsTimer] = useState<boolean>(false)
 
   const onChangeTimerBlock = () => {
-    setIsTimer(!isTimer)
+    if (withTimerLogic) {
+      setIsTimer(!isTimer)
+    } else {
+      onChangeFavorite(item)
+    }
   }
 
   const [timer, setTimer] = useState<number>(5);
 
   useEffect(() => {
-    let interval;
+    let interval: any;
     const handleInterval = () => {
       setTimer(prevTimer => prevTimer - 1);
     };
@@ -43,7 +52,7 @@ const BucketCard: FC<PropsWithChildren<ICount>> = ({
 
   useEffect(() => {
     if (timer === 0 && isTimer) {
-      isWithCounter ? removeFromBucketEvent(item) : onChangeFavorite(item)
+      removeFromBucketEvent(item)
     }
   }, [timer]);
 
@@ -68,7 +77,7 @@ const BucketCard: FC<PropsWithChildren<ICount>> = ({
             </div>
             <div className="bucket-timer-right">
               {timer}
-              <TimeIcon/>
+              <TimeIcon />
             </div>
           </div>
           :
@@ -94,7 +103,7 @@ const BucketCard: FC<PropsWithChildren<ICount>> = ({
                 }
               </h4>
               <div className="bucket-card-main-price">
-                {item?.old_price &&
+                {item?.old_price && withOldPrice &&
                 <p className="bucket-card-main-price-descount">
                   {Number(item?.old_price?.split('.')?.[0]) * (item?.quantity ? item?.quantity : 1)} р.
                 </p>
@@ -111,7 +120,7 @@ const BucketCard: FC<PropsWithChildren<ICount>> = ({
               </div>
               {isWithCounter &&
               <div className="bucket-card-buttons-counter">
-                  <Counter item={item} />
+                  <Counter item={item} handleLessThanOne={setIsTimer}/>
               </div>
               }
             </div>

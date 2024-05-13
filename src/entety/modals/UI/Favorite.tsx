@@ -65,7 +65,7 @@ const Favorite = () => {
         <div className="favorite-inside-main">
           {
             favorites?.map((item: any) =>
-              <BucketCard item={item}/>
+              <BucketCard item={item} withOldPrice={false}/>
             )
           }
         </div>

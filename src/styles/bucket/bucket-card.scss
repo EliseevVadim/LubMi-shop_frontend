@@ -11,10 +11,12 @@
         position: relative;
         width: 114px;
         height: 137px;
+        cursor: pointer;
     }
 
     &-main {
         flex: 1;
+        cursor: pointer;
 
         h3 {
             margin-bottom: 10px;

@@ -38,6 +38,7 @@ const NotificationModal = () => {
         {notification.message}
       </div>
       <CustomButton
+        fontWeight={100}
         title={'Перейти в чат со службой поддержки'}
         padding={'24px 0'}
         maxWidth={'100%'}

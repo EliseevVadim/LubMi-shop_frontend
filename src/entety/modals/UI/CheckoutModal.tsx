@@ -79,8 +79,6 @@ const CheckoutModal = () => {
       scart: bucket?.map((item: any) => ({ppk: item.article, size_id: item?.size?.id, quantity: item?.quantity}))
     }
 
-    console.log(data)
-
     BucketCheckoutFx(data)
       .then((res) =>{
         console.log(res)
@@ -228,7 +226,7 @@ const CheckoutModal = () => {
                   placeholder={'Введите Ваш город'}
                   filterOption={false}
                   value={selectedCities}
-                  onChange={(e, y) => onSelectCity({ id: y?.key, city: y?.children })}
+                  onChange={(e, y: any) => onSelectCity({ id: y?.key, city: y?.children } as any)}
                   showSearch
                   onSearch={(e) => setSearchCity(e)}
                 >
@@ -387,20 +385,47 @@ const CheckoutModal = () => {
               </div>
 
               <div className="checkout-modal-main-sum">
-                <h2>
-                  Сумма к оплате: 35 700 руб
-                </h2>
                 <p>
-                  Сумма: 35 700 руб
+                  Сумма: {' '}
+                  {
+                    isLoadingCalculate
+                      ? <Skeleton.Button active={false} size={'small'} />
+                      : `${bucketCalculated?.price} руб`
+                  }
                 </p>
+                {
+                  !!bucketCalculated?.[selectedDelivery]?.cost &&
+                  <p>
+                    {
+                      selectedDelivery === 'cd' ? 'СДЭК' : 'Почта России'
+                    }: {' '}
+                    {
+                      isLoadingCalculate
+                        ? <Skeleton.Button active={false} size={'small'} />
+                        : `${bucketCalculated?.[selectedDelivery]?.cost} руб`
+                    }
+                  </p>
+                }
+                {
+                  selectedCities?.city &&
+                  <p>
+                    {
+                      isLoadingCalculate
+                        ? <Skeleton.Button active={false} size={'small'} />
+                        : `${selectedCities?.city}`
+                    }
+                  </p>
+                }
                 <p>
-                  СДЭК: 700 руб
-                </p>
-                <p>
-                  Росиия, г.Москва
-                </p>
-                <p>
-                  Итоговая сумма: 35 700 руб
+                  Итоговая сумма: {' '}
+                  {
+                    isLoadingCalculate
+                      ? <Skeleton.Button active={false} size={'small'} />
+                      : `${
+                        Number(bucketCalculated?.price) +
+                        (bucketCalculated?.[selectedDelivery]?.cost ? Number(bucketCalculated?.[selectedDelivery]?.cost) : 0)
+                      } руб`
+                  }
                 </p>
               </div>
 
@@ -429,7 +454,7 @@ const CheckoutModal = () => {
             <div className="checkout-modal-main-order-list">
               {
                 bucket?.map((item: any) =>
-                  <BucketCard isWithCounter={true} item={item} />
+                  <BucketCard isWithCounter={true} withTimerLogic={true} item={item} />
                 )
               }
             </div>
@@ -481,7 +506,10 @@ const CheckoutModal = () => {
                 {
                   isLoadingCalculate
                     ? <Skeleton.Button active={false} size={'small'} />
-                    : `${Number(bucketCalculated?.price) + Number(bucketCalculated?.[selectedDelivery]?.cost)} руб`
+                    : `${
+                    Number(bucketCalculated?.price) +
+                    (bucketCalculated?.[selectedDelivery]?.cost ? Number(bucketCalculated?.[selectedDelivery]?.cost) : 0)
+                  } руб`
                 }
               </p>
             </div>

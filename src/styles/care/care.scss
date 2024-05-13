@@ -52,6 +52,7 @@
                     line-height: 32px;
                     letter-spacing: -0.04em;
                     color: $dark;
+                    text-transform: uppercase;
 
                     @media(max-width: 1024px) {
                         margin-bottom: 20px;
@@ -80,8 +81,8 @@
                             left: 0;
                             top: 10px;
                             content: '';
-                            width: 5px;
-                            height: 5px;
+                            width: 7px;
+                            height: 7px;
                             border-radius: 50%;
 
                             background-color: $dark;

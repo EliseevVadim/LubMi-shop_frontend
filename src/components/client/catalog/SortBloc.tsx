@@ -37,7 +37,7 @@ const items: SortTimes[] = [
   },
 ]
 
-const SortBloc: FC<PropsWithChildren<{ replaceUrl?: boolean, setCurrentSort?: string | undefined }>> = ({ replaceUrl = false, setCurrentSort }) => {
+const SortBloc: FC<PropsWithChildren<{ replaceUrl?: boolean, setCurrentSort?: any | undefined }>> = ({ replaceUrl = false, setCurrentSort }) => {
 
   const ref = useRef<any>(null);
   const router = useRouter();

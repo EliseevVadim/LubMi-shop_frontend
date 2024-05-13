@@ -137,7 +137,7 @@ const Search = () => {
                     page={page}
                     limit={limit}
                     total={totalCount}
-                    changePage={(e) => setPage(e)}
+                    changePage={(e: any) => setPage(e)}
                 />
               }
             </div>

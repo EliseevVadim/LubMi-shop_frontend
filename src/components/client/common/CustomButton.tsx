@@ -10,12 +10,13 @@ interface IButton {
   maxWidth?: string | number,
   onClick?: any,
   isTransperent?: boolean,
-  disable: boolean,
   isWithBorder?: boolean,
   backColor?: any,
   color?: string,
   border?: string,
   icon?: any,
+  fontWeight?: any,
+  disable?: any
 }
 
 const CustomButton: FC<PropsWithChildren<IButton>> = ({
@@ -32,6 +33,7 @@ const CustomButton: FC<PropsWithChildren<IButton>> = ({
                                                         color = 'rgba(34, 34, 34, 1)',
                                                         border = 'none',
                                                         icon,
+                                                        fontWeight = 300,
                                                       }) => {
   return (
     <button
@@ -58,19 +60,18 @@ const CustomButton: FC<PropsWithChildren<IButton>> = ({
             style={{
               padding,
               color: color,
-              fontWeight: 300,
               fontSize: 24,
               width: '100%',
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               gap: 20,
+              fontWeight
             }}
           >
             {title}
             {icon}
           </p>
-
       }
     </button>
   );

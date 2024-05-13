@@ -5,9 +5,11 @@ import FavoriteWhiteFill from "../../../assets/icons/FavoriteWhiteFill";
 import { onChangeIsOpenLeaveMessage, setProductModal } from "../../../entety/modals/model/index";
 import { $favorites, onChangeFavorite } from "../../../entety/client/favorite/model/index";
 import { useStoreMap } from "effector-react";
+import { useAlert } from "../../../controllers/AlertNotification/index";
 
 const Card: FC<PropsWithChildren<{ item?: any }>> = ({ item }) => {
 
+  const uAlert = useAlert()
 
   const isFavorite = useStoreMap({
     store: $favorites,
@@ -15,8 +17,12 @@ const Card: FC<PropsWithChildren<{ item?: any }>> = ({ item }) => {
     fn: (favorite, [itemArticle]) => favorite?.find(({ article }) => article === itemArticle) ?? null,
   });
 
-  console.log('item')
-  console.log(item)
+  const addToFavorite = () => {
+    uAlert({
+      message: 'Товар добавлен в избранное'
+    })
+    onChangeFavorite(item)
+  }
 
   return (
     <div className="card">
@@ -34,7 +40,7 @@ const Card: FC<PropsWithChildren<{ item?: any }>> = ({ item }) => {
               Новинка
           </p>
         }
-        <div className="card-img-favorite" onClick={() => onChangeFavorite(item)}>
+        <div className="card-img-favorite" onClick={addToFavorite}>
           {isFavorite
             ? <FavoriteWhiteFill />
             : <FavoriteWhite />
