@@ -37,9 +37,10 @@ export const CalculateBucketFx = createEffect<any, any, Error>(async() => {
 $bucketCalculated.on(CalculateBucketFx.doneData, (_, t) => t)
 
 $bucket.on(addToBucketEvent, (state, payload) => {
+
   const doctorExists: any = state?.find(item => item?.article === payload?.article && item?.size?.id === payload?.size?.id);
   if (doctorExists) {
-    return state.map((item: any) => item.article === doctorExists?.article ? {
+    return state.map((item: any) => item?.article === doctorExists?.article && item?.size?.id === doctorExists?.size?.id ? {
       ...item,
       quantity: item?.quantity + 1
     } : item);
