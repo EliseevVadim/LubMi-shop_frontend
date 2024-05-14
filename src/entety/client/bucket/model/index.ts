@@ -55,7 +55,12 @@ $bucket.on(changeCountEvent, (state, payload) => {
   );
 })
 $bucket.on(removeFromBucketEvent, (state, payload) => {
-  return state.filter((item: any) => item?.article !== payload?.article && item?.size?.id !== payload?.article?.size?.id)
+  const check = (item: any) =>{
+    const condition1 = item?.size?.id !== payload?.size?.id;
+    const condition2 = item?.article !== payload?.article;
+    return condition1 || condition2;
+  }
+  return state.filter((item: any) => check(item))
 })
 $bucket.on(resetBucket, () => [])
 

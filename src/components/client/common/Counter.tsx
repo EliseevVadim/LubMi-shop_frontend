@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import CounterMinusIcon from "../../../assets/icons/CounterMinusIcon";
 import CounterPlusIcon from "../../../assets/icons/CounterPlusIcon";
 import { changeCountEvent } from "../../../entety/client/bucket/model/index";
+import { useAlert } from "../../../controllers/AlertNotification/index";
 
 const Counter = ({ item, handleLessThanOne }: any) => {
 
   const maxCount = item?.sizes?.find((itemSize: any) => itemSize?.id === item?.size?.id)?.quantity
+  const uAlert = useAlert()
 
   const decrement = () => {
     if (item?.quantity > 1) {
@@ -18,6 +20,10 @@ const Counter = ({ item, handleLessThanOne }: any) => {
   const increment = () => {
     if (item?.quantity < Number(maxCount)) {
       changeCountEvent({ ...item, quantity: item?.quantity + 1 })
+    } else {
+      uAlert({
+        message: `Максимально количество товара  ${Number(maxCount)}`
+      })
     }
   };
 

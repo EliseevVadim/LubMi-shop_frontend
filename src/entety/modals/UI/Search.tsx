@@ -26,7 +26,6 @@ const Search = () => {
 
   const [totalCount, setTotalCount] = useState<any>(0)
 
-  console.log(totalCount)
   useEffect(() => {
     if (showMore && isOpenSearch) {
       setIsLoading(true)
@@ -62,22 +61,21 @@ const Search = () => {
     }
   }, [limit, sort, debouncedSearchValue, page])
 
-  console.log()
 
-  useEffect(() => {
-    if (isOpenSearch) {
-      document.body.style.overflow = 'hidden';
-      document.body.style.paddingRight = '0';
-    } else {
-      document.body.style.overflow = 'auto';
-      document.body.style.paddingRight = '0px';
-    }
-
-    return () => {
-      document.body.style.overflow = 'auto';
-      document.body.style.paddingRight = '0px';
-    };
-  }, [isOpenSearch])
+  // useEffect(() => {
+  //   if (isOpenSearch) {
+  //     document.body.style.overflow = 'hidden';
+  //     document.body.style.paddingRight = '0';
+  //   } else {
+  //     document.body.style.overflow = 'auto';
+  //     document.body.style.paddingRight = '0px';
+  //   }
+  //
+  //   return () => {
+  //     document.body.style.overflow = 'auto';
+  //     document.body.style.paddingRight = '0px';
+  //   };
+  // }, [isOpenSearch])
 
   return (
     <div className={`search-modal ${isOpenSearch ? 'search-modal-active' : ''}`}>

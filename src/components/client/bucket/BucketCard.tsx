@@ -23,7 +23,6 @@ const BucketCard: FC<PropsWithChildren<ICount>> = ({
                                                      item
                                                    }) => {
 
-
   const [isTimer, setIsTimer] = useState<boolean>(false)
 
   const onChangeTimerBlock = () => {
@@ -84,7 +83,7 @@ const BucketCard: FC<PropsWithChildren<ICount>> = ({
           <div className="bucket-card">
             <div className="bucket-card-img" onClick={() => setProductModal(item)}>
               <Image
-                src={bucketTest}
+                src={item?.primary_image?.image}
                 layout={'fill'}
                 objectFit={'cover'}
               />

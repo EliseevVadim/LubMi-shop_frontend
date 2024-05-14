@@ -11,7 +11,7 @@ persist({
 export const onChangeFavorite = createEvent<any>()
 
 $favorites.on(onChangeFavorite, (state, payload) => {
-  const doctorExists = state.some(item => item?.article === payload?.article);
+  const doctorExists = state.some(item => item?.article === payload?.article && item?.size?.id === payload?.size?.id);
 
   if (doctorExists) {
     return state.filter(item => item?.article !== payload?.article);
