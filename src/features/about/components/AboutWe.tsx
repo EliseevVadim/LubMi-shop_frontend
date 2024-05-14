@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import Slider from "react-slick";
-import aboutUs from '../../../../public/about-us-test-slide.png'
 import Image from "next/dist/client/legacy/image";
 
-const AboutWe = () => {
-
-  const slides = [1,2,3]
+const AboutWe: FC<PropsWithChildren<any>> = ({
+                   data
+                 }) => {
 
   const settings = {
     arrows: false,
     dots: false,
+    infinite: data?.length >= 5 ? true : false,
     variableWidth: true,
     slidesToScroll: 1,
   };
@@ -23,21 +23,21 @@ const AboutWe = () => {
 
       <Slider {...settings}>
         {
-          slides?.map((item: any) =>
+          data?.map((item: any) =>
             <div className="about-we-slide" id={item?.id}>
               <div className="about-we-slide-img">
                 <Image
-                  src={aboutUs}
+                  src={item?.image}
                   layout={'fill'}
                   objectFit={'cover'}
                 />
               </div>
              <div className="about-we-slide-text">
                <h3>
-                 Анна Иванова
+                 {item?.label}
                </h3>
                <p>
-                 Стилист, блогер {item}
+                 {item?.description}
                </p>
              </div>
             </div>

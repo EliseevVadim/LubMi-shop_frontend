@@ -19,12 +19,12 @@ import LineBlock from "../../../components/client/common/LineBlock";
 import { AddressSuggestions } from 'react-dadata';
 import 'react-dadata/dist/react-dadata.css';
 import {
-  $bucket, $bucketCalculated,
-  $cities,
-  $selectedCities, $selectedDelivery,
-  BucketCheckoutFx, CalculateBucketFx,
-  CityFX,
-  onSelectCity, onSelectDelivery, resetBucket
+  $bucket, $bucketCalculated, $building,
+  $cities, $selectedBuilding,
+  $selectedCities, $selectedDelivery, $selectedStreet, $streets,
+  BucketCheckoutFx, BuildingFX, CalculateBucketFx,
+  CityFX, onSelectBuilding,
+  onSelectCity, onSelectDelivery, onSelectStreet, resetBucket, StreetFX
 } from "../../client/bucket/model/index";
 import { useDebounce } from "use-debounce";
 
@@ -41,6 +41,10 @@ const CheckoutModal = () => {
     isLoadingCalculate,
     selectedDelivery,
     isLoadingCheckout,
+    streets,
+    selectedStreet,
+    building,
+    selectedBuilding
   ] = useUnit([
     $isOpenCheckout,
     $selectedCities,
@@ -50,15 +54,35 @@ const CheckoutModal = () => {
     CalculateBucketFx.pending,
     $selectedDelivery,
     BucketCheckoutFx.pending,
+    $streets,
+    $selectedStreet,
+    $building,
+    $selectedBuilding
   ])
 
   const [searchCity, setSearchCity] = useState<any>('');
+  const [searchStreet, setSearchStreet] = useState<any>('');
+  const [searchBuilding, setSearchBuilding] = useState<any>('');
   const [isAgree, setIsAgree] = useState<any>(false);
-  const [debouncedSearchCity] = useDebounce(searchCity, 1000);
+  const [debouncedSearchCity] = useDebounce(searchCity, 500);
+  const [debouncedSearchStreet] = useDebounce(searchStreet, 500);
+  const [debouncedSearchBuilding] = useDebounce(searchBuilding, 500);
 
   useEffect(() => {
     CityFX(debouncedSearchCity)
   }, [debouncedSearchCity])
+
+  useEffect(() => {
+    if (selectedCities?.id){
+      StreetFX(debouncedSearchStreet)
+    }
+  }, [selectedCities, debouncedSearchStreet])
+
+  useEffect(() => {
+    if (selectedCities?.id && selectedStreet){
+      BuildingFX(debouncedSearchBuilding)
+    }
+  }, [selectedStreet, debouncedSearchBuilding])
 
   const onFinish = (values: any) => {
 
@@ -69,8 +93,8 @@ const CheckoutModal = () => {
       cu_phone: values?.phone,
       cu_city_uuid: selectedCities?.id,
       cu_city: selectedCities?.city,
-      cu_street: values?.street,
-      cu_building: values?.building,
+      cu_street: selectedStreet,
+      cu_building: selectedBuilding,
       cu_entrance: values?.entrance,
       cu_floor: values?.floor,
       cu_apartment: values?.apartment,
@@ -78,6 +102,8 @@ const CheckoutModal = () => {
       cu_confirm: true,
       scart: bucket?.map((item: any) => ({ppk: item.article, size_id: item?.size?.id, quantity: item?.quantity}))
     }
+
+    console.log(data)
 
     BucketCheckoutFx(data)
       .then((res) =>{
@@ -297,12 +323,32 @@ const CheckoutModal = () => {
                   },
                 ]}
               >
-                <Input
-                  placeholder={'Улица'}
+                <Select
                   style={{
-                    height: 38
+                    width: '100%'
                   }}
-                />
+                  className={'test-test'}
+                  placeholder={'Улица'}
+                  filterOption={false}
+                  value={selectedStreet}
+                  onChange={(e) => onSelectStreet(e)}
+                  showSearch
+                  onSearch={(e) => setSearchStreet(e)}
+                >
+                  {streets?.map((option: any) => {
+                    return (
+                      <Select.Option key={option} value={option}>
+                        {option}
+                      </Select.Option>
+                    );
+                  })}
+                </Select>
+                {/*<Input*/}
+                {/*  placeholder={'Улица'}*/}
+                {/*  style={{*/}
+                {/*    height: 38*/}
+                {/*  }}*/}
+                {/*/>*/}
               </Form.Item>
 
               <div className="checkout-modal-main-form-block">
@@ -315,12 +361,32 @@ const CheckoutModal = () => {
                     },
                   ]}
                 >
-                  <Input
-                    placeholder={'Дом'}
+                  {/*<Input*/}
+                  {/*  placeholder={'Дом'}*/}
+                  {/*  style={{*/}
+                  {/*    height: 38*/}
+                  {/*  }}*/}
+                  {/*/>*/}
+                  <Select
                     style={{
-                      height: 38
+                      width: '100%'
                     }}
-                  />
+                    className={'test-test'}
+                    placeholder={'Дом'}
+                    filterOption={false}
+                    value={selectedDelivery}
+                    onChange={(e) => onSelectBuilding(e)}
+                    showSearch
+                    onSearch={(e) => setSearchBuilding(e)}
+                  >
+                    {building?.map((option: any) => {
+                      return (
+                        <Select.Option key={option} value={option}>
+                          {option}
+                        </Select.Option>
+                      );
+                    })}
+                  </Select>
                 </Form.Item>
                 <Form.Item
                   name="apartment"

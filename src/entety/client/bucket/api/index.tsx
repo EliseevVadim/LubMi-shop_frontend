@@ -1,5 +1,5 @@
 import { api } from "../../../../api/ApiWithoutToken";
-import { $selectedCities } from "../model/index";
+import { $selectedCities, $selectedStreet } from "../model/index";
 
 
 export const bucketCheckout = async (data: any): Promise<any> => {
@@ -10,6 +10,21 @@ export const bucketCheckout = async (data: any): Promise<any> => {
 export const bucketCities = async (search: any): Promise<any> => {
   const response = await api.get<any>(`/service/cities/${search}/`);
   return response.data;
+};
+
+export const bucketStreet = async (data: any): Promise<any> => {
+  if ($selectedCities?.getState()?.id){
+    const response = await api.get<any>(`/service/streets/${$selectedCities?.getState()?.id}/${data}/`);
+    return response.data;
+  }
+};
+
+export const bucketBuilding = async (data: any): Promise<any> => {
+  if ($selectedCities?.getState()?.id && $selectedStreet){
+    console.log(`/service/streets/${$selectedCities?.getState()?.id}/${$selectedStreet?.getState()}/${data}/`)
+    const response = await api.get<any>(`/service/buildings/${$selectedCities?.getState()?.id}/${$selectedStreet?.getState()}/${data}/`);
+    return response.data;
+  }
 };
 
 export const bucketCalculate = async (data: any): Promise<any> => {

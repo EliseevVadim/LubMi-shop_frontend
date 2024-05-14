@@ -1,6 +1,6 @@
 import { createEffect, createEvent, createStore, sample } from "effector";
 import { persist } from 'effector-storage/local'
-import { bucketCalculate, bucketCheckout, bucketCities } from "../api/index";
+import { bucketBuilding, bucketCalculate, bucketCheckout, bucketCities, bucketStreet } from "../api/index";
 import { debounce } from "patronum";
 
 export const $bucket = createStore<any[]>([]);
@@ -61,10 +61,18 @@ $bucket.on(resetBucket, () => [])
 
 //города
 export const $cities = createStore<any[]>([]);
+export const $streets = createStore<any[]>([]);
+export const $building = createStore<any[]>([]);
 export const $selectedCities = createStore<any>(null);
+export const $selectedStreet = createStore<any>(null);
+export const $selectedBuilding = createStore<any>(null);
 
 export const onSelectCity = createEvent<any>();
+export const onSelectStreet = createEvent<any>();
+export const onSelectBuilding = createEvent<any>();
 $selectedCities.on(onSelectCity, (_, t) => t)
+$selectedStreet.on(onSelectStreet, (_, t) => t)
+$selectedBuilding.on(onSelectBuilding, (_, t) => t)
 
 export const $selectedDelivery = createStore<any>('cd');
 export const onSelectDelivery = createEvent<any>();
@@ -73,9 +81,22 @@ $selectedDelivery.on(onSelectDelivery, (_, t) => t)
 export const CityFX = createEffect<any, any, Error>(async(data) => {
   const res = await bucketCities(data);
   if (!res.success) throw new Error(res.message);
-  return res.cities;
+  return res?.cities;
+});
+export const StreetFX = createEffect<any, any, Error>(async(data) => {
+  const res = await bucketStreet(data);
+  if (!res.success) throw new Error(res.message);
+  return res?.streets;
+});
+export const BuildingFX = createEffect<any, any, Error>(async(data) => {
+  const res = await bucketBuilding(data);
+  if (!res.success) throw new Error(res.message);
+  return res?.buildings;
 });
 $cities.on(CityFX.doneData, (_, t) => t)
+$streets.on(StreetFX.doneData, (_, t) => t)
+$building.on(BuildingFX.doneData, (_, t) => t)
+
 //города
 
 

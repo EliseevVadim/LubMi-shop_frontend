@@ -178,7 +178,7 @@ const ProductModal = () => {
                     />
                   }
                   {
-                    selectedSize?.quantity <= 0 ||  productData?.sizes?.length === 0 &&
+                    (selectedSize?.quantity === 0 || productData?.sizes?.length === 0) &&
                     <h6>
                         Нет в наличии
                     </h6>
