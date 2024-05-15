@@ -15,11 +15,11 @@ import { useAlert } from "../../../controllers/AlertNotification/index";
 import { Spin } from "antd";
 import { $favorites, onChangeFavorite } from "../../client/favorite/model/index";
 import FavoriteIconFill from "../../../assets/icons/FavoriteIconFill";
-import { addToBucketEvent } from "../../client/bucket/model/index";
+import { $bucket, addToBucketEvent } from "../../client/bucket/model/index";
 
 const ProductModal = () => {
 
-  const productModal = useUnit($productModal)
+  const [productModal, favorites, bucket] = useUnit([$productModal, $favorites, $bucket])
   const uAlert = useAlert()
 
   useEffect(() => {
@@ -46,10 +46,31 @@ const ProductModal = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const addToFavorite = () => {
-    uAlert({
-      message: 'Товар добавлен в избранное'
-    })
+    let find = favorites.some((favoritesItem: any) => favoritesItem?.article === productModal?.article);
+    if (!find){
+      uAlert({
+        message: 'Товар добавлен в избранное'
+      })
+    }
     onChangeFavorite(productModal)
+  }
+
+  const handleAddToBucket = () =>{
+    let promise = bucket.find((item: any) => item?.article === productModal?.article && item?.size?.id === selectedSize?.id);
+    if (promise?.article && Number(promise?.quantity) === Number(promise?.size?.quantity)){
+      uAlert({
+        message: `Извините, достигнут лимит. Это максимально возможное количество товаров в наличии`
+      })
+    } else {
+      addToBucketEvent({
+        ...productModal,
+        article: productModal.article,
+        size: selectedSize,
+        quantity: 1,
+      })
+      setProductModal(false)
+      onChangeIsOpenBucket(true)
+    }
   }
 
   const isFavorite = useStoreMap({
@@ -193,16 +214,7 @@ const ProductModal = () => {
                   //   size: selectedSize?.id,
                   //   quantity: 1
                   // })}
-                  onClick={() => {
-                    addToBucketEvent({
-                      ...productModal,
-                      article: productModal.article,
-                      size: selectedSize,
-                      quantity: 1,
-                    })
-                    setProductModal(false)
-                    onChangeIsOpenBucket(true)
-                  }}
+                  onClick={handleAddToBucket}
                   title={'Добавить в корзину'}
                   padding={'24px 0'}
                   maxWidth={359}

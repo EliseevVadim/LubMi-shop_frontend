@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useUnit } from "effector-react";
-import { $isOpenSearch, onChangeIsOpenMobMenu, onChangeIsOpenSearch } from "../model/index";
+import { $isOpenSearch, onChangeIsOpenBucket, onChangeIsOpenMobMenu, onChangeIsOpenSearch } from "../model/index";
 import CrossIcon from "../../../assets/icons/CrossIcon";
 import SearchIcon from "../../../assets/icons/SearchIcon";
 import Card from "../../../components/client/catalog/Card";
@@ -13,6 +13,7 @@ import { Spin } from "antd";
 const Search = () => {
 
   const isOpenSearch = useUnit($isOpenSearch)
+  const ref = useRef<any>(null);
 
 
   const [data, setData] = useState<any>([])
@@ -61,6 +62,18 @@ const Search = () => {
     }
   }, [limit, sort, debouncedSearchValue, page])
 
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (ref.current && !ref?.current?.contains(event.target)) {
+        if (value === '') onChangeIsOpenSearch(false)
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref, value]);
 
   // useEffect(() => {
   //   if (isOpenSearch) {
@@ -80,7 +93,7 @@ const Search = () => {
   return (
     <div className={`search-modal ${isOpenSearch ? 'search-modal-active' : ''}`}>
 
-      <div className="search-modal-wrap-search">
+      <div ref={ref} className="search-modal-wrap-search">
         <div className="search-modal-inside">
           <div className="search-modal-inside-input">
             <SearchIcon />

@@ -8,8 +8,11 @@ import Catalog from "../../components/client/catalog/Catalog";
 import MaxWithLayout from "../../layouts/MaxWithLayout";
 import { api } from "../../api/ApiWithoutToken";
 import { Spin } from "antd";
+import { useRouter } from "next/router";
 
 const MainContent: FC = () => {
+
+  const router = useRouter()
 
   const slides = [
     {
@@ -17,6 +20,7 @@ const MainContent: FC = () => {
       image: homeIntroOne,
       text: 'новая коллекция',
       buttonText: 'Перейти в каталог',
+      link: '/catalog',
       style: {}
     },
     {
@@ -24,6 +28,7 @@ const MainContent: FC = () => {
       image: homeIntroTwo,
       text: 'коллекция ароматов',
       buttonText: 'Ознакомиться',
+      link: '/perfumery',
       style: {
         maxWidth: 760,
         marginBottom: 50,
@@ -110,6 +115,7 @@ const MainContent: FC = () => {
                     {item.text}
                   </h2>
                   <CustomButton
+                    onClick={() => router.push(item?.link)}
                     padding={'24px 0'}
                     maxWidth={341}
                     title={item.buttonText}

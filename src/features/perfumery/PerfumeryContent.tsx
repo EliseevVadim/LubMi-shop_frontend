@@ -9,14 +9,14 @@ import PerfumerInfo from "./components/PerfumerInfo";
 const PerfumeryContent = () => {
 
   return (
-    <>
+    <div>
       <PerfumeryIntro />
       <PerfumeryPerfumery />
       <PerfumerDifferent />
       <PerfumerBenefit/>
       <PerfumeryOrder/>
       <PerfumerInfo/>
-    </>
+    </div>
   );
 };
 

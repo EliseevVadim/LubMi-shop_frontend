@@ -22,7 +22,7 @@ const Counter = ({ item, handleLessThanOne }: any) => {
       changeCountEvent({ ...item, quantity: item?.quantity + 1 })
     } else {
       uAlert({
-        message: `Максимально количество товара  ${Number(maxCount)}`
+        message: `Извините, достигнут лимит. Это максимально возможное количество товаров в наличии`
       })
     }
   };
