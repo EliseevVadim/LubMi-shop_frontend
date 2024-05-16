@@ -108,13 +108,14 @@ const CheckoutModal = () => {
     BucketCheckoutFx(data)
       .then((res) => {
         console.log(res)
-
         if (res?.success) {
           onSetNotification({
             title: 'Спасибо за покупку',
             message: 'нужно добавить текст'
           })
-          window.open(res.redirect)
+          if (res?.redirect){
+            window.open(res.redirect)
+          }
           form.resetFields()
           onSelectCity(null)
           onSelectDelivery(null)
