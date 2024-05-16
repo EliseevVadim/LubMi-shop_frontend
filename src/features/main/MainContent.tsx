@@ -159,6 +159,7 @@ const MainContent: FC = () => {
               Парфюмерия
             </h2>
             <CustomButton
+              onClick={() => router.push('/perfumery')}
               title={'Ознакомиться'}
               padding={'24px 0'}
               maxWidth={300}

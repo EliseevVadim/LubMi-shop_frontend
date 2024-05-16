@@ -73,13 +73,13 @@ const CheckoutModal = () => {
   }, [debouncedSearchCity])
 
   useEffect(() => {
-    if (selectedCities?.id){
+    if (selectedCities?.id) {
       StreetFX(debouncedSearchStreet)
     }
   }, [selectedCities, debouncedSearchStreet])
 
   useEffect(() => {
-    if (selectedCities?.id && selectedStreet){
+    if (selectedCities?.id && selectedStreet) {
       BuildingFX(debouncedSearchBuilding)
     }
   }, [selectedStreet, debouncedSearchBuilding])
@@ -100,16 +100,16 @@ const CheckoutModal = () => {
       cu_apartment: values?.apartment,
       cu_fullname: values?.fullName,
       cu_confirm: true,
-      scart: bucket?.map((item: any) => ({ppk: item.article, size_id: item?.size?.id, quantity: item?.quantity}))
+      scart: bucket?.map((item: any) => ({ ppk: item.article, size_id: item?.size?.id, quantity: item?.quantity }))
     }
 
     console.log(data)
 
     BucketCheckoutFx(data)
-      .then((res) =>{
+      .then((res) => {
         console.log(res)
 
-        if (res?.success){
+        if (res?.success) {
           onSetNotification({
             title: 'Спасибо за покупку',
             message: 'нужно добавить текст'
@@ -127,7 +127,7 @@ const CheckoutModal = () => {
           })
         }
       })
-      .catch((e) =>{
+      .catch((e) => {
         console.log(e)
       })
   }
@@ -148,6 +148,7 @@ const CheckoutModal = () => {
       document.body.style.paddingRight = '0px';
     };
   }, [isOpenCheckout])
+
 
   return (
     <div className={`checkout-modal ${isOpenCheckout ? 'checkout-modal-open' : ''}`}>
@@ -267,7 +268,7 @@ const CheckoutModal = () => {
               </Form.Item>
               {!!selectedCities
                 ?
-              <Radio.Group onChange={(e) => onSelectDelivery(e.target.value)} value={selectedDelivery}>
+                <Radio.Group onChange={(e) => onSelectDelivery(e.target.value)} value={selectedDelivery}>
                   <Space direction="vertical">
                     {
                       bucketCalculated?.['cd']?.cost &&
@@ -287,9 +288,9 @@ const CheckoutModal = () => {
                       </Radio>
                     }
                   </Space>
-              </Radio.Group>
+                </Radio.Group>
                 :
-                <p style={{color: 'red', fontSize: 16}}>
+                <p style={{ color: 'red', fontSize: 16 }}>
                   В данном городе нет доставки
                 </p>
               }
@@ -488,7 +489,7 @@ const CheckoutModal = () => {
                     isLoadingCalculate
                       ? <Skeleton.Button active={false} size={'small'} />
                       : `${
-                        Number(bucketCalculated?.price) +
+                        Number(bucketCalculated?.price || 0) +
                         (bucketCalculated?.[selectedDelivery]?.cost ? Number(bucketCalculated?.[selectedDelivery]?.cost) : 0)
                       } руб`
                   }
@@ -573,9 +574,9 @@ const CheckoutModal = () => {
                   isLoadingCalculate
                     ? <Skeleton.Button active={false} size={'small'} />
                     : `${
-                    Number(bucketCalculated?.price) +
-                    (bucketCalculated?.[selectedDelivery]?.cost ? Number(bucketCalculated?.[selectedDelivery]?.cost) : 0)
-                  } руб`
+                      Number(bucketCalculated?.price || 0) +
+                      (bucketCalculated?.[selectedDelivery]?.cost ? Number(bucketCalculated?.[selectedDelivery]?.cost) : 0)
+                    } руб`
                 }
               </p>
             </div>

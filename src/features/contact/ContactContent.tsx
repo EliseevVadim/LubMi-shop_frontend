@@ -17,7 +17,7 @@ const ContactContent = () => {
         <div className="contact-inside">
           <div className="contact-inside-phone">
             Телефон клиентской поддержки:
-            <a href="tel:+7 918 008 2891">+7 918 008 2891</a>
+            <a href="tel:+7 918 008 2891"> +7 918 008 2891</a>
           </div>
           <div className="contact-inside-schedule">
             пн-пт с 11:00 до 21:00
