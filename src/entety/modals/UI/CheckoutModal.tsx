@@ -114,11 +114,11 @@ const CheckoutModal = () => {
             message: 'нужно добавить текст'
           })
           if (res?.redirect){
-            window.open(res.redirect)
+            window?.open(res.redirect)
           }
-          form.resetFields()
+          form?.resetFields()
           onSelectCity(null)
-          onSelectDelivery(null)
+          onSelectDelivery('cd')
           onChangeIsOpenCheckout(false)
           resetBucket([])
         } else {
