@@ -146,7 +146,7 @@ const CheckoutModal = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       CheckOrderPayedFx()
-        .then((response) =>{
+        .then((response: any) =>{
           console.log('response')
           console.log(response?.data)
 
@@ -162,7 +162,6 @@ const CheckoutModal = () => {
             resetBucket([])
             changeActiveOrder(null)
           } else if(response?.data?.status === "canceled"){
-            console.log()
             onSetNotification({
               title: 'Произошла ошибка',
               message: 'Произошла ошибка при оплаче заказа'
