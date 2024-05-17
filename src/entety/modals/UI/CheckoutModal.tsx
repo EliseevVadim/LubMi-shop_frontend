@@ -159,7 +159,7 @@ const CheckoutModal = () => {
             onSelectCity(null)
             onSelectDelivery('cd')
             onChangeIsOpenCheckout(false)
-            resetBucket([])
+            resetBucket()
             changeActiveOrder(null)
           } else if(response?.data?.status === "canceled"){
             onSetNotification({
