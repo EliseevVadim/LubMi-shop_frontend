@@ -8,7 +8,7 @@ import CrossIcon from "../../../assets/icons/CrossIcon";
 import LineBlock from "../../../components/client/common/LineBlock";
 import BucketCard from "../../../components/client/bucket/BucketCard";
 import CustomButton from "../../../components/client/common/CustomButton";
-import { $bucket, $bucketCalculated, CalculateBucketFx } from "../../client/bucket/model/index";
+import { $bucket, $bucketCalculated, CalculateBucketFx, CheckOrderPayedFx } from "../../client/bucket/model/index";
 import { Skeleton } from "antd";
 
 const Bucket = () => {
@@ -57,6 +57,7 @@ const Bucket = () => {
       document.body.style.paddingRight = '0px';
     };
   }, [isOpenBucket])
+
 
   return (
     <div className={`bucket ${isOpenBucket ? 'bucket-active' : ''}`}>

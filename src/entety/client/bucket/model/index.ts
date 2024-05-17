@@ -1,6 +1,13 @@
 import { createEffect, createEvent, createStore, sample } from "effector";
 import { persist } from 'effector-storage/local'
-import { bucketBuilding, bucketCalculate, bucketCheckout, bucketCities, bucketStreet } from "../api/index";
+import {
+  bucketBuilding,
+  bucketCalculate,
+  bucketCheckout,
+  bucketCities,
+  bucketStreet,
+  CheckOrderPayed
+} from "../api/index";
 import { debounce } from "patronum";
 
 export const $bucket = createStore<any[]>([]);
@@ -118,4 +125,19 @@ sample({
 });
 
 
+export const $activeOrderId = createStore<any>(null)
+export const changeActiveOrder = createEvent<any>()
+persist({
+  store: $activeOrderId,
+  key: "activeOrderId",
+  keyPrefix: "v1",
+});
+$activeOrderId.on(changeActiveOrder, (_, t) => t)
+
+export const CheckOrderPayedFx = createEffect<void, boolean, Error>(async() => {
+  if (!$activeOrderId?.getState()) return;
+  const res = await CheckOrderPayed($activeOrderId?.getState());
+  if (res?.status !== 200) throw new Error(res.message);
+  return res;
+});
 

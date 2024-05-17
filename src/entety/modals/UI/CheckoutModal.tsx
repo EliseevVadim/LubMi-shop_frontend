@@ -19,10 +19,11 @@ import LineBlock from "../../../components/client/common/LineBlock";
 import { AddressSuggestions } from 'react-dadata';
 import 'react-dadata/dist/react-dadata.css';
 import {
+  $activeOrderId,
   $bucket, $bucketCalculated, $building,
   $cities, $selectedBuilding,
   $selectedCities, $selectedDelivery, $selectedStreet, $streets,
-  BucketCheckoutFx, BuildingFX, CalculateBucketFx,
+  BucketCheckoutFx, BuildingFX, CalculateBucketFx, changeActiveOrder, CheckOrderPayedFx,
   CityFX, onSelectBuilding,
   onSelectCity, onSelectDelivery, onSelectStreet, resetBucket, StreetFX
 } from "../../client/bucket/model/index";
@@ -44,7 +45,8 @@ const CheckoutModal = () => {
     streets,
     selectedStreet,
     building,
-    selectedBuilding
+    selectedBuilding,
+    activeOrderId
   ] = useUnit([
     $isOpenCheckout,
     $selectedCities,
@@ -57,7 +59,8 @@ const CheckoutModal = () => {
     $streets,
     $selectedStreet,
     $building,
-    $selectedBuilding
+    $selectedBuilding,
+    $activeOrderId
   ])
 
   const [searchCity, setSearchCity] = useState<any>('');
@@ -103,24 +106,14 @@ const CheckoutModal = () => {
       scart: bucket?.map((item: any) => ({ ppk: item.article, size_id: item?.size?.id, quantity: item?.quantity }))
     }
 
-    console.log(data)
-
     BucketCheckoutFx(data)
       .then((res) => {
         console.log(res)
         if (res?.success) {
-          onSetNotification({
-            title: 'Спасибо за покупку',
-            message: 'нужно добавить текст'
-          })
           if (res?.redirect){
+            changeActiveOrder(res?.payment_id)
             window?.open(res.redirect)
           }
-          form?.resetFields()
-          onSelectCity(null)
-          onSelectDelivery('cd')
-          onChangeIsOpenCheckout(false)
-          resetBucket([])
         } else {
           onSetNotification({
             title: 'Произошла ошибка',
@@ -149,6 +142,40 @@ const CheckoutModal = () => {
       document.body.style.paddingRight = '0px';
     };
   }, [isOpenCheckout])
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      CheckOrderPayedFx()
+        .then((response) =>{
+          console.log('response')
+          console.log(response?.data)
+
+          if (response?.data?.status === "succeeded"){
+            onSetNotification({
+              title: 'Спасибо за покупку',
+              message: 'Заказ успешно оплачен'
+            })
+            form?.resetFields()
+            onSelectCity(null)
+            onSelectDelivery('cd')
+            onChangeIsOpenCheckout(false)
+            resetBucket([])
+            changeActiveOrder(null)
+          } else if(response?.data?.status === "canceled"){
+            console.log()
+            onSetNotification({
+              title: 'Произошла ошибка',
+              message: 'Произошла ошибка при оплаче заказа'
+            })
+          }
+        })
+        .catch((e) =>{
+          console.log('e')
+          console.log(e)
+        });
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
 
 
   return (

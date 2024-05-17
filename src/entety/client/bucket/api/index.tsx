@@ -34,3 +34,8 @@ export const bucketCalculate = async (data: any): Promise<any> => {
   });
   return response;
 };
+
+export const CheckOrderPayed = async (invoice_id): Promise<any> => {
+  const res = await api.get<any>(`/yookassa/payments/${invoice_id}/status/`);
+  return res;
+};
