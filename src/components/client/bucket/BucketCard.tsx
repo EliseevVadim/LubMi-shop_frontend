@@ -33,7 +33,7 @@ const BucketCard: FC<PropsWithChildren<ICount>> = ({
     }
   }
 
-  const [timer, setTimer] = useState<number>(2);
+  const [timer, setTimer] = useState<number>(5);
 
   useEffect(() => {
     let interval: any;
@@ -45,7 +45,7 @@ const BucketCard: FC<PropsWithChildren<ICount>> = ({
     }
     return () => {
       clearInterval(interval);
-      setTimer(2);
+      setTimer(5);
     };
   }, [isTimer]);
 
