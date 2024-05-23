@@ -3,7 +3,7 @@ import { api } from "./ApiWithoutToken";
 import { $user, setUser } from "../entety/admin/user/model/index";
 
 const apiToken = axios.create({
-  baseURL: 'https://lubmi.ru/api',
+  baseURL: 'https://api.lubmi.ru',
   headers: {
     Accept: 'application/json',
     Cache: "no-cache",
