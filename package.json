@@ -17,7 +17,7 @@
     "effector": "^23.2.0",
     "effector-react": "^23.2.0",
     "effector-storage": "^7.1.0",
-    "next": "14.0.1",
+    "next": "13.4.0",
     "patronum": "^2.2.0",
     "react": "^18",
     "react-dadata": "^2.23.1",
@@ -25,6 +25,7 @@
     "react-input-mask": "^2.0.4",
     "react-slick": "^0.29.0",
     "sass": "^1.69.5",
+    "sharp": "^0.33.4",
     "slick-carousel": "^1.8.1",
     "use-debounce": "^10.0.0",
     "uuid": "^9.0.1"
