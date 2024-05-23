@@ -1,11 +1,10 @@
 import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
-import bucketTest from '../../../../public/bucket-test-img.png'
 import Image from "next/dist/client/legacy/image";
 import BucketCrossIcon from "../../../assets/icons/BucketCrossIcon";
 import Counter from "../common/Counter";
-import { onChangeFavorite } from "../../../entety/client/favorite/model/index";
-import { setProductModal } from "../../../entety/modals/model/index";
-import { removeFromBucketEvent } from "../../../entety/client/bucket/model/index";
+import { onChangeFavorite } from "../../../entety/client/favorite/model";
+import { setProductModal } from "../../../entety/modals/model";
+import { removeFromBucketEvent } from "../../../entety/client/bucket/model";
 import CustomButton from "../common/CustomButton";
 import TimeIcon from "../../../assets/icons/TimeIcon";
 
@@ -57,7 +56,7 @@ const BucketCard: FC<PropsWithChildren<ICount>> = ({
   }, [timer]);
 
   return (
-    <>
+    <div>
       {
         isTimer
           ?
@@ -126,8 +125,7 @@ const BucketCard: FC<PropsWithChildren<ICount>> = ({
             </div>
           </div>
       }
-    </>
-
+    </div>
   );
 };
 
