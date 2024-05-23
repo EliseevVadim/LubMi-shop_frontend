@@ -4,7 +4,7 @@ import { HttpErrorHandler } from "../middleware/http-error-handler";
 import { message } from "antd";
 
 const api = axios.create({
-  baseURL: 'https://api.lubmi.ru',
+  baseURL: 'https://api.lubmi.ru/api',
   headers: {
     Accept: 'application/json',
     withCredentials: false,

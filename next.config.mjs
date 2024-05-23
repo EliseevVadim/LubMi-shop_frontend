@@ -11,6 +11,14 @@ const nextConfig = {
                 protocol: 'http',
                 hostname: 'lubmi.ru',
             },
+            {
+                protocol: 'https',
+                hostname: 'api.lubmi.ru',
+            },
+            {
+                protocol: 'http',
+                hostname: 'api.lubmi.ru',
+            },
         ],
     },
 };
