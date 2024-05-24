@@ -112,7 +112,11 @@ const CheckoutModal = () => {
         if (res?.success) {
           if (res?.redirect){
             changeActiveOrder(res?.payment_id)
-            window?.open(res.redirect)
+            // window?.open(res.redirect)
+
+            const link = document.createElement('a');
+            link.href = res.redirect;
+            link.click();
           }
         } else {
           onSetNotification({

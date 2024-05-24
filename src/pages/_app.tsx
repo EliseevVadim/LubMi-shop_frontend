@@ -1,6 +1,6 @@
 import '../styles/main.scss'
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AppProps } from "next/app";
 import { NextFonts } from "../components/client/common/NextFonts";
 import Head from "next/head";
