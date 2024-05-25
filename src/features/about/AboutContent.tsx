@@ -5,10 +5,9 @@ import AboutMain from "./components/AboutMain";
 import AboutWe from "./components/AboutWe";
 import AboutPartner from "./components/AboutPartner";
 
-const AboutContent: FC<PropsWithChildren<any>> =({
-                        data
-                      }) => {
-
+const AboutContent: FC<PropsWithChildren<any>> = ({
+                                                    data
+                                                  }) => {
 
 
   const aboutWeItems = data?.items?.filter((item: any) => item?.kind === 0)
@@ -16,25 +15,24 @@ const AboutContent: FC<PropsWithChildren<any>> =({
 
 
   return (
-    <MaxWithLayout>
-      <div className="about">
+    <div className="about">
+      <MaxWithLayout>
         <LineBlock />
         <h1>
           о бренде
         </h1>
+      </MaxWithLayout>
 
-        <AboutMain/>
+      <AboutMain />
 
+      <MaxWithLayout>
         <LineBlock />
-
-        <AboutWe data={aboutWeItems}/>
-
+        <AboutWe data={aboutWeItems} />
         <LineBlock />
+        <AboutPartner data={aboutPartnerItems} />
+      </MaxWithLayout>
 
-        <AboutPartner data={aboutPartnerItems}/>
-
-      </div>
-    </MaxWithLayout>
+    </div>
   );
 };
 

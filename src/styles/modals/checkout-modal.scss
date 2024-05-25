@@ -110,11 +110,11 @@
                 margin-top: 40px;
             }
 
-            input, .ant-select-selection-placeholder, .ant-select-selection-item{
+            input, .ant-select-selection-placeholder, .ant-select-selection-item {
                 font-size: 24px !important;
                 font-weight: 100 !important;
 
-                &::placeholder{
+                &::placeholder {
                     font-size: 24px !important;
                     font-weight: 100 !important;
                 }
@@ -138,14 +138,22 @@
             &-check-box {
                 margin: 0px 0 20px;
 
+
                 .ant-checkbox-checked .ant-checkbox-inner {
                     background-color: $white;
                 }
+
                 .ant-checkbox-checked .ant-checkbox-inner:after {
                     border-color: $dark !important;
                 }
-                .ant-checkbox-wrapper:hover .ant-checkbox-inner{
+
+                .ant-checkbox-wrapper:hover .ant-checkbox-inner {
                     background-color: $white !important;
+                    border-color: $dark !important;
+                }
+
+                .checkout-modal-main-form-check-box .ant-checkbox-wrapper:hover .ant-checkbox-inner {
+                    border-color: $dark !important;
                 }
             }
 

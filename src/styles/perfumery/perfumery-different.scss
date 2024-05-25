@@ -44,16 +44,27 @@
             }
         }
 
-        &-text {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        &-button {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 20px;
+            text-align: left;
+        }
+
+        &-mob-text {
+            display: none;
+            @media(max-width: 1024px) {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
 
             h3 {
                 font-size: 24px;
                 font-weight: 600;
                 line-height: 24px;
                 color: $dark;
+                text-transform: uppercase;
 
                 @media(max-width: 1024px) {
                     font-size: 16px;
@@ -73,8 +84,49 @@
 
                 span {
                     font-weight: 500;
+                    text-transform: uppercase;
                 }
             }
+        }
+
+        &-text {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            @media(max-width: 1024px) {
+                display: none;
+            }
+
+            h3 {
+                font-size: 24px;
+                font-weight: 600;
+                line-height: 24px;
+                color: $dark;
+                text-transform: uppercase;
+
+                @media(max-width: 1024px) {
+                    font-size: 16px;
+                }
+            }
+
+            p {
+                font-size: 24px;
+                font-weight: 100;
+                line-height: 24px;
+                letter-spacing: -0.04em;
+                color: $dark;
+
+                @media(max-width: 1024px) {
+                    font-size: 16px;
+                }
+
+                span {
+                    font-weight: 500;
+                    text-transform: uppercase;
+                }
+            }
+
         }
     }
 }

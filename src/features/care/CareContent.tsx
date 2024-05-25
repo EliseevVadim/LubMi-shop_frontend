@@ -7,15 +7,17 @@ import care from '../../../public/care.png'
 const CareContent = () => {
 
   return (
-    <MaxWithLayout>
-      <div className="care">
+    <div className="care">
+      <MaxWithLayout>
         <LineBlock />
         <h1>
           Уход за изделиями
         </h1>
+      </MaxWithLayout>
 
-        <div className="care-inside">
-          <div className="care-inside-text">
+      <MaxWithLayout padding={0}>
+        <div className="care-inside p-h20">
+          <div className="care-inside-text p-h20-media">
             <div className="care-inside-text-block">
               <h2>
                 Стирка
@@ -77,7 +79,8 @@ const CareContent = () => {
               </ul>
             </div>
           </div>
-          <div className="care-inside-img">
+
+          <div className="care-inside-img ">
             <Image
               src={care}
               layout={'fill'}
@@ -85,8 +88,9 @@ const CareContent = () => {
             />
           </div>
         </div>
-      </div>
-    </MaxWithLayout>
+      </MaxWithLayout>
+
+    </div>
   );
 };
 

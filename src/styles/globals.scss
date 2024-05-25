@@ -198,10 +198,24 @@ input::placeholder {
     border-radius: 0 !important;
 }
 
-.ant-modal-mask{
+.ant-modal-mask {
     z-index: 990 !important;
 }
 
-.ant-modal-wrap{
+.ant-modal-wrap {
     z-index: 990 !important;
+}
+
+.p-h20 {
+    padding: 0 20px;
+    @media(max-width: 1024px) {
+        padding: 0;
+    }
+}
+
+.p-h20-media {
+    padding: 0;
+    @media(max-width: 1024px) {
+        padding: 0 20px;
+    }
 }

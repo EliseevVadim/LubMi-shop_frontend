@@ -6,13 +6,15 @@ import Image from "next/dist/client/legacy/image";
 const PerfumerBenefit = () => {
 
   return (
-    <MaxWithLayout>
-      <div className="perfumery-benefit">
+    <div className="perfumery-benefit">
+      <MaxWithLayout>
         <div className="perfumery-perfumery-line">
           <div className="perfumery-perfumery-line-extra" />
         </div>
+      </MaxWithLayout>
 
-        <div className="perfumery-benefit-inside">
+      <MaxWithLayout padding={0}>
+        <div className="perfumery-benefit-inside p-h20">
           <div className="perfumery-benefit-inside-text">
             <h2>
               твоя выгода!
@@ -38,7 +40,9 @@ const PerfumerBenefit = () => {
             />
           </div>
         </div>
+      </MaxWithLayout>
 
+      <MaxWithLayout>
         <div className="perfumery-benefit-mob">
           <p>
             Именно здесь вы можете заказать оригинальную люксовую и нишевую парфюмерию по очень привлекательной
@@ -53,8 +57,8 @@ const PerfumerBenefit = () => {
             парфюма по оптовой стоимости от трёх единиц полноразмерных флаконов.
           </p>
         </div>
-      </div>
-    </MaxWithLayout>
+      </MaxWithLayout>
+    </div>
   );
 };
 

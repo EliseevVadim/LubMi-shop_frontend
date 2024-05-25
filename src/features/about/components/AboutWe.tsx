@@ -9,7 +9,8 @@ const AboutWe: FC<PropsWithChildren<any>> = ({
   const settings = {
     arrows: false,
     dots: false,
-    infinite: data?.length >= 5 ? true : false,
+    // infinite: data?.length >= 5 ? true : false,
+    infinite: false,
     variableWidth: true,
     slidesToScroll: 1,
   };

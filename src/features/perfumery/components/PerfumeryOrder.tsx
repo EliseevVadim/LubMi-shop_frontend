@@ -6,6 +6,7 @@ const PerfumeryOrder = () => {
 
   return (
     <div className="perfumery-order">
+
       <MaxWithLayout>
         <div className="perfumery-order-inside">
           <h2 >
@@ -32,6 +33,8 @@ const PerfumeryOrder = () => {
           </div>
         </div>
       </MaxWithLayout>
+
+      <div className="perfumery-order-gradient"/>
     </div>
   );
 };

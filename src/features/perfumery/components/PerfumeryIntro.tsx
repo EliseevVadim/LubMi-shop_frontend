@@ -19,6 +19,8 @@ const PerfumeryIntro = () => {
           />
         </div>
       </MaxWithLayout>
+      <div className="perfumery-intro-gradient"/>
+
     </div>
   );
 };

@@ -134,9 +134,9 @@ const ProductModal = () => {
             <ProductArrowToLeft />
             Назад
           </div>
-          <div className="product-modal-top-close" onClick={() => setProductModal({})}>
-            <CrossIcon />
-          </div>
+          {/*<div className="product-modal-top-close" onClick={() => setProductModal({})}>*/}
+          {/*  <CrossIcon />*/}
+          {/*</div>*/}
         </div>
         {isLoading
           ?
