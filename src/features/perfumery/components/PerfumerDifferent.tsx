@@ -33,7 +33,7 @@ const PerfumerDifferent = () => {
     setIsExpanded(!isExpanded);
   };
 
-  const truncateHTML = (str, maxLength) => {
+  const truncateHTML = (str: any, maxLength: any) => {
     if (typeof document === 'undefined') {
       return str;
     }
@@ -44,7 +44,7 @@ const PerfumerDifferent = () => {
     let truncatedStr = '';
     let charCount = 0;
 
-    const truncateNode = (node) => {
+    const truncateNode = (node: any) => {
       if (charCount >= maxLength) {
         return;
       }
@@ -72,7 +72,7 @@ const PerfumerDifferent = () => {
       }
     };
 
-    for (let child of tempDiv.childNodes) {
+    for (let child of tempDiv?.childNodes as any) {
       truncateNode(child);
       if (charCount >= maxLength) {
         break;
