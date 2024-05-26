@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext, FC, PropsWithChildren } from 'react';
 import { v4 as uuid } from 'uuid';
 import CrossIcon from "../../assets/icons/CrossIcon";
+import MaxWithLayout from "../../layouts/MaxWithLayout";
 
 
-const Context = React.createContext<any |undefined>(undefined);
+const Context = React.createContext<any | undefined>(undefined);
 
 const useAlert = () => {
   const {
@@ -35,7 +36,7 @@ const AlertItem = ({ item, onDeletListItem }: any) => {
     };
   }, []);
   return (
-    <div key={item.id} style={{ paddingTop: 10 }}>
+    <div key={item.id} className="alert-notification">
       <div className="alert-notification-item">
         <p className="alert-notification-item-text">{item.message}</p>
         <div className="alert-notification-item-circle" onClick={onDelete}>
@@ -46,7 +47,7 @@ const AlertItem = ({ item, onDeletListItem }: any) => {
   );
 }
 
-const AlertProvider: FC<PropsWithChildren<{children : React.ReactNode}>> = ({ children }) => {
+const AlertProvider: FC<PropsWithChildren<{ children: React.ReactNode }>> = ({ children }) => {
   const [list, setList] = useState<any>([]);
 
   const onDeletListItem = (id: any) => {
@@ -55,11 +56,11 @@ const AlertProvider: FC<PropsWithChildren<{children : React.ReactNode}>> = ({ ch
 
   return (
     <Context.Provider value={{ setList }}>
-      <div className="alert-notification">
-        {list.map((item: any) => (
-          <AlertItem key={item?.id} item={item} onDeletListItem={onDeletListItem} />
-        ))}
-      </div>
+      {/*<div className="alert-notification">*/}
+      {list.map((item: any) => (
+        <AlertItem key={item?.id} item={item} onDeletListItem={onDeletListItem} />
+      ))}
+      {/*</div>*/}
       {children}
     </Context.Provider>
   );

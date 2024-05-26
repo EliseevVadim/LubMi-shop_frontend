@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useStoreMap, useUnit } from "effector-react";
-import { $productModal, onChangeIsOpenBucket, setProductModal } from "../model/index";
+import { $productModal, onChangeIsOpenBucket, onChangeIsOpenSearch, setProductModal } from "../model/index";
 import MaxWithLayout from "../../../layouts/MaxWithLayout";
 import ProductArrowToLeft from "../../../assets/icons/ProductArrowToLeft";
 import CrossIcon from "../../../assets/icons/CrossIcon";
@@ -68,6 +68,7 @@ const ProductModal = () => {
         size: selectedSize,
         quantity: 1,
       })
+      onChangeIsOpenSearch(false)
       setProductModal(false)
       onChangeIsOpenBucket(true)
     }
