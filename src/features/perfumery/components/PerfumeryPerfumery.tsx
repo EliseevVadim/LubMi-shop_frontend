@@ -95,44 +95,45 @@ const PerfumeryPerfumery = () => {
           </button>
         </div>
       </MaxWithLayout>
-
-      <div className="perfumery-perfumery-inside p-h20">
-        <div className="perfumery-perfumery-inside-left">
-          <p>
-            Любимые духи — пленительный аромат, изящный флакон, и коробочка с логотипом любимого бренда — объект,
-            пропитанный образами и эмоциями. Чем больше мы знаем об истории духов, о фирме, под чьим именем они
-            выпущены, о личности заказчика или создателя, - тем богаче для нас звучит мелодия аромата.
-          </p>
-          <p>
-            Когда мы душимся, ароматы проникают в нас и постепенно становятся частью нас самих.
-            Если вы любите ароматы и духи для вас не просто парфюмерная композиция, а нечто большее — настроение,
-            воспоминания, эмоции и чувства — то мой парфюмерный магазинчик точно для вас.
-          </p>
-          <div className="perfumery-perfumery-inside-left-img">
-            <Image
-              src={perfumeryPerfumeryOne}
-              layout={'fill'}
-              objectFit={'cover'}
-            />
+      <MaxWithLayout padding={'0'}>
+        <div className="perfumery-perfumery-inside p-h20">
+          <div className="perfumery-perfumery-inside-left">
+            <p>
+              Любимые духи — пленительный аромат, изящный флакон, и коробочка с логотипом любимого бренда — объект,
+              пропитанный образами и эмоциями. Чем больше мы знаем об истории духов, о фирме, под чьим именем они
+              выпущены, о личности заказчика или создателя, - тем богаче для нас звучит мелодия аромата.
+            </p>
+            <p>
+              Когда мы душимся, ароматы проникают в нас и постепенно становятся частью нас самих.
+              Если вы любите ароматы и духи для вас не просто парфюмерная композиция, а нечто большее — настроение,
+              воспоминания, эмоции и чувства — то мой парфюмерный магазинчик точно для вас.
+            </p>
+            <div className="perfumery-perfumery-inside-left-img">
+              <Image
+                src={perfumeryPerfumeryOne}
+                layout={'fill'}
+                objectFit={'cover'}
+              />
+            </div>
+          </div>
+          <div className="perfumery-perfumery-inside-right">
+            <div className="perfumery-perfumery-inside-right-img-one">
+              <Image
+                src={perfumeryPerfumeryTwo}
+                layout={'fill'}
+                objectFit={'cover'}
+              />
+            </div>
+            <div className="perfumery-perfumery-inside-right-img-two">
+              <Image
+                src={perfumeryPerfumeryThree}
+                layout={'fill'}
+                objectFit={'cover'}
+              />
+            </div>
           </div>
         </div>
-        <div className="perfumery-perfumery-inside-right">
-          <div className="perfumery-perfumery-inside-right-img-one">
-            <Image
-              src={perfumeryPerfumeryTwo}
-              layout={'fill'}
-              objectFit={'cover'}
-            />
-          </div>
-          <div className="perfumery-perfumery-inside-right-img-two">
-            <Image
-              src={perfumeryPerfumeryThree}
-              layout={'fill'}
-              objectFit={'cover'}
-            />
-          </div>
-        </div>
-      </div>
+      </MaxWithLayout>
     </div>
   );
 };
