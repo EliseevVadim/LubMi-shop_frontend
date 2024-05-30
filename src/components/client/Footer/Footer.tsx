@@ -17,11 +17,11 @@ const Footer = () => {
                 src={footerLogo}
               />
             </div>
-            <a href="tel:+1 891 989-11-91">
-              +1 891 989-11-91
+            <a href="tel:+7 918 008-28-91">
+              +7 918 008-28-91
             </a>
-            <a href="mailto:hello@logoipsum.com">
-              hello@logoipsum.com
+            <a href="mailto:lubavamishankova@mail.ru">
+              lubavamishankova@mail.ru
             </a>
           </div>
           <div className="footer-main-menus">
@@ -48,7 +48,7 @@ const Footer = () => {
               </h3>
 
               <div className="footer-main-menus-block-list">
-                <Link href={''}>
+                <Link href={'/about'}>
                   О компании
                 </Link>
               </div>
@@ -58,7 +58,7 @@ const Footer = () => {
         </div>
         <div className="footer-bottom">
           <p>
-            © 2023 — Copyright
+            © 2024 — Copyright
           </p>
           <div className="footer-bottom-social">
             <Social />

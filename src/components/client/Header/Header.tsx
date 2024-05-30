@@ -2,21 +2,30 @@ import React, { useState } from 'react';
 import headerLogo from '../../../../public/header-logo.png'
 import Image from "next/dist/client/legacy/image";
 import SearchIcon from "../../../assets/icons/SearchIcon";
-import FavoriteIcon from "../../../assets/icons/FavoriteIcon";
-import BucketIcon from "../../../assets/icons/BucketIcon";
+import FavoriteIcon, { FavoriteFillIcon } from "../../../assets/icons/FavoriteIcon";
+import BucketIcon, { BucketFillIcon } from "../../../assets/icons/BucketIcon";
 import BurgerIcon from "../../../assets/icons/BurgerIcon";
 import { useRouter } from "next/router";
 import {
+  $isOpenFavorite,
   onChangeIsOpenBucket,
   onChangeIsOpenFavorite,
   onChangeIsOpenMobMenu,
   onChangeIsOpenSearch
 } from "../../../entety/modals/model/index";
 import Link from "next/link";
+import { useUnit } from "effector-react";
+import { $favorites } from "../../../entety/client/favorite/model";
+import { $bucket } from "../../../entety/client/bucket/model";
 
 const Header = () => {
 
   const router = useRouter()
+
+  const [bucket, favorites] = useUnit([$bucket, $favorites])
+
+  const isBucketEmpty = bucket?.length === 0
+  const isFavoritesEmpty = favorites?.length === 0
 
   const nav: any = [
     {
@@ -84,12 +93,20 @@ const Header = () => {
           <button
             onClick={() => onChangeIsOpenFavorite(true)}
           >
-            <FavoriteIcon />
+            {
+              isFavoritesEmpty
+                ? <FavoriteIcon />
+                : <FavoriteFillIcon />
+            }
           </button>
           <button
             onClick={() => onChangeIsOpenBucket(true)}
           >
-            <BucketIcon />
+            {
+              isBucketEmpty
+                ? <BucketIcon />
+                : <BucketFillIcon />
+            }
           </button>
           <button
             className="header-icons-burger"

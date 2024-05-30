@@ -4,6 +4,14 @@ import CustomButton from "../../../components/client/common/CustomButton";
 
 const PerfumeryOrder = () => {
 
+
+  const handleClickButton = () =>{
+    const link = document.createElement('a');
+    link.href = 'https://t.me/lubmi_ru';
+    link.target = '_blank';
+    link.click();
+  }
+
   return (
     <div className="perfumery-order">
 
@@ -23,6 +31,7 @@ const PerfumeryOrder = () => {
             </p>
             <div className="perfumery-order-inside-main-button">
               <CustomButton
+                onClick={handleClickButton}
                 title={'Заказать аромат'}
                 padding={'24px 0'}
                 maxWidth={'100%'}

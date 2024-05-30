@@ -8,6 +8,7 @@ import PerfumerInfo from "./components/PerfumerInfo";
 
 const PerfumeryContent = () => {
 
+
   return (
     <div>
       <PerfumeryIntro />

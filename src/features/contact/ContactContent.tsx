@@ -6,6 +6,14 @@ import TelegramIcon from "../../assets/icons/TelegramIcon";
 
 const ContactContent = () => {
 
+  const handleClickButton = () =>{
+    const link = document.createElement('a');
+    link.href = 'https://t.me/lubmi_ru';
+    link.target = '_blank';
+    link.click();
+  }
+
+
   return (
     <MaxWithLayout>
       <div className="contact">
@@ -28,6 +36,7 @@ const ContactContent = () => {
           </div>
           <div className="contact-inside-button">
             <CustomButton
+              onClick={handleClickButton}
               title={'Написать в Telegram'}
               padding={'24px 0'}
               maxWidth={'400px'}

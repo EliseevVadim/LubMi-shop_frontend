@@ -5,6 +5,13 @@ import Spoller from "../../../components/client/common/Spoller";
 
 const PerfumerInfo = () => {
 
+  const handleClickButton = () =>{
+    const link = document.createElement('a');
+    link.href = 'https://t.me/lubmi_ru';
+    link.target = '_blank';
+    link.click();
+  }
+
   const infoList = [
     {
       title: 'Виды парфюмерии: КАКИЕ БЫВАЮТ',
@@ -617,6 +624,7 @@ const PerfumerInfo = () => {
 
           <div className="perfumery-info-inside-button">
             <CustomButton
+              onClick={handleClickButton}
               title={'Заказать аромат'}
               padding={'24px 0'}
               maxWidth={327}
