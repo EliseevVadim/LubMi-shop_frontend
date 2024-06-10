@@ -64,10 +64,10 @@ const Footer = () => {
             <Social />
           </div>
           <div className="footer-bottom-links">
-            <a href="">
+            <a href="https://drive.google.com/drive/folders/1G9zhjjilXRbhpyiD1S8ORFAOvHN5_K39?usp=share_link" target="_blank">
               Политика конфиденциальности
             </a>
-            <a href="">
+            <a href="https://drive.google.com/drive/folders/1fISBREJ27EQ3TtlK7RzWHlyExiESUwBQ?usp=share_link" target="_blank">
               Публичная оферта
             </a>
           </div>
