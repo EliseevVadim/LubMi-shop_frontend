@@ -2,7 +2,7 @@ import React from 'react';
 import MaxWithLayout from "../../layouts/MaxWithLayout";
 import LineBlock from "../../components/client/common/LineBlock";
 import Image from "next/dist/client/legacy/image";
-import care from '../../../public/care.png'
+import care from '../../../public/about-main.png'
 
 const CareContent = () => {
 

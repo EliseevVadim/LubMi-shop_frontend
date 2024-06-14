@@ -9,9 +9,9 @@ const Social = () => {
   return (
     <div className='social'>
       <div className="social-left">
-        <a href="https://wa.me/79180082891" target="_blank">
-          <WhatsAppIcon />
-        </a>
+        {/*<a href="https://wa.me/79180082891" target="_blank">*/}
+        {/*  <WhatsAppIcon />*/}
+        {/*</a>*/}
         <a href="https://t.me/lubmi_ru" target="_blank">
           <TelegramIcon/>
         </a>

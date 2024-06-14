@@ -6,6 +6,13 @@
         position: relative;
         cursor: pointer;
 
+        &:hover{
+            img{
+                transition: 0.2s;
+                transform: scale(1.2);
+            }
+        }
+
         @media(max-width: 1250px) {
             height: 350px;
         }

@@ -24,13 +24,13 @@ const AboutPartner: FC<PropsWithChildren<any>> = ({
       <Slider {...settings}>
         {
           data?.map((item: any) =>
-            <div className="about-partner-slide" id={item?.id}>
+            <a href={item?.link} className="about-partner-slide" id={item?.id} target="_blank">
               <Image
                 src={item?.image}
                 layout={'fill'}
                 objectFit={'cover'}
               />
-            </div>
+            </a>
           )
         }
       </Slider>

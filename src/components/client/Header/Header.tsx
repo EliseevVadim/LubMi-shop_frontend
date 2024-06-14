@@ -17,6 +17,7 @@ import Link from "next/link";
 import { useUnit } from "effector-react";
 import { $favorites } from "../../../entety/client/favorite/model";
 import { $bucket } from "../../../entety/client/bucket/model";
+import Logo from "../../../assets/icons/Logo";
 
 const Header = () => {
 
@@ -67,6 +68,7 @@ const Header = () => {
           <Image
             src={headerLogo}
           />
+          {/*<Logo/>*/}
         </Link>
         <ul className="header-nav">
           {
