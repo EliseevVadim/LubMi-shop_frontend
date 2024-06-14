@@ -75,20 +75,20 @@ const Search = () => {
     };
   }, [ref, value]);
 
-  // useEffect(() => {
-  //   if (isOpenSearch) {
-  //     document.body.style.overflow = 'hidden';
-  //     document.body.style.paddingRight = '0';
-  //   } else {
-  //     document.body.style.overflow = 'auto';
-  //     document.body.style.paddingRight = '0px';
-  //   }
-  //
-  //   return () => {
-  //     document.body.style.overflow = 'auto';
-  //     document.body.style.paddingRight = '0px';
-  //   };
-  // }, [isOpenSearch])
+  useEffect(() => {
+    if (value && isOpenSearch) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.paddingRight = '0';
+    } else {
+      document.body.style.overflow = 'auto';
+      document.body.style.paddingRight = '0px';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+      document.body.style.paddingRight = '0px';
+    };
+  }, [value, isOpenSearch])
 
   return (
     <div className={`search-modal ${isOpenSearch ? 'search-modal-active' : ''}`}>
@@ -114,11 +114,12 @@ const Search = () => {
       </div>
 
       <div className={`search-modal-wrap-result ${value && isOpenSearch ? 'search-modal-wrap-open' : ''}`}>
-        <Spin spinning={isLoading}>
-          <div className="search-modal-result">
-            <h2>
-              {totalCount} результатов по запросу: {value}
-            </h2>
+
+        <div className="search-modal-result">
+          <h2>
+            {totalCount} результатов по запросу: {value}
+          </h2>
+          <Spin spinning={isLoading}>
             <div className="search-modal-result-items">
               {
                 data?.map((item: any) =>
@@ -126,34 +127,34 @@ const Search = () => {
                 )
               }
             </div>
-            <div className="search-modal-result-buttons">
-              {
-                !(data?.length >= totalCount || data.length === 0 || page * limit >= totalCount) &&
-                <CustomButton
-                    onClick={() => {
-                      setShowMore(true)
-                      setPage(page + 1)
-                    }}
-                    title={'Загрузить еще'}
-                    padding={'24px 0'}
-                    maxWidth={"300px"}
-                    backColor={'rgba(255, 255, 255, 1)'}
-                    color={'rgba(34, 34, 34, 1)'}
-                    border={"2px solid rgba(34, 34, 34, 1)"}
-                />
-              }
-              {
-                data.length !== 0 &&
-                <CustomPagination
-                    page={page}
-                    limit={limit}
-                    total={totalCount}
-                    changePage={(e: any) => setPage(e)}
-                />
-              }
-            </div>
+          </Spin>
+          <div className="search-modal-result-buttons">
+            {
+              !(data?.length >= totalCount || data.length === 0 || page * limit >= totalCount) &&
+              <CustomButton
+                  onClick={() => {
+                    setShowMore(true)
+                    setPage(page + 1)
+                  }}
+                  title={'Загрузить еще'}
+                  padding={'24px 0'}
+                  maxWidth={"300px"}
+                  backColor={'rgba(255, 255, 255, 1)'}
+                  color={'rgba(34, 34, 34, 1)'}
+                  border={"2px solid rgba(34, 34, 34, 1)"}
+              />
+            }
+            {
+              data.length !== 0 &&
+              <CustomPagination
+                  page={page}
+                  limit={limit}
+                  total={totalCount}
+                  changePage={(e: any) => setPage(e)}
+              />
+            }
           </div>
-        </Spin>
+        </div>
       </div>
     </div>
   );
