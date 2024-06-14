@@ -65,10 +65,10 @@ const Header = () => {
     <div className="header">
       <div className="header-wrap">
         <Link href='/' className="header-logo">
-          <Image
-            src={headerLogo}
-          />
-          {/*<Logo/>*/}
+          {/*<Image*/}
+          {/*  src={headerLogo}*/}
+          {/*/>*/}
+          <Logo/>
         </Link>
         <ul className="header-nav">
           {
