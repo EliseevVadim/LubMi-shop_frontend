@@ -170,6 +170,12 @@ const CheckoutModal = () => {
               title: 'Произошла ошибка',
               message: 'Произошла ошибка при оплаче заказа'
             })
+            form?.resetFields()
+            onSelectCity(null)
+            onSelectDelivery('cd')
+            onChangeIsOpenCheckout(false)
+            resetBucket()
+            changeActiveOrder(null)
           }
         })
         .catch((e) =>{

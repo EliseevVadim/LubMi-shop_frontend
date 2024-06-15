@@ -29,7 +29,7 @@
     text-align: center;
     text-transform: uppercase;
 
-    color: $dark;
+    color: $dark !important;
 
     @media(max-width: 1024px) {
         margin-bottom: 10px;
