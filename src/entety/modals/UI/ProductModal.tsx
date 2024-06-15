@@ -3,19 +3,17 @@ import { useStoreMap, useUnit } from "effector-react";
 import { $productModal, onChangeIsOpenBucket, onChangeIsOpenSearch, setProductModal } from "../model/index";
 import MaxWithLayout from "../../../layouts/MaxWithLayout";
 import ProductArrowToLeft from "../../../assets/icons/ProductArrowToLeft";
-import CrossIcon from "../../../assets/icons/CrossIcon";
 import Slider from "react-slick";
-import testImage from '../../../../public/test-image-card.png'
 import Image from "next/dist/client/legacy/image";
 import CustomButton from "../../../components/client/common/CustomButton";
 import FavoriteIcon from "../../../assets/icons/FavoriteIcon";
 import SelectorBlock from "../../../components/client/catalog/SelectorBlock";
-import { api } from "../../../api/ApiWithoutToken";
-import { useAlert } from "../../../controllers/AlertNotification/index";
+import { api } from "@/api/ApiWithoutToken";
+import { useAlert } from "@/controllers/AlertNotification";
 import { Spin } from "antd";
-import { $favorites, onChangeFavorite } from "../../client/favorite/model/index";
+import { $favorites, onChangeFavorite } from "@/entety/client/favorite/model";
 import FavoriteIconFill from "../../../assets/icons/FavoriteIconFill";
-import { $bucket, addToBucketEvent } from "../../client/bucket/model/index";
+import { $bucket, addToBucketEvent } from "@/entety/client/bucket/model";
 
 const ProductModal = () => {
 
@@ -84,10 +82,8 @@ const ProductModal = () => {
     vertical: true,
     verticalSwiping: true,
     arrows: false,
-    dots: false,
     infinite: false,
     variableHeight: true,
-    variableWidth: true,
     slidesToScroll: 5,
     responsive: [
       {
@@ -95,6 +91,7 @@ const ProductModal = () => {
         settings: {
           vertical: false,
           verticalSwiping: false,
+          variableWidth: true,
         },
       },
     ],
