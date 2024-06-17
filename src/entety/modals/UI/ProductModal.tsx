@@ -85,15 +85,17 @@ const ProductModal = () => {
     infinite: false,
     variableHeight: true,
     slidesToScroll: 2,
-    slidesToShow: 5,
+    accessibility: true,
+    swipe: true,
+    swipeToSlide: true,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: false,
           vertical: false,
           verticalSwiping: false,
           variableWidth: true,
+          variableHeight: false,
         },
       },
     ],
@@ -150,7 +152,7 @@ const ProductModal = () => {
             <div className="product-modal-main-img">
               <div className="product-modal-main-img-slider">
                 <Slider {...settings}>
-                  {productData?.images?.map((image: any, index: any) => (
+                  {[...productData?.images, ...productData?.images]?.map((image: any, index: any) => (
                     <div
                       key={index}
                       className="product-modal-main-img-slider-img"
