@@ -37,6 +37,7 @@ const Card: FC<PropsWithChildren<{ item?: any }>> = ({ item }) => {
           objectFit={'cover'}
           src={item?.primary_image?.image}
           alt={'img-card'}
+
         />
         {
           item?.novelty &&
@@ -55,7 +56,7 @@ const Card: FC<PropsWithChildren<{ item?: any }>> = ({ item }) => {
         className="card-title"
         onClick={() => setProductModal(item)}
       >
-        {item?.title}
+        {item?.title} ({item?.color})
       </p>
       <div className="card-price">
         {item?.old_price &&

@@ -4,6 +4,7 @@ import footerLogo from '../../../../public/footer-logo.png'
 import Image from "next/dist/client/legacy/image";
 import Link from "next/link";
 import Social from "../common/Social";
+import Logo from "@/assets/icons/Logo";
 
 const Footer = () => {
 
@@ -13,9 +14,10 @@ const Footer = () => {
         <div className="footer-main">
           <div className="footer-main-info">
             <div className="footer-main-info-img">
-              <Image
-                src={footerLogo}
-              />
+              {/*<Image*/}
+              {/*  src={footerLogo}*/}
+              {/*/>*/}
+              <Logo/>
             </div>
             <a href="tel:+7 918 008-28-91">
               +7 918 008-28-91

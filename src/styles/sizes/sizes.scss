@@ -45,14 +45,21 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        overflow-x: auto;
         position: relative;
 
-
-        @media(max-width: 1000px) {
+        @media(max-width: 860px) {
             margin-top: 40px;
             justify-content: flex-start;
             align-items: flex-start;
+
+            overflow-x: scroll;
+            scrollbar-width: auto; /* For Firefox */
+            -webkit-overflow-scrolling: touch;
+
+            &::-webkit-scrollbar {
+                height: 12px; /* Adjust the height of the scrollbar */
+                display: block; /* Ensure the scrollbar is displayed */
+            }
         }
 
         &::-webkit-scrollbar {

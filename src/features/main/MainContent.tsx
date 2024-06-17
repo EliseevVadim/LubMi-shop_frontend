@@ -2,7 +2,9 @@ import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
 import CustomButton from "../../components/client/common/CustomButton";
 import Slider from 'react-slick';
 import homeIntroOne from '../../../public/home-intro-1.png'
+import homeIntroOneMob from '../../../public/home-intro-1-mob.jpg'
 import homeIntroTwo from '../../../public/home-intro-2.png'
+import homeIntroTwoMob from '../../../public/home-intro-2-mob.jpg'
 import Image from "next/dist/client/legacy/image";
 import Catalog from "../../components/client/catalog/Catalog";
 import MaxWithLayout from "../../layouts/MaxWithLayout";
@@ -18,6 +20,7 @@ const MainContent: FC = () => {
     {
       id: 1,
       image: homeIntroOne,
+      imageMob: homeIntroOneMob,
       text: 'новая коллекция',
       buttonText: 'Перейти в каталог',
       link: '/catalog',
@@ -26,6 +29,7 @@ const MainContent: FC = () => {
     {
       id: 2,
       image: homeIntroTwo,
+      imageMob: homeIntroTwoMob,
       text: 'коллекция ароматов',
       buttonText: 'Ознакомиться',
       link: '/perfumery',
@@ -105,11 +109,20 @@ const MainContent: FC = () => {
           {
             slides?.map((item: any, index: any) =>
               <div className="home-slider-item">
-                <Image
-                  layout={'fill'}
-                  objectFit={'cover'}
-                  src={item?.image}
-                />
+                <div className="home-slider-item-img-desc">
+                  <Image
+                      layout={'fill'}
+                      objectFit={'cover'}
+                      src={item?.image}
+                  />
+                </div>
+                <div className="home-slider-item-img-mob">
+                  <Image
+                      layout={'fill'}
+                      objectFit={'cover'}
+                      src={item?.imageMob}
+                  />
+                </div>
                 <div className="home-slider-item-inner">
                   <h2 style={item.style}>
                     {item.text}

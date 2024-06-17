@@ -23,6 +23,10 @@
                 width: 236px;
                 height: 117px;
                 position: relative;
+                svg {
+                    max-width: 236px;
+                    max-height: 117px;
+                }
             }
 
             a {
@@ -86,9 +90,9 @@
         }
 
         &-social{
-            @media(max-width: 800px) {
-                display: none;
-            }
+            //@media(max-width: 800px) {
+            //    display: none;
+            //}
         }
 
         &-links {
