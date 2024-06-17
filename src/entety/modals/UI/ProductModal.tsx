@@ -88,6 +88,7 @@ const ProductModal = () => {
         accessibility: true,
         swipe: true,
         swipeToSlide: true,
+        slidesToShow: 5,
         responsive: [
             {
                 breakpoint: 1024,

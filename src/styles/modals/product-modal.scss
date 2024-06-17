@@ -104,6 +104,14 @@
         max-width: 120px;
         height: auto;
 
+        .slick-track{
+          display: flex;
+          flex-direction: column;
+          @media(max-width: 1024px) {
+            flex-direction: row;
+          }
+        }
+
         @media(max-width: 1024px) {
           max-width: 100%;
           width: 100%;
