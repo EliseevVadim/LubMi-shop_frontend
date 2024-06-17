@@ -59,6 +59,8 @@
         height: calc(100% - 100px);
         padding-bottom: 20px;
 
+        .slick-track{
+        }
         &::-webkit-scrollbar {
             width: 4px;
         }
@@ -107,7 +109,6 @@
                 .slick-list {
                     max-height: 660px;
                     height: 100% !important;
-
                 }
 
                 &-img {

@@ -84,11 +84,13 @@ const ProductModal = () => {
     arrows: false,
     infinite: false,
     variableHeight: true,
-    slidesToScroll: 5,
+    slidesToScroll: 2,
+    slidesToShow: 5,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
+          slidesToShow: false,
           vertical: false,
           verticalSwiping: false,
           variableWidth: true,
@@ -124,6 +126,7 @@ const ProductModal = () => {
     };
   }, []);
 
+  console.log(productData)
   return (
     <div className={`product-modal ${productModal?.article ? 'product-modal-open' : ''}`}>
       <MaxWithLayout>
