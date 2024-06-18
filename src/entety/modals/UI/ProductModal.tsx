@@ -143,6 +143,8 @@ const ProductModal = () => {
         setIsModalVisible(false);
     };
 
+    console.log(mainImage)
+
     return (
         <div className={`product-modal ${productModal?.article ? 'product-modal-open' : ''}`}>
             <MaxWithLayout padding={'0 0 0 20px'}>
