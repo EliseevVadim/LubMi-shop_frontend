@@ -34,7 +34,7 @@ const Card: FC<PropsWithChildren<{ item?: any }>> = ({ item }) => {
         <Image
           onClick={() => setProductModal(item)}
           layout='fill'
-          objectFit={'fill'}
+          objectFit={'cover'}
           src={item?.primary_image?.image}
           alt={'img-card'}
         />
