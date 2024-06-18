@@ -123,6 +123,19 @@
                 position: relative;
                 @media(max-width: 1024px) {
                     min-height: 167px;
+                    display: none;
+                }
+
+                &-mob{
+                    width: 100%;
+                    min-height: 769px;
+                    height: 100%;
+                    position: relative;
+                    display: none;
+                    @media(max-width: 1024px) {
+                        min-height: 167px;
+                        display: block;
+                    }
                 }
             }
 
