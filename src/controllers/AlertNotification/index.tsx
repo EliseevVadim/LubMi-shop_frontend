@@ -36,7 +36,7 @@ const AlertItem = ({ item, onDeletListItem }: any) => {
     };
   }, []);
   return (
-    <div key={item.id} className="alert-notification">
+    <div key={item.id} >
       <div className="alert-notification-item">
         <p className="alert-notification-item-text">{item.message}</p>
         <div className="alert-notification-item-circle" onClick={onDelete}>
@@ -50,6 +50,8 @@ const AlertItem = ({ item, onDeletListItem }: any) => {
 const AlertProvider: FC<PropsWithChildren<{ children: React.ReactNode }>> = ({ children }) => {
   const [list, setList] = useState<any>([]);
 
+  console.log('list')
+  console.log(list)
   const onDeletListItem = (id: any) => {
     setList((prev: any) => prev.filter((item: any) => item.id !== id));
   }
@@ -57,9 +59,12 @@ const AlertProvider: FC<PropsWithChildren<{ children: React.ReactNode }>> = ({ c
   return (
     <Context.Provider value={{ setList }}>
       {/*<div className="alert-notification">*/}
-      {list.map((item: any) => (
-        <AlertItem key={item?.id} item={item} onDeletListItem={onDeletListItem} />
-      ))}
+      <div className="alert-notification">
+        {list.map((item: any) => (
+          <AlertItem key={item?.id} item={item} onDeletListItem={onDeletListItem} />
+        ))}
+      </div>
+
       {/*</div>*/}
       {children}
     </Context.Provider>
