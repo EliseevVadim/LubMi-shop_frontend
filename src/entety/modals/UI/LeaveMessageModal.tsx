@@ -25,7 +25,7 @@ const LeaveMessageModal = () => {
   const onFinish = (values: any) => {
     setIsLoading(true)
 
-    let data = {
+    let data: any = {
       ppk: isOpenLeaveMessage,
       phone: values?.phone,
       email: values?.email,
