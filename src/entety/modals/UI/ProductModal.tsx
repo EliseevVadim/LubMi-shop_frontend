@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useStoreMap, useUnit} from "effector-react";
-import {$productModal, onChangeIsOpenBucket, onChangeIsOpenSearch, setProductModal} from "../model/index";
+import {
+    $productModal,
+    onChangeIsOpenBucket,
+    onChangeIsOpenLeaveMessage,
+    onChangeIsOpenSearch,
+    setProductModal
+} from "../model/index";
 import MaxWithLayout from "../../../layouts/MaxWithLayout";
 import ProductArrowToLeft from "../../../assets/icons/ProductArrowToLeft";
 import Slider from "react-slick";
@@ -226,27 +232,39 @@ const ProductModal = () => {
                                 Таблица размеров
                             </div>
                             <div className="product-modal-main-text-buttons">
-                                <CustomButton
+                                {selectedSize?.quantity <= 0 || !selectedSize || productData?.sizes?.length === 0
+                                  ?
+                                  <CustomButton
+                                    onClick={() => {
+                                        console.log(productData?.article)
+                                        onChangeIsOpenLeaveMessage(productData?.article)
+                                    }}
+                                    title={'Сообщить о поступлении'}
+                                    padding={'24px 0'}
+                                    maxWidth={359}
+                                    backColor={'rgba(34, 34, 34, 1)'}
+                                    color={'rgba(255, 255, 255, 1)'}
+                                  />
+                                  :
+                                  <CustomButton
                                     disable={selectedSize?.quantity <= 0 || !selectedSize || productData?.sizes?.length === 0}
-                                    // onClick={() => console.log({
-                                    //   article: productModal.article,
-                                    //   size: selectedSize?.id,
-                                    //   quantity: 1
-                                    // })}
+
                                     onClick={handleAddToBucket}
                                     title={'Добавить в корзину'}
                                     padding={'24px 0'}
                                     maxWidth={359}
                                     backColor={'rgba(34, 34, 34, 1)'}
                                     color={'rgba(255, 255, 255, 1)'}
-                                />
+                                  />
+
+                                }
                                 <div className="product-modal-main-text-buttons-favorite"
                                      onClick={addToFavorite}>
                                     {
                                         isFavorite
-                                            ?
-                                            <FavoriteIconFill/>
-                                            : <FavoriteIcon/>
+                                          ?
+                                          <FavoriteIconFill/>
+                                          : <FavoriteIcon/>
                                     }
                                 </div>
                             </div>
