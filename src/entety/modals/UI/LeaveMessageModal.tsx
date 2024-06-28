@@ -41,6 +41,7 @@ const LeaveMessageModal = () => {
           message: 'Запрос успешно отправлен'
         })
         form.resetFields()
+        onChangeIsOpenLeaveMessage(false)
         onChangeIsOpenLeaveMessageSize('')
       })
       .catch(() => {
