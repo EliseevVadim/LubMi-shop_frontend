@@ -29,6 +29,9 @@ $isOpenSearch.on(onChangeIsOpenSearch, (_, t) => t)
 export const $isOpenLeaveMessage = createStore<any>('')
 export const onChangeIsOpenLeaveMessage = createEvent<any>()
 $isOpenLeaveMessage.on(onChangeIsOpenLeaveMessage, (_, t) => t)
+export const $isOpenLeaveMessageSize = createStore<any>('')
+export const onChangeIsOpenLeaveMessageSize = createEvent<any>()
+$isOpenLeaveMessageSize.on(onChangeIsOpenLeaveMessageSize, (_, t) => t)
 
 // leave message modal
 export const $productModal = createStore<any>({})

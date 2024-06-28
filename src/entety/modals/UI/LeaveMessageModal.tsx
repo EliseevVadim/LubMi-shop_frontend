@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useUnit } from "effector-react";
-import { $isOpenLeaveMessage, onChangeIsOpenLeaveMessage } from "../model/index";
-import { Form, Input, Modal } from "antd";
+import React, {useEffect, useState} from 'react';
+import {useUnit} from "effector-react";
+import {
+  $isOpenLeaveMessage,
+  $isOpenLeaveMessageSize,
+  onChangeIsOpenLeaveMessage,
+  onChangeIsOpenLeaveMessageSize
+} from "../model/index";
+import {Form, Input, Modal} from "antd";
 import InputMask from "react-input-mask";
 import CustomButton from "../../../components/client/common/CustomButton";
-import { api } from "../../../api/ApiWithoutToken";
-import { postFeedBack } from "../api/index";
-import { useAlert } from "../../../controllers/AlertNotification/index";
+import {api} from "../../../api/ApiWithoutToken";
+import {postFeedBack} from "../api/index";
+import {useAlert} from "../../../controllers/AlertNotification/index";
 
 const LeaveMessageModal = () => {
 
-  const isOpenLeaveMessage = useUnit($isOpenLeaveMessage)
+  const [isOpenLeaveMessage, isOpenLeaveMessageSize] = useUnit([$isOpenLeaveMessage, $isOpenLeaveMessageSize])
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -19,23 +24,31 @@ const LeaveMessageModal = () => {
 
   const onFinish = (values: any) => {
     setIsLoading(true)
-    postFeedBack({
+
+    let data = {
       ppk: isOpenLeaveMessage,
       phone: values?.phone,
-      email: values?.email
-    })
-      .then(() =>{
+      email: values?.email,
+    }
+
+    if (isOpenLeaveMessageSize) {
+      data.size = isOpenLeaveMessageSize
+    }
+
+    postFeedBack(data)
+      .then(() => {
         uAlert({
           message: 'Запрос успешно отправлен'
         })
         form.resetFields()
+        onChangeIsOpenLeaveMessageSize('')
       })
-      .catch(() =>{
+      .catch(() => {
         uAlert({
           message: 'Произошла ошибка при попытке отправить запрос'
         })
       })
-      .finally(() =>{
+      .finally(() => {
         setIsLoading(false)
       })
   }
@@ -61,7 +74,10 @@ const LeaveMessageModal = () => {
       width={680}
       title=""
       open={isOpenLeaveMessage}
-      onCancel={() => onChangeIsOpenLeaveMessage(false)}
+      onCancel={() => {
+        onChangeIsOpenLeaveMessage(false)
+        onChangeIsOpenLeaveMessageSize('')
+      }}
       footer={null}
       style={{
         zIndex: 990,

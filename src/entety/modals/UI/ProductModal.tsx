@@ -3,7 +3,7 @@ import {useStoreMap, useUnit} from "effector-react";
 import {
     $productModal,
     onChangeIsOpenBucket,
-    onChangeIsOpenLeaveMessage,
+    onChangeIsOpenLeaveMessage, onChangeIsOpenLeaveMessageSize,
     onChangeIsOpenSearch,
     setProductModal
 } from "../model/index";
@@ -236,7 +236,8 @@ const ProductModal = () => {
                                   ?
                                   <CustomButton
                                     onClick={() => {
-                                        console.log(productData?.article)
+                                        console.log(selectedSize)
+                                        onChangeIsOpenLeaveMessageSize(selectedSize?.size)
                                         onChangeIsOpenLeaveMessage(productData?.article)
                                     }}
                                     title={'Сообщить о поступлении'}
