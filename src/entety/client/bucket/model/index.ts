@@ -6,7 +6,7 @@ import {
   bucketCheckout,
   bucketCities,
   bucketStreet,
-  CheckOrderPayed
+  CheckOrderPayed, CheckRussianPost
 } from "../api/index";
 import { debounce } from "patronum";
 
@@ -135,4 +135,24 @@ export const CheckOrderPayedFx = createEffect<void, boolean, Error>(async() => {
   if (res?.status !== 200) throw new Error(res.message);
   return res;
 });
+
+export const $isRussianPostAvaible = createStore(true)
+
+export const CheckRussianPostFx = createEffect<void, boolean, Error>(async() => {
+  const data = {
+    region: $selectedCities.getState()?.region,
+    city: $selectedCities.getState()?.city,
+    street: $selectedStreet.getState(),
+    building: $selectedBuilding.getState()
+  }
+
+  console.log(data)
+  console.log($selectedCities.getState())
+
+  const res = await CheckRussianPost(data);
+  if (res?.status !== 200) throw new Error(res.message);
+  return res?.data?.['address-is-valid'];
+});
+
+$isRussianPostAvaible.on(CheckRussianPostFx.doneData, (_,t ) => t)
 

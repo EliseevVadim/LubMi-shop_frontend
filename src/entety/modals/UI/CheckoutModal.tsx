@@ -21,10 +21,10 @@ import 'react-dadata/dist/react-dadata.css';
 import {
   $activeOrderId,
   $bucket, $bucketCalculated, $building,
-  $cities, $selectedBuilding,
+  $cities, $isRussianPostAvaible, $selectedBuilding,
   $selectedCities, $selectedDelivery, $selectedStreet, $streets,
-  BucketCheckoutFx, BuildingFX, CalculateBucketFx, changeActiveOrder, CheckOrderPayedFx,
-  CityFX, onSelectBuilding,
+  BucketCheckoutFx, BuildingFX, CalculateBucketFx, changeActiveOrder, CheckOrderPayedFx, CheckRussianPostFx,
+  CityFX, isRussianPostAvaible, onSelectBuilding,
   onSelectCity, onSelectDelivery, onSelectStreet, resetBucket, StreetFX
 } from "../../client/bucket/model/index";
 import { useDebounce } from "use-debounce";
@@ -46,7 +46,8 @@ const CheckoutModal = () => {
     selectedStreet,
     building,
     selectedBuilding,
-    activeOrderId
+    activeOrderId,
+    isRussianPostAvaible
   ] = useUnit([
     $isOpenCheckout,
     $selectedCities,
@@ -60,7 +61,8 @@ const CheckoutModal = () => {
     $selectedStreet,
     $building,
     $selectedBuilding,
-    $activeOrderId
+    $activeOrderId,
+    $isRussianPostAvaible
   ])
 
   const [searchCity, setSearchCity] = useState<any>('');
@@ -86,6 +88,19 @@ const CheckoutModal = () => {
       BuildingFX(debouncedSearchBuilding)
     }
   }, [selectedStreet, debouncedSearchBuilding])
+
+  useEffect(() => {
+    if (selectedCities?.city && selectedStreet && selectedBuilding) {
+      CheckRussianPostFx()
+    }
+  }, [selectedCities, selectedStreet, selectedBuilding])
+
+
+  console.log(selectedCities?.city)
+  console.log(selectedStreet)
+  console.log(selectedBuilding)
+  console.log('isRussianPostAvaible')
+  console.log(isRussianPostAvaible)
 
   const onFinish = (values: any) => {
 
@@ -290,13 +305,13 @@ const CheckoutModal = () => {
                   placeholder={'Введите Ваш город'}
                   filterOption={false}
                   value={selectedCities}
-                  onChange={(e, y: any) => onSelectCity({ id: y?.key, city: y?.children } as any)}
+                  onChange={(e, y: any) => onSelectCity({ id: y?.key, city: y?.children, region: y?.data } as any)}
                   showSearch
                   onSearch={(e) => setSearchCity(e)}
                 >
                   {cities?.map((option: any) => {
                     return (
-                      <Select.Option key={option?.uuid?.toString()} value={option?.uuid?.toString()}>
+                      <Select.Option key={option?.uuid?.toString()} value={option?.uuid?.toString()} data={option?.region}>
                         {`${option?.city}, ${option?.region}`}
                       </Select.Option>
                     );
@@ -316,7 +331,7 @@ const CheckoutModal = () => {
                       </Radio>
                     }
                     {
-                      bucketCalculated?.['pr']?.cost &&
+                      bucketCalculated?.['pr']?.cost && isRussianPostAvaible &&
                       <Radio value={'pr'}>
                           <div className="checkout-modal-main-form-radio">
                               Доставка почтой

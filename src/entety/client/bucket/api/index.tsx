@@ -39,3 +39,9 @@ export const CheckOrderPayed = async (invoice_id: any): Promise<any> => {
   const res = await api.get<any>(`/yookassa/payments/${invoice_id}/status/`);
   return res;
 };
+
+
+export const CheckRussianPost = async (data: any): Promise<any> => {
+  const res = await api.get<any>(`service/pr/poke-with-a-stick/${data.region}/${data.city}/${data.street}/${data.building}/`);
+  return res;
+};
