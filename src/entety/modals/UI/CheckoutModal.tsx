@@ -24,7 +24,7 @@ import {
   $cities, $isRussianPostAvaible, $selectedBuilding,
   $selectedCities, $selectedDelivery, $selectedStreet, $streets,
   BucketCheckoutFx, BuildingFX, CalculateBucketFx, changeActiveOrder, CheckOrderPayedFx, CheckRussianPostFx,
-  CityFX, isRussianPostAvaible, onSelectBuilding,
+  CityFX, onSelectBuilding,
   onSelectCity, onSelectDelivery, onSelectStreet, resetBucket, StreetFX
 } from "../../client/bucket/model/index";
 import { useDebounce } from "use-debounce";
