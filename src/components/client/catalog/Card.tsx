@@ -6,6 +6,7 @@ import { onChangeIsOpenLeaveMessage, setProductModal } from "../../../entety/mod
 import { $favorites, onChangeFavorite } from "../../../entety/client/favorite/model/index";
 import { useStoreMap, useUnit } from "effector-react";
 import { useAlert } from "../../../controllers/AlertNotification/index";
+import ProductSkeletonImage from "@/components/client/Skeletons/ProductSkeletonImage";
 
 const Card: FC<PropsWithChildren<{ item?: any }>> = ({ item }) => {
 
@@ -31,7 +32,14 @@ const Card: FC<PropsWithChildren<{ item?: any }>> = ({ item }) => {
   return (
     <div className="card">
       <div className="card-img">
-        <Image
+        {/*<Image*/}
+        {/*  onClick={() => setProductModal(item)}*/}
+        {/*  layout='fill'*/}
+        {/*  objectFit={'cover'}*/}
+        {/*  src={item?.primary_image?.image}*/}
+        {/*  alt={'img-card'}*/}
+        {/*/>*/}
+        <ProductSkeletonImage
           onClick={() => setProductModal(item)}
           layout='fill'
           objectFit={'cover'}

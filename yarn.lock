@@ -1120,6 +1120,11 @@ rc-virtual-list@^3.11.1, rc-virtual-list@^3.5.1, rc-virtual-list@^3.5.2:
     rc-resize-observer "^1.0.0"
     rc-util "^5.36.0"
 
+react-content-loader@^7.0.2:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/react-content-loader/-/react-content-loader-7.0.2.tgz#5d5e0f723cb937db88f9fec1c5b0651cd301c42e"
+  integrity sha512-773S98JTyC8VB2nu7LXUhpHx8tZMieGxMcx3qTe7IkohT6Br7d9AXnIXs/wQ6IhlUdKQcw6JLKk1QKigYCWDRA==
+
 react-dadata@^2.23.1:
   version "2.23.1"
   resolved "https://registry.yarnpkg.com/react-dadata/-/react-dadata-2.23.1.tgz#a940cdbbe424f10ce58be33710986e7b636285f7"
