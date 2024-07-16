@@ -6,7 +6,6 @@ import Favorite from "../entety/modals/UI/Favorite";
 import Bucket from "../entety/modals/UI/Bucket";
 import Search from "../entety/modals/UI/Search";
 import NotificationModal from "../entety/modals/UI/NotificationModal";
-import { onSetNotification } from "../entety/modals/model/index";
 import LeaveMessageModal from "../entety/modals/UI/LeaveMessageModal";
 import ProductModal from "../entety/modals/UI/ProductModal";
 import CheckoutModal from "../entety/modals/UI/CheckoutModal";

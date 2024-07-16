@@ -23,6 +23,19 @@ const NotificationModal = () => {
     };
   }, [notification?.title])
 
+  const handleClickButton = () =>{
+    const link = document.createElement('a');
+    link.href = 'https://t.me/lubmi_ru';
+    link.target = '_blank';
+    link.click();
+  }
+
+  const formattedMessage = notification?.message?.split('\n').map((line: any, index: any) => (
+    <React.Fragment key={index}>
+      {line}
+      <br />
+    </React.Fragment>
+  ));
   return (
     <Modal
       width={665}
@@ -34,10 +47,11 @@ const NotificationModal = () => {
       <div className="notification-title">
         {notification.title}
       </div>
-      <div className="notification-text">
-        {notification.message}
+      <div className="notification-text" style={{textAlign: notification?.isCenter ? 'left' : 'center'}}>
+        {formattedMessage}
       </div>
       <CustomButton
+        onClick={handleClickButton}
         fontWeight={100}
         title={'Перейти в чат со службой поддержки'}
         padding={'24px 0'}

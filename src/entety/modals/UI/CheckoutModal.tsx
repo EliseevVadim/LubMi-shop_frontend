@@ -96,12 +96,6 @@ const CheckoutModal = () => {
   }, [selectedCities, selectedStreet, selectedBuilding])
 
 
-  console.log(selectedCities?.city)
-  console.log(selectedStreet)
-  console.log(selectedBuilding)
-  console.log('isRussianPostAvaible')
-  console.log(isRussianPostAvaible)
-
   const onFinish = (values: any) => {
 
     const data = {
@@ -171,8 +165,11 @@ const CheckoutModal = () => {
 
           if (response?.data?.status === "succeeded"){
             onSetNotification({
-              title: 'Спасибо за покупку',
-              message: 'Заказ успешно оплачен'
+              title: 'Спасибо за покупку!',
+              message: 'Заказ успешно оплачен. Отправка заказов осуществляется еженедельно в понедельник и четверг.\n' +
+                'Отследить передвижение заказа вы можете в приложении транспортной компании.\n\n' +
+                'По дополнительным вопросам обращайтесь в службу поддержки.',
+              isCenter: true
             })
             form?.resetFields()
             onSelectCity(null)
