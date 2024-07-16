@@ -33,7 +33,7 @@ const ProductModal = () => {
         api.get(`/products/${productModal?.article}/`)
             .then((response) => {
                 setProductData(response?.data)
-                setMainImage(response?.data?.images[0]?.image)
+                setMainImage(0)
             })
             .catch(() => {
                 uAlert({
@@ -45,7 +45,7 @@ const ProductModal = () => {
             })
     }, [productModal.article])
 
-    const [mainImage, setMainImage] = useState<any>(null);
+    const [mainImage, setMainImage] = useState<any>(0);
     const [productData, setProductData] = useState<any>({})
     const [selectedSize, setSelectedSize] = useState<any>(null)
     const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -149,8 +149,6 @@ const ProductModal = () => {
         setIsModalVisible(false);
     };
 
-    console.log(mainImage)
-
     return (
         <div className={`product-modal ${productModal?.article ? 'product-modal-open' : ''}`}>
             <MaxWithLayout padding={'0 0 0 20px'}>
@@ -177,11 +175,11 @@ const ProductModal = () => {
                         <div className="product-modal-main-img">
                             <div className="product-modal-main-img-slider">
                                 <Slider {...settings}>
-                                    {[...productData?.images, ...productData?.images]?.map((image: any, index: any) => (
+                                    {productData?.images?.map((image: any, index: any) => (
                                         <div
                                             key={index}
                                             className="product-modal-main-img-slider-img"
-                                            onClick={() => setMainImage(image?.image)}
+                                            onClick={() => setMainImage(index)}
                                         >
                                             <Image
                                                 src={image?.image}
@@ -193,7 +191,12 @@ const ProductModal = () => {
                                 </Slider>
                             </div>
                             <div className="product-modal-main-img-main">
-                                <img src={mainImage} alt=""/>
+                                <Image
+                                  src={productData?.images?.[mainImage]?.image}
+                                  alt=""
+                                  objectFit={'cover'}
+                                  layout="fill"
+                                />
                             </div>
                         </div>
 

@@ -34,18 +34,6 @@ const MainLayout: FC<PropsWithChildren<any>> = ({
       <LeaveMessageModal />
       <ProductModal />
       <CheckoutModal />
-
-
-      {/*<div*/}
-      {/*  style={{*/}
-      {/*    width: 40,*/}
-      {/*    height: 50,*/}
-      {/*    backgroundColor: '#000'*/}
-      {/*  }}*/}
-      {/*  onClick={() => onSetNotification({title: '1', message: '2'})}*/}
-      {/*>*/}
-      {/*</div>*/}
-
       <div className="main-block">
         {children}
       </div>
