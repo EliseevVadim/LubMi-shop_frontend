@@ -1,79 +1,79 @@
 @use './_variable.scss' as *;
 
 html {
-    scroll-behavior: smooth !important;
+  scroll-behavior: smooth !important;
 }
 
 html,
 body {
-    height: 100%;
-    line-height: 1.5;
-    font-family: $fontBase,
+  height: 100%;
+  line-height: 1.5;
+  font-family: $fontBase,
 }
 
 body {
-    overflow-x: hidden;
-    position: relative;
-    -webkit-font-smoothing: antialiased;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    background-color: $white;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background-color: $white;
 
-    &::-webkit-scrollbar {
-        width: 4px;
-    }
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
 
-    &::-webkit-scrollbar-track {
-        background: rgba(34, 34, 34, 0.2);
-    }
+  &::-webkit-scrollbar-track {
+    background: rgba(34, 34, 34, 0.2);
+  }
 
-    &::-webkit-scrollbar-thumb {
-        background: $dark;
-    }
+  &::-webkit-scrollbar-thumb {
+    background: $dark;
+  }
 }
 
 * {
-    font-family: $fontBase,
+  font-family: $fontBase,
 }
 
 *,
 :before,
 :after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    -webkit-locale: auto;
-    font-family: $fontBase !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-locale: auto;
+  font-family: $fontBase !important;
 }
 
 input[type=number] {
-    -moz-appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 input,
 textarea,
 button {
-    font-family: inherit;
-    border: none;
-    outline: none;
-    border-radius: 0;
+  font-family: inherit;
+  border: none;
+  outline: none;
+  border-radius: 0;
 
-    font-weight: 100;
-    letter-spacing: -0.04em;
+  font-weight: 100;
+  letter-spacing: -0.04em;
 }
 
 button {
-    border: none; /* Remove button border */
-    background: none; /* Remove button background */
-    padding: 0; /* Remove button padding */
-    margin: 0; /* Remove button margin */
-    outline: none; /* Remove button outline (focus) */
-    cursor: pointer; /* Show pointer cursor on hover (optional) */
+  border: none; /* Remove button border */
+  background: none; /* Remove button background */
+  padding: 0; /* Remove button padding */
+  margin: 0; /* Remove button margin */
+  outline: none; /* Remove button outline (focus) */
+  cursor: pointer; /* Show pointer cursor on hover (optional) */
 }
 
 input[type='text'],
@@ -83,139 +83,143 @@ input[type='email'],
 input[type='number'],
 textarea,
 button {
-    -webkit-appearance: none;
+  -webkit-appearance: none;
 }
 
 input::-webkit-credentials-auto-fill-button,
 input::-webkit-contacts-auto-fill-button {
-    visibility: hidden;
-    pointer-events: none;
-    position: absolute;
-    right: 0;
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
 }
 
 input::-ms-reveal,
 input::-ms-clear {
-    width: 0;
-    height: 0;
+  width: 0;
+  height: 0;
 }
 
 fieldset {
-    border: none;
+  border: none;
+}
+
+ul {
+  margin-left: 10px !important;
 }
 
 h1,
 h2,
 h3,
 h4 {
-    font-family: var(--font-base);
-    font-weight: 400;
-    color: inherit;
-    margin: 0;
+  font-family: var(--font-base);
+  font-weight: 400;
+  color: inherit;
+  margin: 0;
 }
 
 h5,
 h6 {
-    font-weight: 600;
-    color: inherit;
-    margin: 0;
+  font-weight: 600;
+  color: inherit;
+  margin: 0;
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 
-    &:hover,
-    &:active,
-    &:focus {
-        text-decoration: none;
-    }
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+  }
 }
 
 a,
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 li {
-    list-style: none;
+  list-style: none;
 
 }
 
 input::placeholder {
-    color: #2C2C2C !important;
-    font-size: 18px;
-    font-weight: 100;
-    font-family: $fontBase,
+  color: #2C2C2C !important;
+  font-size: 18px;
+  font-weight: 100;
+  font-family: $fontBase,
 }
 
 
 .ant-select-arrow {
-    display: none !important;
+  display: none !important;
 }
 
 .ant-select-selector {
-    border: none !important;
-    box-shadow: none !important;
-    padding-left: 0 !important;
-    margin-left: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
 
-    .ant-select-selection-search {
-        inset-inline-start: 0 !important;
-        inset-block-end: 0 !important;
-    }
+  .ant-select-selection-search {
+    inset-inline-start: 0 !important;
+    inset-block-end: 0 !important;
+  }
 }
 
 .ant-select-selection {
-    background-color: green !important;
+  background-color: green !important;
 }
 
 .rc-virtual-list-holder-inner {
-    .ant-select-item {
-        padding: 0px;
-    }
+  .ant-select-item {
+    padding: 0px;
+  }
 
-    .ant-select-item-option-content {
-        font-size: 24px !important;
-        font-weight: 100 !important;
-        line-height: 23px !important;
-        letter-spacing: -0.02em !important;
-        color: $dark !important;
-    }
+  .ant-select-item-option-content {
+    font-size: 24px !important;
+    font-weight: 100 !important;
+    line-height: 23px !important;
+    letter-spacing: -0.02em !important;
+    color: $dark !important;
+  }
 
 }
 
 .ant-select-item-option-active, .ant-select-item-option-selected {
-    background-color: transparent !important;
+  background-color: transparent !important;
 
-    &:hover {
-        background-color: transparent !important;
-    }
+  &:hover {
+    background-color: transparent !important;
+  }
 }
 
 .ant-select-dropdown {
-    border: 1px solid $dark;
-    border-radius: 0 !important;
+  border: 1px solid $dark;
+  border-radius: 0 !important;
 }
 
 .ant-modal-mask {
-    z-index: 990 !important;
+  z-index: 990 !important;
 }
 
 .ant-modal-wrap {
-    z-index: 990 !important;
+  z-index: 990 !important;
 }
 
 .p-h20 {
-    padding: 0 20px;
-    @media(max-width: 1024px) {
-        padding: 0;
-    }
+  padding: 0 20px;
+  @media(max-width: 1024px) {
+    padding: 0;
+  }
 }
 
 .p-h20-media {
-    padding: 0;
-    @media(max-width: 1024px) {
-        padding: 0 20px;
-    }
+  padding: 0;
+  @media(max-width: 1024px) {
+    padding: 0 20px;
+  }
 }
