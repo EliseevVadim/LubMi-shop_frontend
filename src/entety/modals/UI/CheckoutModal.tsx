@@ -584,7 +584,7 @@ const CheckoutModal = () => {
               <div className="checkout-modal-main-form-button">
                 <CustomButton
                   disable={isDisablePay}
-                  isLoading={true}
+                  isLoading={isLoadingCheckout}
                   title={'Оформить заказ'}
                   padding={'24px 0'}
                   maxWidth={'100%'}
