@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useUnit } from "effector-react";
+import React, {useEffect, useState} from 'react';
+import {useUnit} from "effector-react";
 import {
   $isOpenBucket,
   $isOpenCheckout,
@@ -12,22 +12,22 @@ import MaxWithLayout from "../../../layouts/MaxWithLayout";
 import ProductArrowToLeft from "../../../assets/icons/ProductArrowToLeft";
 import CrossIcon from "../../../assets/icons/CrossIcon";
 import BucketCard from "../../../components/client/bucket/BucketCard";
-import { Checkbox, Form, Input, Radio, Select, Skeleton, Space } from "antd";
+import {Checkbox, Form, Input, Radio, Select, Skeleton, Space} from "antd";
 import InputMask from "react-input-mask";
 import CustomButton from "../../../components/client/common/CustomButton";
 import LineBlock from "../../../components/client/common/LineBlock";
-import { AddressSuggestions } from 'react-dadata';
+import {AddressSuggestions} from 'react-dadata';
 import 'react-dadata/dist/react-dadata.css';
 import {
   $activeOrderId,
   $bucket, $bucketCalculated, $building,
-  $cities, $isRussianPostAvaible, $selectedBuilding,
-  $selectedCities, $selectedDelivery, $selectedStreet, $streets,
+  $cities, $isRussianPostAvaible, $pvs, $selectedBuilding,
+  $selectedCities, $selectedDelivery, $selectedPVS, $selectedStreet, $streets,
   BucketCheckoutFx, BuildingFX, CalculateBucketFx, changeActiveOrder, CheckOrderPayedFx, CheckRussianPostFx,
   CityFX, onSelectBuilding,
-  onSelectCity, onSelectDelivery, onSelectStreet, resetBucket, StreetFX
+  onSelectCity, onSelectDelivery, onSelectPVS, onSelectStreet, PVSFX, resetBucket, StreetFX
 } from "../../client/bucket/model/index";
-import { useDebounce } from "use-debounce";
+import {useDebounce} from "use-debounce";
 
 const CheckoutModal = () => {
 
@@ -36,7 +36,9 @@ const CheckoutModal = () => {
   const [
     isOpenCheckout,
     selectedCities,
+    selectedPVS,
     cities,
+    pvs,
     bucket,
     bucketCalculated,
     isLoadingCalculate,
@@ -51,7 +53,9 @@ const CheckoutModal = () => {
   ] = useUnit([
     $isOpenCheckout,
     $selectedCities,
+    $selectedPVS,
     $cities,
+    $pvs,
     $bucket,
     $bucketCalculated,
     CalculateBucketFx.pending,
@@ -65,13 +69,25 @@ const CheckoutModal = () => {
     $isRussianPostAvaible
   ])
 
+
   const [searchCity, setSearchCity] = useState<any>('');
+  const [searchPVS, setSearchPVS] = useState<any>('');
   const [searchStreet, setSearchStreet] = useState<any>('');
   const [searchBuilding, setSearchBuilding] = useState<any>('');
   const [isAgree, setIsAgree] = useState<any>(false);
   const [debouncedSearchCity] = useDebounce(searchCity, 500);
+  const [debouncedSearchPVS] = useDebounce(searchPVS, 500);
   const [debouncedSearchStreet] = useDebounce(searchStreet, 500);
   const [debouncedSearchBuilding] = useDebounce(searchBuilding, 500);
+
+  const searchPVSData = pvs.filter((item: any) => debouncedSearchPVS
+    ? String(item.name).toLowerCase()?.includes(String(debouncedSearchPVS).toLowerCase())
+    : true
+  )
+
+  console.log('selectedDelivery')
+  console.log(searchPVSData)
+  console.log(debouncedSearchPVS)
 
   useEffect(() => {
     CityFX(debouncedSearchCity)
@@ -80,6 +96,7 @@ const CheckoutModal = () => {
   useEffect(() => {
     if (selectedCities?.id) {
       StreetFX(debouncedSearchStreet)
+      PVSFX(debouncedSearchStreet)
     }
   }, [selectedCities, debouncedSearchStreet])
 
@@ -100,26 +117,30 @@ const CheckoutModal = () => {
 
     const data = {
       delivery: selectedDelivery,
+      delivery_point: selectedPVS?.id,
       cu_first_name: values?.name,
       cu_last_name: values?.surname,
       cu_phone: values?.phone,
       cu_city_uuid: selectedCities?.id,
       cu_city: selectedCities?.city,
-      cu_street: selectedStreet,
-      cu_building: selectedBuilding,
-      cu_entrance: values?.entrance,
-      cu_floor: values?.floor,
-      cu_apartment: values?.apartment,
+      cu_street: selectedStreet || null,
+      cu_building: selectedBuilding || null,
+      cu_entrance: values?.entrance  || null,
+      cu_floor: values?.floor || null,
+      cu_apartment: values?.apartment || null,
       cu_fullname: values?.fullName,
       cu_confirm: true,
-      scart: bucket?.map((item: any) => ({ ppk: item.article, size_id: item?.size?.id, quantity: item?.quantity }))
+      scart: bucket?.map((item: any) => ({ppk: item.article, size_id: item?.size?.id, quantity: item?.quantity}))
     }
+
+    console.log('data')
+    console.log(data)
 
     BucketCheckoutFx(data)
       .then((res) => {
         console.log(res)
         if (res?.success) {
-          if (res?.redirect){
+          if (res?.redirect) {
             changeActiveOrder(res?.payment_id)
             // window?.open(res.redirect)
 
@@ -159,11 +180,11 @@ const CheckoutModal = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       CheckOrderPayedFx()
-        .then((response: any) =>{
+        .then((response: any) => {
           console.log('response')
           console.log(response?.data)
 
-          if (response?.data?.status === "succeeded"){
+          if (response?.data?.status === "succeeded") {
             onSetNotification({
               title: 'Спасибо за покупку!',
               message: 'Заказ успешно оплачен. Отправка заказов осуществляется еженедельно в понедельник и четверг.\n' +
@@ -177,7 +198,7 @@ const CheckoutModal = () => {
             onChangeIsOpenCheckout(false)
             resetBucket()
             changeActiveOrder(null)
-          } else if(response?.data?.status === "canceled"){
+          } else if (response?.data?.status === "canceled") {
             onSetNotification({
               title: 'Произошла ошибка',
               message: 'Произошла ошибка при оплаче заказа'
@@ -190,7 +211,7 @@ const CheckoutModal = () => {
             changeActiveOrder(null)
           }
         })
-        .catch((e) =>{
+        .catch((e) => {
           console.log('e')
           console.log(e)
         });
@@ -204,11 +225,11 @@ const CheckoutModal = () => {
       <MaxWithLayout>
         <div className="checkout-modal-top">
           <div className="checkout-modal-top-back" onClick={() => onChangeIsOpenCheckout(false)}>
-            <ProductArrowToLeft />
+            <ProductArrowToLeft/>
             Назад
           </div>
           <div className="checkout-modal-top-close" onClick={() => onChangeIsOpenCheckout(false)}>
-            <CrossIcon />
+            <CrossIcon/>
           </div>
         </div>
         <div className="checkout-modal-main">
@@ -302,13 +323,14 @@ const CheckoutModal = () => {
                   placeholder={'Введите Ваш город'}
                   filterOption={false}
                   value={selectedCities}
-                  onChange={(e, y: any) => onSelectCity({ id: y?.key, city: y?.children, region: y?.data } as any)}
+                  onChange={(e, y: any) => onSelectCity({id: y?.key, city: y?.children, region: y?.data} as any)}
                   showSearch
                   onSearch={(e) => setSearchCity(e)}
                 >
                   {cities?.map((option: any) => {
                     return (
-                      <Select.Option key={option?.uuid?.toString()} value={option?.uuid?.toString()} data={option?.region}>
+                      <Select.Option key={option?.uuid?.toString()} value={option?.uuid?.toString()}
+                                     data={option?.region}>
                         {`${option?.city}, ${option?.region}`}
                       </Select.Option>
                     );
@@ -321,25 +343,34 @@ const CheckoutModal = () => {
                   <Space direction="vertical">
                     {
                       bucketCalculated?.['cd']?.cost &&
-                      <Radio value={'cd'}>
-                          <div className="checkout-modal-main-form-radio">
-                              СДЭК, <span>от {bucketCalculated?.['cd']?.days} дней, от {bucketCalculated?.['cd']?.cost} руб.</span>
-                          </div>
-                      </Radio>
+                        <Radio value={'cd'}>
+                            <div className="checkout-modal-main-form-radio">
+                                СДЭК, <span>от {bucketCalculated?.['cd']?.days} дней, от {bucketCalculated?.['cd']?.cost} руб.</span>
+                            </div>
+                        </Radio>
+                    }
+                    {
+                      bucketCalculated?.['cp']?.cost &&
+                        <Radio value={'cp'}>
+                            <div className="checkout-modal-main-form-radio">
+                                СДЭК
+                                (ПВЗ), <span>от {bucketCalculated?.['cp']?.days} дней, от {bucketCalculated?.['cp']?.cost} руб.</span>
+                            </div>
+                        </Radio>
                     }
                     {
                       bucketCalculated?.['pr']?.cost && isRussianPostAvaible &&
-                      <Radio value={'pr'}>
-                          <div className="checkout-modal-main-form-radio">
-                              Доставка почтой
-                              России, <span> от {bucketCalculated?.['pr']?.days} дней, от {bucketCalculated?.['pr']?.cost} руб.</span>
-                          </div>
-                      </Radio>
+                        <Radio value={'pr'}>
+                            <div className="checkout-modal-main-form-radio">
+                                Доставка почтой
+                                России, <span> от {bucketCalculated?.['pr']?.days} дней, от {bucketCalculated?.['pr']?.cost} руб.</span>
+                            </div>
+                        </Radio>
                     }
                   </Space>
                 </Radio.Group>
                 :
-                <p style={{ color: 'red', fontSize: 16 }}>
+                <p style={{color: 'red', fontSize: 16}}>
                   В данном городе нет доставки
                 </p>
               }
@@ -364,133 +395,140 @@ const CheckoutModal = () => {
                   }}
                 />
               </Form.Item>
-              <Form.Item
-                name="street"
-                rules={[
-                  {
-                    required: true,
-                    message: "Данные введены неверно",
-                  },
-                ]}
-              >
-                <Select
-                  style={{
-                    width: '100%'
-                  }}
-                  className={'test-test'}
-                  placeholder={'Улица'}
-                  filterOption={false}
-                  value={selectedStreet}
-                  onChange={(e) => onSelectStreet(e)}
-                  showSearch
-                  onSearch={(e) => setSearchStreet(e)}
-                >
-                  {streets?.map((option: any) => {
-                    return (
-                      <Select.Option key={option} value={option}>
-                        {option}
-                      </Select.Option>
-                    );
-                  })}
-                </Select>
-                {/*<Input*/}
-                {/*  placeholder={'Улица'}*/}
-                {/*  style={{*/}
-                {/*    height: 38*/}
-                {/*  }}*/}
-                {/*/>*/}
-              </Form.Item>
 
-              <div className="checkout-modal-main-form-block">
-                <Form.Item
-                  name="building"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Данные введены неверно",
-                    },
-                  ]}
-                >
-                  {/*<Input*/}
-                  {/*  placeholder={'Дом'}*/}
-                  {/*  style={{*/}
-                  {/*    height: 38*/}
-                  {/*  }}*/}
-                  {/*/>*/}
-                  <Select
-                    style={{
-                      width: '100%'
-                    }}
-                    className={'test-test'}
-                    placeholder={'Дом'}
-                    filterOption={false}
-                    value={selectedDelivery}
-                    onChange={(e) => onSelectBuilding(e)}
-                    showSearch
-                    onSearch={(e) => setSearchBuilding(e)}
+              {
+                selectedDelivery !== 'cp'
+                  ?
+                  <>
+                    <Form.Item
+                      name="street"
+                      // rules={[
+                      //   {
+                      //     required: true,
+                      //     message: "Данные введены неверно",
+                      //   },
+                      // ]}
+                    >
+                      <Select
+                        style={{
+                          width: '100%'
+                        }}
+                        className={'test-test'}
+                        placeholder={'Улица'}
+                        filterOption={false}
+                        value={selectedStreet}
+                        onChange={(e) => onSelectStreet(e)}
+                        showSearch
+                        onSearch={(e) => setSearchStreet(e)}
+                      >
+                        {streets?.map((option: any) => {
+                          return (
+                            <Select.Option key={option} value={option}>
+                              {option}
+                            </Select.Option>
+                          );
+                        })}
+                      </Select>
+                    </Form.Item>
+
+                    <div className="checkout-modal-main-form-block">
+                      <Form.Item
+                        name="building"
+                        // rules={[
+                        //   {
+                        //     required: true,
+                        //     message: "Данные введены неверно",
+                        //   },
+                        // ]}
+                      >
+                        <Select
+                          style={{
+                            width: '100%'
+                          }}
+                          className={'test-test'}
+                          placeholder={'Дом'}
+                          filterOption={false}
+                          value={selectedDelivery}
+                          onChange={(e) => onSelectBuilding(e)}
+                          showSearch
+                          onSearch={(e) => setSearchBuilding(e)}
+                        >
+                          {building?.map((option: any) => {
+                            return (
+                              <Select.Option key={option} value={option}>
+                                {option}
+                              </Select.Option>
+                            );
+                          })}
+                        </Select>
+                      </Form.Item>
+                      <Form.Item
+                        name="apartment"
+                      >
+                        <Input
+                          placeholder={'Квартира/офис'}
+                          style={{
+                            height: 38
+                          }}
+                        />
+                      </Form.Item>
+                    </div>
+
+                    <div className="checkout-modal-main-form-block">
+                      <Form.Item
+                        name="entrance"
+                      >
+                        <Input
+                          placeholder={'Подъезд'}
+                          style={{
+                            height: 38
+                          }}
+                        />
+                      </Form.Item>
+                      <Form.Item
+                        name="floor"
+                      >
+                        <Input
+                          placeholder={'Этаж'}
+                          style={{
+                            height: 38
+                          }}
+                        />
+                      </Form.Item>
+                    </div>
+                  </>
+                  :
+                  <Form.Item
+                    name="psv"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Данные введены неверно",
+                      },
+                    ]}
                   >
-                    {building?.map((option: any) => {
-                      return (
-                        <Select.Option key={option} value={option}>
-                          {option}
-                        </Select.Option>
-                      );
-                    })}
-                  </Select>
-                </Form.Item>
-                <Form.Item
-                  name="apartment"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Данные введены неверно",
-                    },
-                  ]}
-                >
-                  <Input
-                    placeholder={'Квартира/офис'}
-                    style={{
-                      height: 38
-                    }}
-                  />
-                </Form.Item>
-              </div>
-
-              <div className="checkout-modal-main-form-block">
-                <Form.Item
-                  name="entrance"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Данные введены неверно",
-                    },
-                  ]}
-                >
-                  <Input
-                    placeholder={'Подъезд'}
-                    style={{
-                      height: 38
-                    }}
-                  />
-                </Form.Item>
-                <Form.Item
-                  name="floor"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Данные введены неверно",
-                    },
-                  ]}
-                >
-                  <Input
-                    placeholder={'Этаж'}
-                    style={{
-                      height: 38
-                    }}
-                  />
-                </Form.Item>
-              </div>
-
+                    <Select
+                      style={{
+                        width: '100%'
+                      }}
+                      className={'test-test'}
+                      placeholder={'Введите пункт ПВЗ'}
+                      filterOption={false}
+                      value={selectedPVS}
+                      onChange={(e, y: any) => onSelectPVS({id: y?.key} as any)}
+                      showSearch
+                      onSearch={(e) => setSearchPVS(e)}
+                    >
+                      {searchPVSData?.map((option: any) => {
+                        return (
+                          <Select.Option key={option?.code?.toString()} value={option?.code?.toString()}>
+                            {option?.name}
+                          </Select.Option>
+                        );
+                      })}
+                    </Select>
+                  </Form.Item>
+              }
               <div className="checkout-modal-main-form-check-box">
                 <Checkbox
                   value={isAgree}
@@ -505,38 +543,38 @@ const CheckoutModal = () => {
                   Сумма: {' '}
                   {
                     isLoadingCalculate
-                      ? <Skeleton.Button active={false} size={'small'} />
+                      ? <Skeleton.Button active={false} size={'small'}/>
                       : `${bucketCalculated?.price} руб`
                   }
                 </p>
                 {
                   !!bucketCalculated?.[selectedDelivery]?.cost &&
-                  <p>
-                    {
-                      selectedDelivery === 'cd' ? 'СДЭК' : 'Почта России'
-                    }: {' '}
-                    {
-                      isLoadingCalculate
-                        ? <Skeleton.Button active={false} size={'small'} />
-                        : `${bucketCalculated?.[selectedDelivery]?.cost} руб`
-                    }
-                  </p>
+                    <p>
+                      {
+                        selectedDelivery === 'cd' ? 'СДЭК' : 'Почта России'
+                      }: {' '}
+                      {
+                        isLoadingCalculate
+                          ? <Skeleton.Button active={false} size={'small'}/>
+                          : `${bucketCalculated?.[selectedDelivery]?.cost} руб`
+                      }
+                    </p>
                 }
                 {
                   selectedCities?.city &&
-                  <p>
-                    {
-                      isLoadingCalculate
-                        ? <Skeleton.Button active={false} size={'small'} />
-                        : `${selectedCities?.city}`
-                    }
-                  </p>
+                    <p>
+                      {
+                        isLoadingCalculate
+                          ? <Skeleton.Button active={false} size={'small'}/>
+                          : `${selectedCities?.city}`
+                      }
+                    </p>
                 }
                 <p>
                   Итоговая сумма: {' '}
                   {
                     isLoadingCalculate
-                      ? <Skeleton.Button active={false} size={'small'} />
+                      ? <Skeleton.Button active={false} size={'small'}/>
                       : `${
                         Number(bucketCalculated?.price || 0) +
                         (bucketCalculated?.[selectedDelivery]?.cost ? Number(bucketCalculated?.[selectedDelivery]?.cost) : 0)
@@ -565,24 +603,24 @@ const CheckoutModal = () => {
               <h3>
                 ваш заказ
               </h3>
-              <LineBlock />
+              <LineBlock/>
             </div>
             <div className="checkout-modal-main-order-list">
               {
                 bucket?.map((item: any) =>
-                  <BucketCard isWithCounter={true} withTimerLogic={true} item={item} />
+                  <BucketCard isWithCounter={true} withTimerLogic={true} item={item}/>
                 )
               }
             </div>
             <div className="checkout-modal-main-order-mob">
-              <LineBlock />
+              <LineBlock/>
             </div>
             <div className="checkout-modal-main-order-sum">
               <h2>
                 Сумма к оплате: {' '}
                 {
                   isLoadingCalculate
-                    ? <Skeleton.Button active={false} size={'small'} />
+                    ? <Skeleton.Button active={false} size={'small'}/>
                     : `${bucketCalculated?.price} руб`
                 }
               </h2>
@@ -590,38 +628,38 @@ const CheckoutModal = () => {
                 Сумма: {' '}
                 {
                   isLoadingCalculate
-                    ? <Skeleton.Button active={false} size={'small'} />
+                    ? <Skeleton.Button active={false} size={'small'}/>
                     : `${bucketCalculated?.price} руб`
                 }
               </p>
               {
                 !!bucketCalculated?.[selectedDelivery]?.cost &&
-                <p>
-                  {
-                    selectedDelivery === 'cd' ? 'СДЭК' : 'Почта России'
-                  }: {' '}
-                  {
-                    isLoadingCalculate
-                      ? <Skeleton.Button active={false} size={'small'} />
-                      : `${bucketCalculated?.[selectedDelivery]?.cost} руб`
-                  }
-                </p>
+                  <p>
+                    {
+                      selectedDelivery === 'cd' ? 'СДЭК' : 'Почта России'
+                    }: {' '}
+                    {
+                      isLoadingCalculate
+                        ? <Skeleton.Button active={false} size={'small'}/>
+                        : `${bucketCalculated?.[selectedDelivery]?.cost} руб`
+                    }
+                  </p>
               }
               {
                 selectedCities?.city &&
-                <p>
-                  {
-                    isLoadingCalculate
-                      ? <Skeleton.Button active={false} size={'small'} />
-                      : `${selectedCities?.city}`
-                  }
-                </p>
+                  <p>
+                    {
+                      isLoadingCalculate
+                        ? <Skeleton.Button active={false} size={'small'}/>
+                        : `${selectedCities?.city}`
+                    }
+                  </p>
               }
               <p>
                 Итоговая сумма: {' '}
                 {
                   isLoadingCalculate
-                    ? <Skeleton.Button active={false} size={'small'} />
+                    ? <Skeleton.Button active={false} size={'small'}/>
                     : `${
                       Number(bucketCalculated?.price || 0) +
                       (bucketCalculated?.[selectedDelivery]?.cost ? Number(bucketCalculated?.[selectedDelivery]?.cost) : 0)

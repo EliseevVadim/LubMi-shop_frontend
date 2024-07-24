@@ -12,6 +12,13 @@ export const bucketCities = async (search: any): Promise<any> => {
   return response.data;
 };
 
+export const bucketPSVs = async (data: any): Promise<any> => {
+  if ($selectedCities?.getState()?.id){
+    const response = await api.get<any>(`/service/cities/${$selectedCities?.getState()?.id}/delivery-points/`);
+    return response.data;
+  }
+};
+
 export const bucketStreet = async (data: any): Promise<any> => {
   if ($selectedCities?.getState()?.id){
     const response = await api.get<any>(`/service/streets/${$selectedCities?.getState()?.id}/${data}/`);

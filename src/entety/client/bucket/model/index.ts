@@ -4,7 +4,7 @@ import {
   bucketBuilding,
   bucketCalculate,
   bucketCheckout,
-  bucketCities,
+  bucketCities, bucketPSVs,
   bucketStreet,
   CheckOrderPayed, CheckRussianPost
 } from "../api/index";
@@ -68,16 +68,20 @@ $bucket.on(resetBucket, () => [])
 
 //города
 export const $cities = createStore<any[]>([]);
+export const $pvs = createStore<any[]>([]);
 export const $streets = createStore<any[]>([]);
 export const $building = createStore<any[]>([]);
 export const $selectedCities = createStore<any>(null);
+export const $selectedPVS  = createStore<any>(null);
 export const $selectedStreet = createStore<any>(null);
 export const $selectedBuilding = createStore<any>(null);
 
 export const onSelectCity = createEvent<any>();
+export const onSelectPVS = createEvent<any>();
 export const onSelectStreet = createEvent<any>();
 export const onSelectBuilding = createEvent<any>();
 $selectedCities.on(onSelectCity, (_, t) => t)
+$selectedPVS.on(onSelectPVS, (_, t) => t)
 $selectedStreet.on(onSelectStreet, (_, t) => t)
 $selectedBuilding.on(onSelectBuilding, (_, t) => t)
 
@@ -90,6 +94,11 @@ export const CityFX = createEffect<any, any, Error>(async(data) => {
   if (!res.success) throw new Error(res.message);
   return res?.cities;
 });
+export const PVSFX = createEffect<any, any, Error>(async(data) => {
+  const res = await bucketPSVs(data);
+  if (!res.success) throw new Error(res.message);
+  return res?.['delivery-points'];
+});
 export const StreetFX = createEffect<any, any, Error>(async(data) => {
   const res = await bucketStreet(data);
   if (!res.success) throw new Error(res.message);
@@ -101,6 +110,7 @@ export const BuildingFX = createEffect<any, any, Error>(async(data) => {
   return res?.buildings;
 });
 $cities.on(CityFX.doneData, (_, t) => t)
+$pvs.on(PVSFX.doneData, (_, t) => t)
 $streets.on(StreetFX.doneData, (_, t) => t)
 $building.on(BuildingFX.doneData, (_, t) => t)
 
