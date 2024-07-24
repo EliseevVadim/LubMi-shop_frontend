@@ -133,8 +133,6 @@ const CheckoutModal = () => {
       scart: bucket?.map((item: any) => ({ppk: item.article, size_id: item?.size?.id, quantity: item?.quantity}))
     }
 
-    console.log('data')
-    console.log(data)
 
     BucketCheckoutFx(data)
       .then((res) => {
@@ -402,12 +400,12 @@ const CheckoutModal = () => {
                   <>
                     <Form.Item
                       name="street"
-                      // rules={[
-                      //   {
-                      //     required: true,
-                      //     message: "Данные введены неверно",
-                      //   },
-                      // ]}
+                      rules={[
+                        {
+                          required:  selectedDelivery !== 'cp',
+                          message: "Данные введены неверно",
+                        },
+                      ]}
                     >
                       <Select
                         style={{
@@ -434,12 +432,12 @@ const CheckoutModal = () => {
                     <div className="checkout-modal-main-form-block">
                       <Form.Item
                         name="building"
-                        // rules={[
-                        //   {
-                        //     required: true,
-                        //     message: "Данные введены неверно",
-                        //   },
-                        // ]}
+                        rules={[
+                          {
+                            required:  selectedDelivery !== 'cp',
+                            message: "Данные введены неверно",
+                          },
+                        ]}
                       >
                         <Select
                           style={{
@@ -586,7 +584,7 @@ const CheckoutModal = () => {
               <div className="checkout-modal-main-form-button">
                 <CustomButton
                   disable={isDisablePay}
-                  isLoading={isLoadingCheckout}
+                  isLoading={true}
                   title={'Оформить заказ'}
                   padding={'24px 0'}
                   maxWidth={'100%'}

@@ -53,9 +53,11 @@ const CustomButton: FC<PropsWithChildren<IButton>> = ({
       {
         isLoading
           ?
-          <Spin
-            indicator={<LoadingOutlined style={{ fontSize: 25, color: '#000' }} />}
-          />
+          <div style={{padding: 15}}>
+            <Spin
+              indicator={<LoadingOutlined style={{ fontSize: 25, color: '#fff' }} />}
+            />
+          </div>
           : <p
             style={{
               padding,
