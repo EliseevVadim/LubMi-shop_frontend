@@ -125,7 +125,7 @@ const CheckoutModal = () => {
       cu_city: selectedCities?.city,
       cu_street: selectedStreet || null,
       cu_building: selectedBuilding || null,
-      cu_entrance: values?.entrance  || null,
+      cu_entrance: values?.entrance || null,
       cu_floor: values?.floor || null,
       cu_apartment: values?.apartment || null,
       cu_fullname: values?.fullName,
@@ -402,7 +402,7 @@ const CheckoutModal = () => {
                       name="street"
                       rules={[
                         {
-                          required:  selectedDelivery !== 'cp',
+                          required: selectedDelivery !== 'cp',
                           message: "Данные введены неверно",
                         },
                       ]}
@@ -434,7 +434,7 @@ const CheckoutModal = () => {
                         name="building"
                         rules={[
                           {
-                            required:  selectedDelivery !== 'cp',
+                            required: selectedDelivery !== 'cp',
                             message: "Данные введены неверно",
                           },
                         ]}
@@ -634,7 +634,11 @@ const CheckoutModal = () => {
                 !!bucketCalculated?.[selectedDelivery]?.cost &&
                   <p>
                     {
-                      selectedDelivery === 'cd' ? 'СДЭК' : 'Почта России'
+                      selectedDelivery === 'cd'
+                        ? 'СДЭК'
+                        : selectedDelivery === 'pr'
+                          ? 'Почта России'
+                          : 'СДЭК (ПВЗ)'
                     }: {' '}
                     {
                       isLoadingCalculate
