@@ -19,6 +19,8 @@
             position: absolute;
             bottom: 30px;
 
+                margin-left: 0 !important;
+
             @media(max-width: 1024px) {
                 bottom: 10px;
             }
