@@ -520,7 +520,7 @@ const CheckoutModal = () => {
                       {searchPVSData?.map((option: any) => {
                         return (
                           <Select.Option key={option?.code?.toString()} value={option?.code?.toString()}>
-                            {option?.name}
+                            {option?.location?.address}
                           </Select.Option>
                         );
                       })}
