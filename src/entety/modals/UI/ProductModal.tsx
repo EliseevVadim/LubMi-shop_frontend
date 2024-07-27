@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useStoreMap, useUnit} from "effector-react";
 import {
   $productModal,
@@ -109,6 +109,7 @@ const ProductModal = () => {
   };
 
   useEffect(() => {
+
     if (!!productModal.article) {
       document.body.style.overflow = 'hidden';
       document.body.style.paddingRight = '4px';
@@ -148,6 +149,7 @@ const ProductModal = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+
 
   return (
     <div className={`product-modal ${productModal?.article ? 'product-modal-open' : ''}`}>
@@ -198,11 +200,11 @@ const ProductModal = () => {
                   layout="fill"
                 />
               </div>
-            </div>
 
+            </div>
             <div className="product-modal-main-text">
               <h1>
-                {productData?.title} ({productData?.color})
+              {productData?.title} ({productData?.color})
               </h1>
               <h2>
                 Артикул: {productData?.article}
@@ -279,7 +281,6 @@ const ProductModal = () => {
           </div>
         }
       </MaxWithLayout>
-
       <Modal
         visible={isModalVisible}
         onOk={handleOk}

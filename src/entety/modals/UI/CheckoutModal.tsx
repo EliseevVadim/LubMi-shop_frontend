@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useUnit} from "effector-react";
 import {
   $isOpenBucket,
@@ -16,7 +16,6 @@ import {Checkbox, Form, Input, Radio, Select, Skeleton, Space} from "antd";
 import InputMask from "react-input-mask";
 import CustomButton from "../../../components/client/common/CustomButton";
 import LineBlock from "../../../components/client/common/LineBlock";
-import {AddressSuggestions} from 'react-dadata';
 import 'react-dadata/dist/react-dadata.css';
 import {
   $activeOrderId,
@@ -26,12 +25,13 @@ import {
   BucketCheckoutFx, BuildingFX, CalculateBucketFx, changeActiveOrder, CheckOrderPayedFx, CheckRussianPostFx,
   CityFX, onSelectBuilding,
   onSelectCity, onSelectDelivery, onSelectPVS, onSelectStreet, PVSFX, resetBucket, StreetFX
-} from "../../client/bucket/model/index";
+} from "@/entety/client/bucket/model";
 import {useDebounce} from "use-debounce";
 
 const CheckoutModal = () => {
 
   const [form] = Form.useForm<{}>();
+  const modalRef = useRef<any>(null);
 
   const [
     isOpenCheckout,
@@ -84,10 +84,6 @@ const CheckoutModal = () => {
     ? String(item.name).toLowerCase()?.includes(String(debouncedSearchPVS).toLowerCase())
     : true
   )
-
-  console.log('selectedDelivery')
-  console.log(searchPVSData)
-  console.log(debouncedSearchPVS)
 
   useEffect(() => {
     CityFX(debouncedSearchCity)
@@ -161,6 +157,11 @@ const CheckoutModal = () => {
   const isDisablePay = !selectedCities || !isAgree || !selectedDelivery
 
   useEffect(() => {
+    modalRef.current.scrollTo({
+      top: -1000,
+      left: 0,
+    });
+
     if (isOpenCheckout) {
       document.body.style.overflow = 'hidden';
       document.body.style.paddingRight = '4px';
@@ -230,29 +231,14 @@ const CheckoutModal = () => {
             <CrossIcon/>
           </div>
         </div>
-        <div className="checkout-modal-main">
+        <div/>
+        <div className="checkout-modal-main" ref={modalRef}>
           <div className="checkout-modal-main-form">
             <Form
               form={form}
               layout={"vertical"}
               onFinish={onFinish}
             >
-              <Form.Item
-                name="name"
-                rules={[
-                  {
-                    required: true,
-                    message: "Данные введены неверно",
-                  },
-                ]}
-              >
-                <Input
-                  placeholder={'Введите имя'}
-                  style={{
-                    height: 38
-                  }}
-                />
-              </Form.Item>
               <Form.Item
                 name="surname"
                 rules={[
@@ -264,6 +250,22 @@ const CheckoutModal = () => {
               >
                 <Input
                   placeholder={'Введите фамилию'}
+                  style={{
+                    height: 38
+                  }}
+                />
+              </Form.Item>
+              <Form.Item
+                name="name"
+                rules={[
+                  {
+                    required: true,
+                    message: "Данные введены неверно",
+                  },
+                ]}
+              >
+                <Input
+                  placeholder={'Введите имя'}
                   style={{
                     height: 38
                   }}
@@ -549,7 +551,11 @@ const CheckoutModal = () => {
                   !!bucketCalculated?.[selectedDelivery]?.cost &&
                     <p>
                       {
-                        selectedDelivery === 'cd' ? 'СДЭК' : 'Почта России'
+                        selectedDelivery === 'cd'
+                          ? 'СДЭК'
+                          : selectedDelivery === 'cp'
+                            ? 'СДЭК (ПВЗ)'
+                            : 'Почта России'
                       }: {' '}
                       {
                         isLoadingCalculate
@@ -595,7 +601,6 @@ const CheckoutModal = () => {
 
             </Form>
           </div>
-
           <div className="checkout-modal-main-order">
             <div className="checkout-modal-main-order-mob">
               <h3>
