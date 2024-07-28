@@ -81,7 +81,7 @@ const CheckoutModal = () => {
   const [debouncedSearchBuilding] = useDebounce(searchBuilding, 500);
 
   const searchPVSData = pvs.filter((item: any) => debouncedSearchPVS
-    ? String(item.name).toLowerCase()?.includes(String(debouncedSearchPVS).toLowerCase())
+    ? String(item?.location?.address).toLowerCase()?.includes(String(debouncedSearchPVS).toLowerCase())
     : true
   )
 
