@@ -111,7 +111,7 @@ const ProductModal = () => {
       },
     ],
   };
-  const sliderRef = useRef(null);
+  const sliderRef = useRef<any>(null);
 
   useEffect(() => {
 
