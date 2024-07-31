@@ -200,7 +200,7 @@ const CheckoutModal = () => {
           } else if (response?.data?.status === "canceled") {
             onSetNotification({
               title: 'Произошла ошибка',
-              message: 'Произошла ошибка при оплаче заказа'
+              message: 'Произошла ошибка при оплате заказа'
             })
             form?.resetFields()
             onSelectCity(null)
@@ -345,7 +345,8 @@ const CheckoutModal = () => {
                       bucketCalculated?.['cd']?.cost &&
                         <Radio value={'cd'}>
                             <div className="checkout-modal-main-form-radio">
-                                СДЭК, <span>от {bucketCalculated?.['cd']?.days} дней, от {bucketCalculated?.['cd']?.cost} руб.</span>
+                                СДЭК
+                                (курьер), <span>от {bucketCalculated?.['cd']?.days} дней, от {bucketCalculated?.['cd']?.cost} руб.</span>
                             </div>
                         </Radio>
                     }
@@ -375,160 +376,165 @@ const CheckoutModal = () => {
                 </p>
               }
 
-              <h3>
-                Получатель
-              </h3>
-
-              <Form.Item
-                name="fullName"
-                rules={[
-                  {
-                    required: true,
-                    message: "Данные введены неверно",
-                  },
-                ]}
-              >
-                <Input
-                  placeholder={'Введите Ваше ФИО полностью'}
-                  style={{
-                    height: 38
-                  }}
-                />
-              </Form.Item>
-
-              {
-                selectedDelivery !== 'cp'
-                  ?
+              {!!selectedCities && (bucketCalculated?.['cp']?.cost || bucketCalculated?.['cd']?.cost || bucketCalculated?.['pr']?.cost) &&
                   <>
-                    <Form.Item
-                      name="street"
-                      rules={[
-                        {
-                          required: selectedDelivery !== 'cp',
-                          message: "Данные введены неверно",
-                        },
-                      ]}
-                    >
-                      <Select
-                        style={{
-                          width: '100%'
-                        }}
-                        className={'test-test'}
-                        placeholder={'Улица'}
-                        filterOption={false}
-                        value={selectedStreet}
-                        onChange={(e) => onSelectStreet(e)}
-                        showSearch
-                        onSearch={(e) => setSearchStreet(e)}
-                      >
-                        {streets?.map((option: any) => {
-                          return (
-                            <Select.Option key={option} value={option}>
-                              {option}
-                            </Select.Option>
-                          );
-                        })}
-                      </Select>
-                    </Form.Item>
+                      <h3>
+                          Получатель
+                      </h3>
 
-                    <div className="checkout-modal-main-form-block">
                       <Form.Item
-                        name="building"
-                        rules={[
-                          {
-                            required: selectedDelivery !== 'cp',
-                            message: "Данные введены неверно",
-                          },
-                        ]}
+                          name="fullName"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Данные введены неверно",
+                            },
+                          ]}
                       >
-                        <Select
-                          style={{
-                            width: '100%'
-                          }}
-                          className={'test-test'}
-                          placeholder={'Дом'}
-                          filterOption={false}
-                          value={selectedDelivery}
-                          onChange={(e) => onSelectBuilding(e)}
-                          showSearch
-                          onSearch={(e) => setSearchBuilding(e)}
+                          <Input
+                              placeholder={'Введите Ваше ФИО полностью'}
+                              style={{
+                                height: 38
+                              }}
+                          />
+                      </Form.Item>
+
+                    {
+                      selectedDelivery !== 'cp'
+                        ?
+                        <>
+                          <Form.Item
+                            name="street"
+                            rules={[
+                              {
+                                required: selectedDelivery !== 'cp',
+                                message: "Данные введены неверно",
+                              },
+                            ]}
+                          >
+                            <Select
+                              style={{
+                                width: '100%'
+                              }}
+                              className={'test-test'}
+                              placeholder={'Улица'}
+                              filterOption={false}
+                              value={selectedStreet}
+                              onChange={(e) => onSelectStreet(e)}
+                              showSearch
+                              onSearch={(e) => setSearchStreet(e)}
+                            >
+                              {streets?.map((option: any) => {
+                                return (
+                                  <Select.Option key={option} value={option}>
+                                    {option}
+                                  </Select.Option>
+                                );
+                              })}
+                            </Select>
+                          </Form.Item>
+
+                          <div className="checkout-modal-main-form-block">
+                            <Form.Item
+                              name="building"
+                              rules={[
+                                {
+                                  required: selectedDelivery !== 'cp',
+                                  message: "Данные введены неверно",
+                                },
+                              ]}
+                            >
+                              <Select
+                                style={{
+                                  width: '100%'
+                                }}
+                                className={'test-test'}
+                                placeholder={'Дом'}
+                                filterOption={false}
+                                value={selectedDelivery}
+                                onChange={(e) => onSelectBuilding(e)}
+                                showSearch
+                                onSearch={(e) => setSearchBuilding(e)}
+                              >
+                                {building?.map((option: any) => {
+                                  return (
+                                    <Select.Option key={option} value={option}>
+                                      {option}
+                                    </Select.Option>
+                                  );
+                                })}
+                              </Select>
+                            </Form.Item>
+                            <Form.Item
+                              name="apartment"
+                            >
+                              <Input
+                                placeholder={'Квартира/офис'}
+                                style={{
+                                  height: 38
+                                }}
+                              />
+                            </Form.Item>
+                          </div>
+
+                          <div className="checkout-modal-main-form-block">
+                            <Form.Item
+                              name="entrance"
+                            >
+                              <Input
+                                placeholder={'Подъезд'}
+                                style={{
+                                  height: 38
+                                }}
+                              />
+                            </Form.Item>
+                            <Form.Item
+                              name="floor"
+                            >
+                              <Input
+                                placeholder={'Этаж'}
+                                style={{
+                                  height: 38
+                                }}
+                              />
+                            </Form.Item>
+                          </div>
+                        </>
+                        :
+                        <Form.Item
+                          name="psv"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Данные введены неверно",
+                            },
+                          ]}
                         >
-                          {building?.map((option: any) => {
-                            return (
-                              <Select.Option key={option} value={option}>
-                                {option}
-                              </Select.Option>
-                            );
-                          })}
-                        </Select>
-                      </Form.Item>
-                      <Form.Item
-                        name="apartment"
-                      >
-                        <Input
-                          placeholder={'Квартира/офис'}
-                          style={{
-                            height: 38
-                          }}
-                        />
-                      </Form.Item>
-                    </div>
-
-                    <div className="checkout-modal-main-form-block">
-                      <Form.Item
-                        name="entrance"
-                      >
-                        <Input
-                          placeholder={'Подъезд'}
-                          style={{
-                            height: 38
-                          }}
-                        />
-                      </Form.Item>
-                      <Form.Item
-                        name="floor"
-                      >
-                        <Input
-                          placeholder={'Этаж'}
-                          style={{
-                            height: 38
-                          }}
-                        />
-                      </Form.Item>
-                    </div>
+                          <Select
+                            style={{
+                              width: '100%'
+                            }}
+                            className={'test-test'}
+                            placeholder={'Введите пункт ПВЗ'}
+                            filterOption={false}
+                            value={selectedPVS}
+                            onChange={(e, y: any) => onSelectPVS({id: y?.key} as any)}
+                            showSearch
+                            onSearch={(e) => setSearchPVS(e)}
+                          >
+                            {searchPVSData?.map((option: any) => {
+                              return (
+                                <Select.Option key={option?.code?.toString()} value={option?.code?.toString()}>
+                                  {option?.location?.address}
+                                </Select.Option>
+                              );
+                            })}
+                          </Select>
+                        </Form.Item>
+                    }
                   </>
-                  :
-                  <Form.Item
-                    name="psv"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Данные введены неверно",
-                      },
-                    ]}
-                  >
-                    <Select
-                      style={{
-                        width: '100%'
-                      }}
-                      className={'test-test'}
-                      placeholder={'Введите пункт ПВЗ'}
-                      filterOption={false}
-                      value={selectedPVS}
-                      onChange={(e, y: any) => onSelectPVS({id: y?.key} as any)}
-                      showSearch
-                      onSearch={(e) => setSearchPVS(e)}
-                    >
-                      {searchPVSData?.map((option: any) => {
-                        return (
-                          <Select.Option key={option?.code?.toString()} value={option?.code?.toString()}>
-                            {option?.location?.address}
-                          </Select.Option>
-                        );
-                      })}
-                    </Select>
-                  </Form.Item>
               }
+
               <div className="checkout-modal-main-form-check-box">
                 <Checkbox
                   value={isAgree}
@@ -537,7 +543,6 @@ const CheckoutModal = () => {
                   Я согласен/а с политикой конфиденциальности
                 </Checkbox>
               </div>
-
               <div className="checkout-modal-main-sum">
                 <p>
                   Сумма: {' '}

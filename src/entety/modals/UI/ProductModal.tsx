@@ -85,6 +85,9 @@ const ProductModal = () => {
     fn: (favorite, [itemArticle]) => favorite?.find(({article}) => article === itemArticle) ?? null,
   });
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  console.log(currentIndex)
   const settings = {
     vertical: true,
     verticalSwiping: true,
@@ -94,6 +97,7 @@ const ProductModal = () => {
     accessibility: true,
     swipe: true,
     swipeToSlide: true,
+    afterChange: (index: any) => setCurrentIndex(index),
     // slidesToShow: 5,
     responsive: [
       {
@@ -107,6 +111,7 @@ const ProductModal = () => {
       },
     ],
   };
+  const sliderRef = useRef(null);
 
   useEffect(() => {
 
@@ -176,12 +181,18 @@ const ProductModal = () => {
           <div className="product-modal-main">
             <div className="product-modal-main-img">
               <div className="product-modal-main-img-slider">
-                <Slider {...settings}>
+                <Slider {...settings} ref={sliderRef}>
                   {productData?.images?.map((image: any, index: any) => (
                     <div
                       key={index}
                       className="product-modal-main-img-slider-img"
-                      onClick={() => setMainImage(index)}
+                      onClick={() => {
+                        setMainImage(index)
+                        if(index - 2 > currentIndex){
+                          sliderRef?.current?.slickNext()
+                        } else if(index <= currentIndex)
+                          sliderRef?.current?.slickPrev()
+                      }}
                     >
                       <ProductSkeletonImage
                         src={image?.image}
