@@ -52,3 +52,8 @@ export const CheckRussianPost = async (data: any): Promise<any> => {
   const res = await api.get<any>(`service/pr/poke-with-a-stick/${data.region}/${data.city}/${data.street}/${data.building}/`);
   return res;
 };
+
+export const prPostOfficesPost = async (data: any): Promise<any> => {
+  const res = await api.get<any>(`service/pr/post-offices/${data.region}/${data.city}/${data.street}/${data.building}/`);
+  return res;
+};

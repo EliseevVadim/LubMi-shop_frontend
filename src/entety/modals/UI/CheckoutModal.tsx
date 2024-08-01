@@ -19,12 +19,36 @@ import LineBlock from "../../../components/client/common/LineBlock";
 import 'react-dadata/dist/react-dadata.css';
 import {
   $activeOrderId,
-  $bucket, $bucketCalculated, $building,
-  $cities, $isRussianPostAvaible, $pvs, $selectedBuilding,
-  $selectedCities, $selectedDelivery, $selectedPVS, $selectedStreet, $streets,
-  BucketCheckoutFx, BuildingFX, CalculateBucketFx, changeActiveOrder, CheckOrderPayedFx, CheckRussianPostFx,
-  CityFX, onSelectBuilding,
-  onSelectCity, onSelectDelivery, onSelectPVS, onSelectStreet, PVSFX, resetBucket, StreetFX
+  $bucket,
+  $bucketCalculated,
+  $building,
+  $cities,
+  $isRussianPostAvaible,
+  $prPostOffices,
+  $pvs,
+  $selectedBuilding,
+  $selectedCities,
+  $selectedDelivery,
+  $selectedPVS,
+  $selectedStreet,
+  $streets,
+  BucketCheckoutFx,
+  BuildingFX,
+  CalculateBucketFx,
+  changeActiveOrder,
+  CheckOrderPayedFx,
+  CheckRussianPostFx,
+  CityFX,
+  onSelectBuilding,
+  onSelectCity,
+  onSelectDelivery,
+  onSelectPrPostOffices,
+  onSelectPVS,
+  onSelectStreet,
+  PrPostOfficesFx,
+  PVSFX,
+  resetBucket,
+  StreetFX
 } from "@/entety/client/bucket/model";
 import {useDebounce} from "use-debounce";
 
@@ -49,7 +73,8 @@ const CheckoutModal = () => {
     building,
     selectedBuilding,
     activeOrderId,
-    isRussianPostAvaible
+    isRussianPostAvaible,
+    prPostOffices
   ] = useUnit([
     $isOpenCheckout,
     $selectedCities,
@@ -66,7 +91,8 @@ const CheckoutModal = () => {
     $building,
     $selectedBuilding,
     $activeOrderId,
-    $isRussianPostAvaible
+    $isRussianPostAvaible,
+    $prPostOffices
   ])
 
 
@@ -105,6 +131,7 @@ const CheckoutModal = () => {
   useEffect(() => {
     if (selectedCities?.city && selectedStreet && selectedBuilding) {
       CheckRussianPostFx()
+      PrPostOfficesFx()
     }
   }, [selectedCities, selectedStreet, selectedBuilding])
 
@@ -113,7 +140,7 @@ const CheckoutModal = () => {
 
     const data = {
       delivery: selectedDelivery,
-      delivery_point: selectedPVS?.id,
+      delivery_point: values?.postOfficePr || selectedPVS?.id,
       cu_first_name: values?.name,
       cu_last_name: values?.surname,
       cu_phone: values?.phone,
@@ -132,7 +159,6 @@ const CheckoutModal = () => {
 
     BucketCheckoutFx(data)
       .then((res) => {
-        console.log(res)
         if (res?.success) {
           if (res?.redirect) {
             changeActiveOrder(res?.payment_id)
@@ -197,6 +223,8 @@ const CheckoutModal = () => {
             onChangeIsOpenCheckout(false)
             resetBucket()
             changeActiveOrder(null)
+            onSelectPrPostOffices(null)
+            onSelectPVS(null)
           } else if (response?.data?.status === "canceled") {
             onSetNotification({
               title: 'Произошла ошибка',
@@ -499,6 +527,37 @@ const CheckoutModal = () => {
                               />
                             </Form.Item>
                           </div>
+                          {selectedDelivery === 'pr' &&
+                              <Form.Item
+                                  name="postOfficePr"
+                                  rules={[
+                                    {
+                                      required: true,
+                                      message: "Данные введены неверно",
+                                    },
+                                  ]}
+                              >
+                                  <Select
+                                      style={{
+                                        width: '100%'
+                                      }}
+                                      className={'test-test'}
+                                      placeholder={'Выберите ОПС'}
+                                      filterOption={false}
+                                      value={selectedCities}
+                                      onChange={(e, y: any) => onSelectPrPostOffices(e)}
+                                  >
+                                    {prPostOffices?.map((option: any) => {
+                                      return (
+                                        <Select.Option key={option?.['postal-code']?.toString()} value={option?.['postal-code']?.toString()}>
+                                          {option?.['address-source']}
+                                        </Select.Option>
+                                      );
+                                    })}
+                                  </Select>
+                              </Form.Item>
+                          }
+
                         </>
                         :
                         <Form.Item
@@ -515,7 +574,7 @@ const CheckoutModal = () => {
                               width: '100%'
                             }}
                             className={'test-test'}
-                            placeholder={'Введите пункт ПВЗ'}
+                            placeholder={'Выберите пункт ПВЗ'}
                             filterOption={false}
                             value={selectedPVS}
                             onChange={(e, y: any) => onSelectPVS({id: y?.key} as any)}
