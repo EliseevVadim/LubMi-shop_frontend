@@ -135,6 +135,11 @@ const CheckoutModal = () => {
     }
   }, [selectedCities, selectedStreet, selectedBuilding])
 
+  useEffect(() => {
+    if (!isRussianPostAvaible && selectedDelivery === 'pr'){
+      onSelectDelivery('cd')
+    }
+  }, [isRussianPostAvaible]);
 
   const onFinish = (values: any) => {
 
