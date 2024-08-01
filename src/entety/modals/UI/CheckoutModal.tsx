@@ -574,7 +574,7 @@ const CheckoutModal = () => {
                               width: '100%'
                             }}
                             className={'test-test'}
-                            placeholder={'Выберите пункт ПВЗ'}
+                            placeholder={'Выберите ПВЗ'}
                             filterOption={false}
                             value={selectedPVS}
                             onChange={(e, y: any) => onSelectPVS({id: y?.key} as any)}
