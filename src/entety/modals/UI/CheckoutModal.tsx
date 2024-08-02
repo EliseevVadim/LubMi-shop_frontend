@@ -24,7 +24,6 @@ import {
   $building,
   $cities,
   $isRussianPostAvaible,
-  $prPostOffices,
   $pvs,
   $selectedBuilding,
   $selectedCities,
@@ -42,10 +41,8 @@ import {
   onSelectBuilding,
   onSelectCity,
   onSelectDelivery,
-  onSelectPrPostOffices,
   onSelectPVS,
   onSelectStreet,
-  PrPostOfficesFx,
   PVSFX,
   resetBucket,
   StreetFX
@@ -74,7 +71,6 @@ const CheckoutModal = () => {
     selectedBuilding,
     activeOrderId,
     isRussianPostAvaible,
-    prPostOffices
   ] = useUnit([
     $isOpenCheckout,
     $selectedCities,
@@ -92,7 +88,6 @@ const CheckoutModal = () => {
     $selectedBuilding,
     $activeOrderId,
     $isRussianPostAvaible,
-    $prPostOffices
   ])
 
 
@@ -131,7 +126,6 @@ const CheckoutModal = () => {
   useEffect(() => {
     if (selectedCities?.city && selectedStreet && selectedBuilding) {
       CheckRussianPostFx()
-      PrPostOfficesFx()
     }
   }, [selectedCities, selectedStreet, selectedBuilding])
 
@@ -140,7 +134,7 @@ const CheckoutModal = () => {
 
     const data = {
       delivery: selectedDelivery,
-      delivery_point: values?.postOfficePr || selectedPVS?.id,
+      delivery_point: selectedPVS?.id,
       cu_first_name: values?.name,
       cu_last_name: values?.surname,
       cu_phone: values?.phone,
@@ -223,7 +217,6 @@ const CheckoutModal = () => {
             onChangeIsOpenCheckout(false)
             resetBucket()
             changeActiveOrder(null)
-            onSelectPrPostOffices(null)
             onSelectPVS(null)
           } else if (response?.data?.status === "canceled") {
             onSetNotification({
@@ -527,37 +520,6 @@ const CheckoutModal = () => {
                               />
                             </Form.Item>
                           </div>
-                          {selectedDelivery === 'pr' &&
-                              <Form.Item
-                                  name="postOfficePr"
-                                  rules={[
-                                    {
-                                      required: true,
-                                      message: "Данные введены неверно",
-                                    },
-                                  ]}
-                              >
-                                  <Select
-                                      style={{
-                                        width: '100%'
-                                      }}
-                                      className={'test-test'}
-                                      placeholder={'Выберите ОПС'}
-                                      filterOption={false}
-                                      value={selectedCities}
-                                      onChange={(e, y: any) => onSelectPrPostOffices(e)}
-                                  >
-                                    {prPostOffices?.map((option: any) => {
-                                      return (
-                                        <Select.Option key={option?.['postal-code']?.toString()} value={option?.['postal-code']?.toString()}>
-                                          {option?.['address-source']}
-                                        </Select.Option>
-                                      );
-                                    })}
-                                  </Select>
-                              </Form.Item>
-                          }
-
                         </>
                         :
                         <Form.Item

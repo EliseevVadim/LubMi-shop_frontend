@@ -167,27 +167,3 @@ export const CheckRussianPostFx = createEffect<void, boolean, Error>(async() => 
 $isRussianPostAvaible.on(CheckRussianPostFx.doneData, (_,t ) => t)
 
 
-export const $prPostOffices = createStore<any>([])
-export const $selectedPrPostOffices = createStore(null)
-
-export const onSelectPrPostOffices = createEvent<any>();
-
-export const PrPostOfficesFx = createEffect<void, boolean, Error>(async() => {
-  const data = {
-    region: $selectedCities.getState()?.region,
-    city: $selectedCities.getState()?.city,
-    street: $selectedStreet.getState(),
-    building: $selectedBuilding.getState()
-  }
-
-  console.log(data)
-  console.log($selectedCities.getState())
-
-  const res = await prPostOfficesPost(data);
-  if (res?.status !== 200) throw new Error(res.message);
-  return res?.data?.['post-offices'];
-});
-
-$selectedPrPostOffices.on(onSelectPrPostOffices, (_,t ) => t)
-$prPostOffices.on(PrPostOfficesFx.doneData, (_,t ) => t)
-
