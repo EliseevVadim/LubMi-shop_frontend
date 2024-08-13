@@ -203,7 +203,7 @@ const CheckoutModal = () => {
           console.log('response')
           console.log(response?.data)
 
-          if (response?.data?.status === "succeeded") {
+          if (response?.data?.status === "CONFIRMED") {
             onSetNotification({
               title: 'Спасибо за покупку!',
               message: 'Заказ успешно оплачен. Отправка заказов осуществляется еженедельно в понедельник и четверг.\n' +
@@ -218,7 +218,12 @@ const CheckoutModal = () => {
             resetBucket()
             changeActiveOrder(null)
             onSelectPVS(null)
-          } else if (response?.data?.status === "canceled") {
+          } else if (
+            response?.data?.status === "CANCELED" ||
+            response?.data?.status === "DEADLINE_EXPIRED" ||
+            response?.data?.status === "REJECTED" ||
+            response?.data?.status === "AUTH_FAIL"
+          ) {
             onSetNotification({
               title: 'Произошла ошибка',
               message: 'Произошла ошибка при оплате заказа'
