@@ -8,6 +8,12 @@ import { ConfigProvider } from "antd";
 import locale from "antd/locale/ru_RU";
 import { AlertProvider } from "../controllers/AlertNotification/index";
 
+export const metadata = {
+  icons: {
+    icon: '/favicon.ico',
+  },
+};
+
 export default function App({ Component, pageProps }: AppProps){
 
   const antdTheme: any = {
@@ -27,22 +33,13 @@ export default function App({ Component, pageProps }: AppProps){
     <div>
       <NextFonts />
       <Head>
-        <noscript>
-          <div>
-            <img
-              src="https://mc.yandex.ru/watch/96824580"
-              style={{ position: 'absolute', left: '-9999px' }}
-              alt=""
-            />
-          </div>
-        </noscript>
         <meta
           name="viewport"
           content="width=device-width, user-scalable=no"
         />
         <link
           rel="icon"
-          href="/favicon.png"
+          href="/favicon.ico"
           sizes="32x32"
           type="image/x-icon"
         />
