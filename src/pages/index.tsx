@@ -8,7 +8,9 @@ const Home: FC<PropsWithChildren<any>> = ({
                                           }) => {
 
   return (
-    <Meta title={'Главная'}>
+    <Meta
+      title={'Шоурум дизайнерской одежды'}
+    >
       <MainLayout>
         <MainContent />
       </MainLayout>
