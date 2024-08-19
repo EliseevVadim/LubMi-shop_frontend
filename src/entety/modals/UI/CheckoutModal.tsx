@@ -154,28 +154,28 @@ const CheckoutModal = () => {
       data.cu_entrance =values?.entrance || null
       data.cu_floor = values?.floor || null
     }
-    //
-    // BucketCheckoutFx(data)
-    //   .then((res) => {
-    //     if (res?.success) {
-    //       if (res?.redirect) {
-    //         changeActiveOrder(res?.payment_id)
-    //         // window?.open(res.redirect)
-    //
-    //         const link = document.createElement('a');
-    //         link.href = res.redirect;
-    //         link.click();
-    //       }
-    //     } else {
-    //       onSetNotification({
-    //         title: 'Произошла ошибка',
-    //         message: res?.why
-    //       })
-    //     }
-    //   })
-    //   .catch((e) => {
-    //     console.log(e)
-    //   })
+
+    BucketCheckoutFx(data)
+      .then((res) => {
+        if (res?.success) {
+          if (res?.redirect) {
+            changeActiveOrder(res?.payment_id)
+            // window?.open(res.redirect)
+
+            const link = document.createElement('a');
+            link.href = res.redirect;
+            link.click();
+          }
+        } else {
+          onSetNotification({
+            title: 'Произошла ошибка',
+            message: res?.why
+          })
+        }
+      })
+      .catch((e) => {
+        console.log(e)
+      })
   }
 
   const isDisablePay = !selectedCities || !isAgree || !selectedDelivery
