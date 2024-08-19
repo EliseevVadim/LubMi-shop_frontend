@@ -139,42 +139,43 @@ const CheckoutModal = () => {
       cu_phone: values?.phone,
       cu_city_uuid: selectedCities?.id,
       cu_city: selectedCities?.city,
-      cu_street: selectedStreet || null,
-      cu_building: selectedBuilding || null,
-      cu_entrance: values?.entrance || null,
-      cu_floor: values?.floor || null,
-      cu_apartment: values?.apartment || null,
       cu_fullname: values?.fullName,
       cu_confirm: true,
       scart: bucket?.map((item: any) => ({ppk: item.article, size_id: item?.size?.id, quantity: item?.quantity}))
     }
 
-    if(selectedDelivery === 'cp'){
+    if (selectedDelivery === 'cp') {
       // @ts-ignore
       data.delivery_point = selectedPVS?.id
+    } else {
+      data.cu_street = selectedStreet || null
+      data.cu_building = selectedBuilding || null
+      data.cu_apartment = values?.apartment || null
+      data.cu_entrance =values?.entrance || null
+      data.cu_floor = values?.floor || null
     }
-
-    BucketCheckoutFx(data)
-      .then((res) => {
-        if (res?.success) {
-          if (res?.redirect) {
-            changeActiveOrder(res?.payment_id)
-            // window?.open(res.redirect)
-
-            const link = document.createElement('a');
-            link.href = res.redirect;
-            link.click();
-          }
-        } else {
-          onSetNotification({
-            title: 'Произошла ошибка',
-            message: res?.why
-          })
-        }
-      })
-      .catch((e) => {
-        console.log(e)
-      })
+    //
+    // BucketCheckoutFx(data)
+    //   .then((res) => {
+    //     if (res?.success) {
+    //       if (res?.redirect) {
+    //         changeActiveOrder(res?.payment_id)
+    //         // window?.open(res.redirect)
+    //
+    //         const link = document.createElement('a');
+    //         link.href = res.redirect;
+    //         link.click();
+    //       }
+    //     } else {
+    //       onSetNotification({
+    //         title: 'Произошла ошибка',
+    //         message: res?.why
+    //       })
+    //     }
+    //   })
+    //   .catch((e) => {
+    //     console.log(e)
+    //   })
   }
 
   const isDisablePay = !selectedCities || !isAgree || !selectedDelivery
@@ -366,44 +367,52 @@ const CheckoutModal = () => {
                   })}
                 </Select>
               </Form.Item>
-              {!!selectedCities
-                ?
-                <Radio.Group onChange={(e) => onSelectDelivery(e.target.value)} value={selectedDelivery}>
-                  <Space direction="vertical">
-                    {
-                      bucketCalculated?.['cd']?.cost &&
-                        <Radio value={'cd'}>
-                            <div className="checkout-modal-main-form-radio">
-                                СДЭК
-                                (курьер), <span>от {bucketCalculated?.['cd']?.days} дней, от {bucketCalculated?.['cd']?.cost} руб.</span>
-                            </div>
-                        </Radio>
-                    }
-                    {
-                      bucketCalculated?.['cp']?.cost &&
-                        <Radio value={'cp'}>
-                            <div className="checkout-modal-main-form-radio">
-                                СДЭК
-                                (ПВЗ), <span>от {bucketCalculated?.['cp']?.days} дней, от {bucketCalculated?.['cp']?.cost} руб.</span>
-                            </div>
-                        </Radio>
-                    }
-                    {
-                      bucketCalculated?.['pr']?.cost && isRussianPostAvaible &&
-                        <Radio value={'pr'}>
-                            <div className="checkout-modal-main-form-radio">
-                                Доставка почтой
-                                России, <span> от {bucketCalculated?.['pr']?.days} дней, от {bucketCalculated?.['pr']?.cost} руб.</span>
-                            </div>
-                        </Radio>
-                    }
-                  </Space>
-                </Radio.Group>
-                :
-                <p style={{color: 'red', fontSize: 16}}>
-                  В данном городе нет доставки
-                </p>
+              {
+                isLoadingCalculate
+                  ?
+                  <Skeleton.Input active={true} size={'large'} block={true} style={{
+                    height: 100
+                  }}/>
+                  :
+                  !!selectedCities
+                    ?
+                    <Radio.Group onChange={(e) => onSelectDelivery(e.target.value)} value={selectedDelivery}>
+                      <Space direction="vertical">
+                        {
+                          bucketCalculated?.['cd']?.cost &&
+                            <Radio value={'cd'}>
+                                <div className="checkout-modal-main-form-radio">
+                                    СДЭК
+                                    (курьер), <span>от {bucketCalculated?.['cd']?.days} дней, от {bucketCalculated?.['cd']?.cost} руб.</span>
+                                </div>
+                            </Radio>
+                        }
+                        {
+                          bucketCalculated?.['cp']?.cost &&
+                            <Radio value={'cp'}>
+                                <div className="checkout-modal-main-form-radio">
+                                    СДЭК
+                                    (ПВЗ), <span>от {bucketCalculated?.['cp']?.days} дней, от {bucketCalculated?.['cp']?.cost} руб.</span>
+                                </div>
+                            </Radio>
+                        }
+                        {
+                          bucketCalculated?.['pr']?.cost && isRussianPostAvaible &&
+                            <Radio value={'pr'}>
+                                <div className="checkout-modal-main-form-radio">
+                                    Доставка почтой
+                                    России, <span> от {bucketCalculated?.['pr']?.days} дней, от {bucketCalculated?.['pr']?.cost} руб.</span>
+                                </div>
+                            </Radio>
+                        }
+                      </Space>
+                    </Radio.Group>
+                    :
+                    <p style={{color: 'red', fontSize: 16}}>
+                      В данном городе нет доставки
+                    </p>
               }
+
 
               {!!selectedCities && (bucketCalculated?.['cp']?.cost || bucketCalculated?.['cd']?.cost || bucketCalculated?.['pr']?.cost) &&
                   <>
