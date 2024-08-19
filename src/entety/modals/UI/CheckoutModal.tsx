@@ -132,9 +132,8 @@ const CheckoutModal = () => {
 
   const onFinish = (values: any) => {
 
-    const data = {
+    let data: any = {
       delivery: selectedDelivery,
-      delivery_point: selectedPVS?.id,
       cu_first_name: values?.name,
       cu_last_name: values?.surname,
       cu_phone: values?.phone,
@@ -150,6 +149,10 @@ const CheckoutModal = () => {
       scart: bucket?.map((item: any) => ({ppk: item.article, size_id: item?.size?.id, quantity: item?.quantity}))
     }
 
+    if(selectedDelivery === 'cp'){
+      // @ts-ignore
+      data.delivery_point = selectedPVS?.id
+    }
 
     BucketCheckoutFx(data)
       .then((res) => {
