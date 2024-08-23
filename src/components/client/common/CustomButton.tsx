@@ -41,7 +41,7 @@ const CustomButton: FC<PropsWithChildren<IButton>> = ({
       onClick={onClick}
       className='custom-button'
       style={{
-        pointerEvents: isLoading ? 'none' : 'auto',
+        pointerEvents: isLoading || disable ? 'none' : 'auto',
         opacity: isLoading || disable? 0.5 : 1,
         width,
         maxWidth,

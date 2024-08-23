@@ -11,6 +11,10 @@ body {
   font-family: $fontBase;
 }
 
+.overflow-hidden {
+  overflow-y: hidden !important;
+}
+
 body {
   overflow-x: hidden;
   position: relative;
@@ -222,4 +226,38 @@ input::placeholder {
   @media(max-width: 1024px) {
     padding: 0 20px;
   }
+}
+
+.select-block input {
+  margin-left: -7px !important;
+  padding-left: -7px !important;
+  min-width: 100% !important;
+  width: auto !important;
+  font-family: var(--font-base) !important;
+  font-weight: 250 !important;
+  color: rgba(34, 34, 34, 1) !important;
+  font-size: 24px !important;
+}
+
+[id$='-placeholder'] {
+  margin-left: -7px !important;
+  padding-left: -7px !important;
+  min-width: 100% !important;
+  width: auto !important;
+  font-family: var(--font-base) !important;
+  font-weight: 250 !important;
+  color: rgba(34, 34, 34, 1);
+  font-size: 24px;
+}
+
+[class$='-singleValue'] {
+  margin-left: -7px !important;
+  padding-left: -7px !important;
+
+  min-width: 100% !important;
+  width: auto !important;
+  font-family: var(--font-base) !important;
+  font-weight: 250 !important;
+  color: rgba(34, 34, 34, 1);
+  font-size: 24px;
 }
