@@ -37,6 +37,7 @@ import {useDebounce} from "use-debounce";
 import CitySelect from "@/components/client/selectors/CitySelect";
 import StreetSelect from "@/components/client/selectors/StreetSelect";
 import BuildingSelect from "@/components/client/selectors/BuildingSelect";
+import PVZSelect from "@/components/client/selectors/PVZSelect";
 
 const SecondStep = ({
                       step,
@@ -431,26 +432,35 @@ const SecondStep = ({
                           },
                         ]}
                       >
-                        <Select
-                          style={{
-                            width: '100%'
+                        <PVZSelect
+                          selectedPVS={selectedPVS}
+                          onSelectPVS={(e: any) => {
+                            onSelectPVS(e)
+                            form.setFieldValue('psv', e)
                           }}
-                          className={'test-test'}
-                          placeholder={'Выберите ПВЗ'}
-                          filterOption={false}
-                          value={selectedPVS}
-                          onChange={(e, y: any) => onSelectPVS({id: y?.key} as any)}
-                          showSearch
-                          onSearch={(e) => setSearchPVS(e)}
-                        >
-                          {searchPVSData?.map((option: any) => {
-                            return (
-                              <Select.Option key={option?.code?.toString()} value={option?.code?.toString()}>
-                                {option?.location?.address}
-                              </Select.Option>
-                            );
-                          })}
-                        </Select>
+                          setSearchPVS={setSearchPVS}
+                          searchPVSData={searchPVSData}
+                        />
+                        {/*<Select*/}
+                        {/*  style={{*/}
+                        {/*    width: '100%'*/}
+                        {/*  }}*/}
+                        {/*  className={'test-test'}*/}
+                        {/*  placeholder={'Выберите ПВЗ'}*/}
+                        {/*  filterOption={false}*/}
+                        {/*  value={selectedPVS}*/}
+                        {/*  onChange={(e, y: any) => onSelectPVS({id: y?.key} as any)}*/}
+                        {/*  showSearch*/}
+                        {/*  onSearch={(e) => setSearchPVS(e)}*/}
+                        {/*>*/}
+                        {/*  {searchPVSData?.map((option: any) => {*/}
+                        {/*    return (*/}
+                        {/*      <Select.Option key={option?.code?.toString()} value={option?.code?.toString()}>*/}
+                        {/*        {option?.location?.address}*/}
+                        {/*      </Select.Option>*/}
+                        {/*    );*/}
+                        {/*  })}*/}
+                        {/*</Select>*/}
                       </Form.Item>
                   }
                 </>
