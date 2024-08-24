@@ -1,6 +1,5 @@
 import React, { FC, PropsWithChildren } from 'react';
 import Slider from "react-slick";
-import aboutPartner from '../../../../public/about-partner-test.png'
 import Image from "next/dist/client/legacy/image";
 
 const AboutPartner: FC<PropsWithChildren<any>> = ({

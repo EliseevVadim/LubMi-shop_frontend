@@ -1,7 +1,5 @@
 import React from 'react';
 import MaxWithLayout from "../../../layouts/MaxWithLayout";
-import footerLogo from '../../../../public/footer-logo.png'
-import Image from "next/dist/client/legacy/image";
 import Link from "next/link";
 import Social from "../common/Social";
 import Logo from "@/assets/icons/Logo";

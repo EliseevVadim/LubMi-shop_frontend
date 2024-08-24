@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import headerLogo from '../../../../public/header-logo.png'
-import Image from "next/dist/client/legacy/image";
 import SearchIcon from "../../../assets/icons/SearchIcon";
 import FavoriteIcon, { FavoriteFillIcon } from "../../../assets/icons/FavoriteIcon";
 import BucketIcon, { BucketFillIcon } from "../../../assets/icons/BucketIcon";

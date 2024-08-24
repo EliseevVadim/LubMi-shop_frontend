@@ -126,6 +126,7 @@ const SecondStep = ({
       cu_first_name: values?.name,
       cu_last_name: values?.surname,
       cu_phone: values?.phone,
+      cu_email: values?.email,
       cu_city_uuid: selectedCities?.id,
       cu_city: selectedCities?.city,
       cu_fullname: `${values?.surname} ${values?.name}`,
@@ -318,6 +319,26 @@ const SecondStep = ({
                   />
                 }) as any}
               </InputMask>
+            </Form.Item>
+
+            <Form.Item
+              name="email"
+              rules={form.getFieldValue('email')
+                ?
+                [{
+                  type: 'email',
+                  message: "Введен неверный формат электронной почты",
+                }]
+                : []
+              }
+            >
+              <Input
+                // type={'email'}
+                placeholder={'Электронная почта'}
+                style={{
+                  height: 38
+                }}
+              />
             </Form.Item>
 
             {!!selectedCities && (bucketCalculated?.['cp']?.cost || bucketCalculated?.['cd']?.cost || bucketCalculated?.['pr']?.cost) &&
