@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Image from "next/dist/client/legacy/image";
 import perfumeryPerfumeryOne from "../../../../public/perfumery-perfumery-one.png";
-import perfumeryPerfumeryTwo from "../../../../public/perfumery-perfumery-two.png";
+import perfumeryPerfumeryTwo from "../../../../public/perfumery-perfumery-two.jpg";
 import perfumeryPerfumeryTwoMob from "../../../../public/perfumery-perfumery-two-mob.jpg";
-import perfumeryPerfumeryThree from "../../../../public/perfumery-perfumery-three.png";
+import perfumeryPerfumeryThree from "../../../../public/perfumery-perfumery-three.jpg";
 import MaxWithLayout from "../../../layouts/MaxWithLayout";
 
 const PerfumeryPerfumery = () => {

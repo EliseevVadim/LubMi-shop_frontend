@@ -1,7 +1,7 @@
 import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
 import CustomButton from "../../components/client/common/CustomButton";
 import Slider from 'react-slick';
-import homeIntroOne from '../../../public/home-intro-1.png'
+import homeIntroOne from '../../../public/home-intro-1.jpg'
 import homeIntroOneMob from '../../../public/home-intro-1-mob.jpg'
 import homeIntroTwo from '../../../public/home-intro-2.png'
 import homeIntroTwoMob from '../../../public/home-intro-2-mob.jpg'

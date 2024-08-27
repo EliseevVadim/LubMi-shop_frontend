@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import MaxWithLayout from "../../../layouts/MaxWithLayout";
 import Image from "next/dist/client/legacy/image";
-import perfumerDifferent from '../../../../public/perfumer-different.png'
+import perfumerDifferent from '../../../../public/perfumer-different.jpg'
 
 const PerfumerDifferent = () => {
 
