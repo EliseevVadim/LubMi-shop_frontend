@@ -509,9 +509,9 @@ const SecondStep = ({
                   <p>
                     {
                       selectedDelivery === 'cd'
-                        ? 'СДЭК'
+                        ? 'СДЭК (оплачивается при получении)'
                         : selectedDelivery === 'cp'
-                          ? 'СДЭК (ПВЗ)'
+                          ? 'СДЭК (ПВЗ) (оплачивается при получении)'
                           : 'Почта России'
                     }: {' '}
                     {
@@ -538,7 +538,10 @@ const SecondStep = ({
                     ? <Skeleton.Button active={false} size={'small'}/>
                     : `${
                       Number(bucketCalculated?.price || 0) +
-                      (bucketCalculated?.[selectedDelivery]?.cost ? Number(bucketCalculated?.[selectedDelivery]?.cost) : 0)
+                      (!bucketCalculated?.[selectedDelivery]?.cod && bucketCalculated?.[selectedDelivery]?.cost
+                          ? Number(bucketCalculated?.[selectedDelivery]?.cost)
+                          : 0
+                      )
                     } руб`
                 }
               </p>
@@ -608,10 +611,10 @@ const SecondStep = ({
                 <p>
                   {
                     selectedDelivery === 'cd'
-                      ? 'СДЭК'
+                      ? 'СДЭК (оплачивается при получении)'
                       : selectedDelivery === 'pr'
                         ? 'Почта России'
-                        : 'СДЭК (ПВЗ)'
+                        : 'СДЭК (ПВЗ) (оплачивается при получении)'
                   }: {' '}
                   {
                     isLoadingCalculate
@@ -637,7 +640,10 @@ const SecondStep = ({
                   ? <Skeleton.Button active={false} size={'small'}/>
                   : `${
                     Number(bucketCalculated?.price || 0) +
-                    (bucketCalculated?.[selectedDelivery]?.cost ? Number(bucketCalculated?.[selectedDelivery]?.cost) : 0)
+                    (!bucketCalculated?.[selectedDelivery]?.cod && bucketCalculated?.[selectedDelivery]?.cost
+                        ? Number(bucketCalculated?.[selectedDelivery]?.cost)
+                        : 0
+                    )
                   } руб`
               }
             </p>

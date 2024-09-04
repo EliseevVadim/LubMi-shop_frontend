@@ -76,6 +76,9 @@ const FirstStep = ({
     $isRussianPostAvaible,
   ])
 
+  console.log('bucketCalculated')
+  console.log(bucketCalculated)
+
   const [searchCity, setSearchCity] = useState<any>('');
   const [debouncedSearchCity] = useDebounce(searchCity, 500);
 
@@ -103,15 +106,6 @@ const FirstStep = ({
     };
   }, [isOpenCheckout, step])
 
-  const handleFocus = () => {
-    console.log('handleFocus')
-    document.body.classList.add('overflow-hidden');
-  };
-
-  const handleBlur = () => {
-    console.log('handleBlur')
-    document.body.classList.remove('overflow-hidden');
-  };
 
   return (
     <>
@@ -145,33 +139,6 @@ const FirstStep = ({
               setSearchCity={setSearchCity}
               cities={cities}
             />
-            {/*<Select*/}
-            {/*  onFocus={handleFocus}*/}
-            {/*  onBlur={handleBlur}*/}
-            {/*  id={'select-city'}*/}
-            {/*  style={{*/}
-            {/*    width: '100%'*/}
-            {/*  }}*/}
-            {/*  virtual={false}*/}
-            {/*  className={'test-test'}*/}
-            {/*  placeholder={'Введите Ваш город'}*/}
-            {/*  filterOption={false}*/}
-            {/*  value={selectedCities}*/}
-            {/*  onChange={(e, y: any) => onSelectCity({id: y?.key, city: y?.children, region: y?.data} as any)}*/}
-            {/*  showSearch*/}
-            {/*  onSearch={(e) => setSearchCity(e)}*/}
-            {/*  getPopupContainer={(e) => e}*/}
-            {/*  listHeight={200}*/}
-            {/*>*/}
-            {/*  {cities?.map((option: any) => {*/}
-            {/*    return (*/}
-            {/*      <Select.Option key={option?.uuid?.toString()} value={option?.uuid?.toString()}*/}
-            {/*                     data={option?.region}>*/}
-            {/*        {`${option?.city}, ${option?.region}`}*/}
-            {/*      </Select.Option>*/}
-            {/*    );*/}
-            {/*  })}*/}
-            {/*</Select>*/}
           </Form.Item>
           {
             isLoadingCalculate
@@ -233,9 +200,9 @@ const FirstStep = ({
                 <p>
                   {
                     selectedDelivery === 'cd'
-                      ? 'СДЭК'
+                      ? 'СДЭК (оплачивается при получении)'
                       : selectedDelivery === 'cp'
-                        ? 'СДЭК (ПВЗ)'
+                        ? 'СДЭК (ПВЗ) (оплачивается при получении)'
                         : 'Почта России'
                   }: {' '}
                   {
@@ -262,7 +229,10 @@ const FirstStep = ({
                   ? <Skeleton.Button active={false} size={'small'}/>
                   : `${
                     Number(bucketCalculated?.price || 0) +
-                    (bucketCalculated?.[selectedDelivery]?.cost ? Number(bucketCalculated?.[selectedDelivery]?.cost) : 0)
+                    (!bucketCalculated?.[selectedDelivery]?.cod && bucketCalculated?.[selectedDelivery]?.cost
+                        ? Number(bucketCalculated?.[selectedDelivery]?.cost)
+                        : 0
+                    )
                   } руб`
               }
             </p>
@@ -322,10 +292,10 @@ const FirstStep = ({
                 <p>
                   {
                     selectedDelivery === 'cd'
-                      ? 'СДЭК'
+                      ? 'СДЭК (оплачивается при получении)'
                       : selectedDelivery === 'pr'
                         ? 'Почта России'
-                        : 'СДЭК (ПВЗ)'
+                        : 'СДЭК (ПВЗ) (оплачивается при получении)'
                   }: {' '}
                   {
                     isLoadingCalculate
@@ -351,7 +321,10 @@ const FirstStep = ({
                   ? <Skeleton.Button active={false} size={'small'}/>
                   : `${
                     Number(bucketCalculated?.price || 0) +
-                    (bucketCalculated?.[selectedDelivery]?.cost ? Number(bucketCalculated?.[selectedDelivery]?.cost) : 0)
+                    (!bucketCalculated?.[selectedDelivery]?.cod && bucketCalculated?.[selectedDelivery]?.cost
+                      ? Number(bucketCalculated?.[selectedDelivery]?.cost) 
+                      : 0
+                    )
                   } руб`
               }
             </p>
