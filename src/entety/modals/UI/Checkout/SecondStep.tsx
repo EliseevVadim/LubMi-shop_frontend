@@ -323,13 +323,16 @@ const SecondStep = ({
 
             <Form.Item
               name="email"
-              rules={form.getFieldValue('email')
-                ?
-                [{
+              rules={
+                [
+                  {
+                    required: true,
+                    message: "Данные введены неверно",
+                  },
+                  {
                   type: 'email',
                   message: "Введен неверный формат электронной почты",
                 }]
-                : []
               }
             >
               <Input
