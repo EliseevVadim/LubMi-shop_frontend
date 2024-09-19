@@ -2,11 +2,11 @@ import '../styles/main.scss'
 
 import React, { useEffect } from 'react';
 import { AppProps } from "next/app";
-import { NextFonts } from "../components/client/common/NextFonts";
+import { NextFonts } from "@/components/client/common/NextFonts";
 import Head from "next/head";
 import { ConfigProvider } from "antd";
 import locale from "antd/locale/ru_RU";
-import { AlertProvider } from "../controllers/AlertNotification/index";
+import { AlertProvider } from "@/controllers/AlertNotification";
 
 export const metadata = {
   icons: {

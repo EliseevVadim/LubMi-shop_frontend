@@ -1,17 +1,18 @@
 import React, { FC, PropsWithChildren } from 'react';
-import Image from "next/dist/client/legacy/image";
 import FavoriteWhite from "../../../assets/icons/FavoriteWhite";
 import FavoriteWhiteFill from "../../../assets/icons/FavoriteWhiteFill";
-import { onChangeIsOpenLeaveMessage, setProductModal } from "../../../entety/modals/model/index";
-import { $favorites, onChangeFavorite } from "../../../entety/client/favorite/model/index";
+import { onChangeIsOpenLeaveMessage, setProductModal } from "@/entety/modals/model";
+import { $favorites, onChangeFavorite } from "@/entety/client/favorite/model";
 import { useStoreMap, useUnit } from "effector-react";
-import { useAlert } from "../../../controllers/AlertNotification/index";
+import { useAlert } from "@/controllers/AlertNotification";
 import ProductSkeletonImage from "@/components/client/Skeletons/ProductSkeletonImage";
+import {useRouter} from "next/router";
 
 const Card: FC<PropsWithChildren<{ item?: any }>> = ({ item }) => {
 
   const uAlert = useAlert()
   const favorites = useUnit($favorites)
+  const router = useRouter();
 
   const isFavorite = useStoreMap({
     store: $favorites,
@@ -29,6 +30,18 @@ const Card: FC<PropsWithChildren<{ item?: any }>> = ({ item }) => {
     onChangeFavorite(item)
   }
 
+  const goToProduct = (item: any) =>{
+    const currentPath = router.pathname;
+    const currentQuery = router.query;
+    router.replace({
+      pathname: currentPath,
+      query: {
+        ...currentQuery,
+        product: item?.article
+      }
+    }, undefined, { shallow: true });
+  }
+
   return (
     <div className="card">
       <div className="card-img">
@@ -40,7 +53,7 @@ const Card: FC<PropsWithChildren<{ item?: any }>> = ({ item }) => {
         {/*  alt={'img-card'}*/}
         {/*/>*/}
         <ProductSkeletonImage
-          onClick={() => setProductModal(item)}
+          onClick={() => goToProduct(item)}
           layout='fill'
           objectFit={'cover'}
           src={item?.primary_image?.image}
@@ -61,7 +74,7 @@ const Card: FC<PropsWithChildren<{ item?: any }>> = ({ item }) => {
       </div>
       <p
         className="card-title"
-        onClick={() => setProductModal(item)}
+        onClick={() => goToProduct(item)}
       >
         {item?.title} ({item?.color})
       </p>

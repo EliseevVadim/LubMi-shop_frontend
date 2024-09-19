@@ -8,7 +8,7 @@ import homeIntroTwoMob from '../../../public/home-intro-2-mob.jpg'
 import Image from "next/dist/client/legacy/image";
 import Catalog from "../../components/client/catalog/Catalog";
 import MaxWithLayout from "../../layouts/MaxWithLayout";
-import { api } from "../../api/ApiWithoutToken";
+import { api } from "@/api/ApiWithoutToken";
 import { Spin } from "antd";
 import { useRouter } from "next/router";
 

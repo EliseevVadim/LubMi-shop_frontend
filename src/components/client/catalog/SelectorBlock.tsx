@@ -22,7 +22,7 @@ const SelectorBlock: FC<PropsWithChildren<{
   }
 
   useEffect(() => {
-    setSelectedItem(items[0])
+    setSelectedItem(items?.[0])
   }, [items])
 
   useEffect(() => {

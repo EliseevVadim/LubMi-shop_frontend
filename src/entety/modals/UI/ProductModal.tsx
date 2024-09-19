@@ -21,13 +21,16 @@ import {$favorites, onChangeFavorite} from "@/entety/client/favorite/model";
 import FavoriteIconFill from "../../../assets/icons/FavoriteIconFill";
 import {$bucket, addToBucketEvent} from "@/entety/client/bucket/model";
 import ProductSkeletonImage from "@/components/client/Skeletons/ProductSkeletonImage";
+import {useRouter} from "next/router";
 
 const ProductModal = () => {
 
   const [productModal, favorites, bucket] = useUnit([$productModal, $favorites, $bucket])
   const uAlert = useAlert()
+  const router = useRouter()
 
   useEffect(() => {
+    setIsError(false)
     if (!productModal?.article) return
     setIsLoading(true)
     api.get(`/products/${productModal?.article}/`)
@@ -39,6 +42,7 @@ const ProductModal = () => {
         uAlert({
           message: 'Произошла ошибка. Попробуйте позже'
         })
+        setIsError(true)
       })
       .finally(() => {
         setIsLoading(false)
@@ -49,6 +53,7 @@ const ProductModal = () => {
   const [productData, setProductData] = useState<any>({})
   const [selectedSize, setSelectedSize] = useState<any>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isError, setIsError] = useState<boolean>(false)
 
   const addToFavorite = () => {
     let find = favorites.some((favoritesItem: any) => favoritesItem?.article === productModal?.article);
@@ -76,6 +81,7 @@ const ProductModal = () => {
       onChangeIsOpenSearch(false)
       setProductModal(false)
       onChangeIsOpenBucket(true)
+      resetProductQuery()
     }
   }
 
@@ -87,7 +93,6 @@ const ProductModal = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  console.log(currentIndex)
   const settings = {
     vertical: true,
     verticalSwiping: true,
@@ -155,12 +160,29 @@ const ProductModal = () => {
     setIsModalVisible(false);
   };
 
+  const onClose = () => {
+    setProductModal({})
+    resetProductQuery()
+  }
+
+  const resetProductQuery = () => {
+    const currentPath = router.pathname;
+    const currentQuery = {...router.query};
+
+    // Удаляем параметр product
+    delete currentQuery?.product;
+
+    router.replace({
+      pathname: currentPath,
+      query: currentQuery
+    }, undefined, {shallow: true});
+  }
 
   return (
     <div className={`product-modal ${productModal?.article ? 'product-modal-open' : ''}`}>
       <MaxWithLayout padding={'0 0 0 20px'}>
         <div className="product-modal-top">
-          <div className="product-modal-top-back" onClick={() => setProductModal({})}>
+          <div className="product-modal-top-back" onClick={onClose}>
             <ProductArrowToLeft/>
             Назад
           </div>
@@ -178,118 +200,133 @@ const ProductModal = () => {
             <Spin/>
           </div>
           :
-          <div className="product-modal-main">
-            <div className="product-modal-main-img">
-              <div className="product-modal-main-img-slider">
-                <Slider {...settings} ref={sliderRef}>
-                  {productData?.images?.map((image: any, index: any) => (
-                    <div
-                      key={index}
-                      className="product-modal-main-img-slider-img"
+          isError
+            ?
+            <div
+            style={{
+              width: '100%',
+              height: '90%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              fontSize: 22,
+            }}
+            >
+              Товар не найдет
+            </div>
+            :
+            <div className="product-modal-main">
+              <div className="product-modal-main-img">
+                <div className="product-modal-main-img-slider">
+                  <Slider {...settings} ref={sliderRef}>
+                    {productData?.images?.map((image: any, index: any) => (
+                      <div
+                        key={index}
+                        className="product-modal-main-img-slider-img"
+                        onClick={() => {
+                          setMainImage(index)
+                          if (index - 2 > currentIndex) {
+                            sliderRef?.current?.slickNext()
+                          } else if (index <= currentIndex)
+                            sliderRef?.current?.slickPrev()
+                        }}
+                      >
+                        <ProductSkeletonImage
+                          src={image?.image}
+                          layout={'fill'}
+                          objectFit={'cover'}
+                        />
+                      </div>
+                    ))}
+                  </Slider>
+                </div>
+                <div className="product-modal-main-img-main">
+                  <ProductSkeletonImage
+                    src={productData?.images?.[mainImage]?.image}
+                    alt=""
+                    objectFit={'cover'}
+                    layout="fill"
+                  />
+                </div>
+
+              </div>
+              <div className="product-modal-main-text">
+                <h1>
+                  {productData?.title} ({productData?.color})
+                </h1>
+                <h2>
+                  Артикул: {productData?.article}
+                </h2>
+                <p>
+                  {productData?.actual_price?.split('.')?.[0]} руб.
+                </p>
+                <div className="product-modal-main-text-size">
+                  {
+                    productData?.sizes?.length !== 0 && 'Размер:'
+                  }
+                  <div className="product-modal-main-text-size-inside">
+                    {
+                      productData?.sizes?.length !== 0 &&
+                        <SelectorBlock
+                            items={productData?.sizes}
+                            setSelectedItem={setSelectedSize}
+                            selectedItem={selectedSize}
+                        />
+                    }
+                    {
+                      (selectedSize?.quantity === 0 || productData?.sizes?.length === 0) &&
+                        <h6>
+                            Нет в наличии
+                        </h6>
+                    }
+                  </div>
+                </div>
+                <div className="product-modal-main-table" onClick={showModal}>
+                  Таблица размеров
+                </div>
+                <div className="product-modal-main-text-buttons">
+                  {selectedSize?.quantity <= 0 || !selectedSize || productData?.sizes?.length === 0
+                    ?
+                    <CustomButton
                       onClick={() => {
-                        setMainImage(index)
-                        if(index - 2 > currentIndex){
-                          sliderRef?.current?.slickNext()
-                        } else if(index <= currentIndex)
-                          sliderRef?.current?.slickPrev()
+                        console.log(selectedSize)
+                        onChangeIsOpenLeaveMessageSize(selectedSize?.size)
+                        onChangeIsOpenLeaveMessage(productData?.article)
                       }}
-                    >
-                      <ProductSkeletonImage
-                        src={image?.image}
-                        layout={'fill'}
-                        objectFit={'cover'}
-                      />
-                    </div>
-                  ))}
-                </Slider>
-              </div>
-              <div className="product-modal-main-img-main">
-                <ProductSkeletonImage
-                  src={productData?.images?.[mainImage]?.image}
-                  alt=""
-                  objectFit={'cover'}
-                  layout="fill"
-                />
-              </div>
+                      title={'Сообщить о поступлении'}
+                      padding={'24px 0'}
+                      maxWidth={359}
+                      backColor={'rgba(34, 34, 34, 1)'}
+                      color={'rgba(255, 255, 255, 1)'}
+                    />
+                    :
+                    <CustomButton
+                      disable={selectedSize?.quantity <= 0 || !selectedSize || productData?.sizes?.length === 0}
 
-            </div>
-            <div className="product-modal-main-text">
-              <h1>
-              {productData?.title} ({productData?.color})
-              </h1>
-              <h2>
-                Артикул: {productData?.article}
-              </h2>
-              <p>
-                {productData?.actual_price?.split('.')?.[0]} руб.
-              </p>
-              <div className="product-modal-main-text-size">
-                {
-                  productData?.sizes?.length !== 0 && 'Размер:'
-                }
-                <div className="product-modal-main-text-size-inside">
-                  {
-                    productData?.sizes?.length !== 0 &&
-                      <SelectorBlock
-                          items={productData?.sizes}
-                          setSelectedItem={setSelectedSize}
-                          selectedItem={selectedSize}
-                      />
+                      onClick={handleAddToBucket}
+                      title={'Добавить в корзину'}
+                      padding={'24px 0'}
+                      maxWidth={359}
+                      backColor={'rgba(34, 34, 34, 1)'}
+                      color={'rgba(255, 255, 255, 1)'}
+                    />
+
                   }
-                  {
-                    (selectedSize?.quantity === 0 || productData?.sizes?.length === 0) &&
-                      <h6>
-                          Нет в наличии
-                      </h6>
-                  }
+                  <div className="product-modal-main-text-buttons-favorite"
+                       onClick={addToFavorite}>
+                    {
+                      isFavorite
+                        ?
+                        <FavoriteIconFill/>
+                        : <FavoriteIcon/>
+                    }
+                  </div>
+                </div>
+                <div className="product-modal-main-text-desc">
+                  {productData?.description}
                 </div>
               </div>
-              <div className="product-modal-main-table" onClick={showModal}>
-                Таблица размеров
-              </div>
-              <div className="product-modal-main-text-buttons">
-                {selectedSize?.quantity <= 0 || !selectedSize || productData?.sizes?.length === 0
-                  ?
-                  <CustomButton
-                    onClick={() => {
-                      console.log(selectedSize)
-                      onChangeIsOpenLeaveMessageSize(selectedSize?.size)
-                      onChangeIsOpenLeaveMessage(productData?.article)
-                    }}
-                    title={'Сообщить о поступлении'}
-                    padding={'24px 0'}
-                    maxWidth={359}
-                    backColor={'rgba(34, 34, 34, 1)'}
-                    color={'rgba(255, 255, 255, 1)'}
-                  />
-                  :
-                  <CustomButton
-                    disable={selectedSize?.quantity <= 0 || !selectedSize || productData?.sizes?.length === 0}
-
-                    onClick={handleAddToBucket}
-                    title={'Добавить в корзину'}
-                    padding={'24px 0'}
-                    maxWidth={359}
-                    backColor={'rgba(34, 34, 34, 1)'}
-                    color={'rgba(255, 255, 255, 1)'}
-                  />
-
-                }
-                <div className="product-modal-main-text-buttons-favorite"
-                     onClick={addToFavorite}>
-                  {
-                    isFavorite
-                      ?
-                      <FavoriteIconFill/>
-                      : <FavoriteIcon/>
-                  }
-                </div>
-              </div>
-              <div className="product-modal-main-text-desc">
-                {productData?.description}
-              </div>
             </div>
-          </div>
         }
       </MaxWithLayout>
       <Modal

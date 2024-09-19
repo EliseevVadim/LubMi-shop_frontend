@@ -9,11 +9,20 @@ import NotificationModal from "../entety/modals/UI/NotificationModal";
 import LeaveMessageModal from "../entety/modals/UI/LeaveMessageModal";
 import ProductModal from "../entety/modals/UI/ProductModal";
 import CheckoutModal from "../entety/modals/UI/CheckoutModal";
+import {useRouter} from "next/router";
+import {setProductModal} from "@/entety/modals/model";
 
 
 const MainLayout: FC<PropsWithChildren<any>> = ({
                                                   children,
                                                 }) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.query.product) {
+      setProductModal({article: router.query.product});
+    }
+  }, [router.query]);
 
   return (
     <div style={{
