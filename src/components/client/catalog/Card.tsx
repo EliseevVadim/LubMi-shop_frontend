@@ -40,6 +40,7 @@ const Card: FC<PropsWithChildren<{ item?: any }>> = ({ item }) => {
         product: item?.article
       }
     }, undefined, { shallow: true });
+    setProductModal(item)
   }
 
   return (

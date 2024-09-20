@@ -78,6 +78,13 @@ const ProductModal = () => {
         size: selectedSize,
         quantity: 1,
       })
+      console.log('addToBucket')
+      console.log({
+        ...productModal,
+        article: productModal.article,
+        size: selectedSize,
+        quantity: 1,
+      })
       onChangeIsOpenSearch(false)
       setProductModal(false)
       onChangeIsOpenBucket(true)

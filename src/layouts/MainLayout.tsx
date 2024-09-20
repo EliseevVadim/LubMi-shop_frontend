@@ -10,17 +10,21 @@ import LeaveMessageModal from "../entety/modals/UI/LeaveMessageModal";
 import ProductModal from "../entety/modals/UI/ProductModal";
 import CheckoutModal from "../entety/modals/UI/CheckoutModal";
 import {useRouter} from "next/router";
-import {setProductModal} from "@/entety/modals/model";
+import {$productModal, setProductModal} from "@/entety/modals/model";
+import {useUnit} from "effector-react";
+import {$favorites} from "@/entety/client/favorite/model";
+import {$bucket} from "@/entety/client/bucket/model";
 
 
 const MainLayout: FC<PropsWithChildren<any>> = ({
                                                   children,
                                                 }) => {
   const router = useRouter();
+  const [productModal] = useUnit([$productModal])
 
   useEffect(() => {
     if (router.query.product) {
-      setProductModal({article: router.query.product});
+      setProductModal({...productModal, article: router.query.product});
     }
   }, [router.query]);
 
