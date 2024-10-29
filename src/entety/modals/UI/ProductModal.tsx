@@ -186,7 +186,7 @@ const ProductModal = () => {
   }
 
   return (
-    <div className={`product-modal ${productModal?.article ? 'product-modal-open' : ''}`}>
+    <div className={`product-modal ${productModal?.article ? 'product-modal-open' : ''}`} style={{zIndex: 999}}>
       <MaxWithLayout padding={'0 0 0 20px'}>
         <div className="product-modal-top">
           <div className="product-modal-top-back" onClick={onClose}>
