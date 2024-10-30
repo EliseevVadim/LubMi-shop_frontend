@@ -28,22 +28,20 @@ const CheckoutModal = () => {
       <MaxWithLayout>
 
         {isOpenCheckout &&
-            <>
-                <div style={{display: step ? 'block' : 'none', minHeight: '90vh', height: '100%', paddingBottom: 20}}>
-                    <FirstStep
-                        step={step}
-                        setStep={setStep}
-                    />
-                </div>
-
-                <div style={{display: step ? 'none' : 'block', minHeight: '90vh', height: '100%', paddingBottom: 10}}>
-                    <SecondStep
-                        step={step}
-                        setStep={setStep}
-                    />
-                </div>
-            </>
+            <div style={{display: step ? 'block' : 'none', minHeight: '90vh', height: '100%', paddingBottom: 20}}>
+                <FirstStep
+                    step={step}
+                    setStep={setStep}
+                />
+            </div>
         }
+
+        <div style={{display: step ? 'none' : 'block', minHeight: '90vh', height: '100%', paddingBottom: 10}}>
+          <SecondStep
+            step={step}
+            setStep={setStep}
+          />
+        </div>
 
       </MaxWithLayout>
     </div>
