@@ -72,7 +72,10 @@ const ProductModal = () => {
         message: `Извините, достигнут лимит. Это максимально возможное количество товаров в наличии`
       })
     } else {
+      const primary_image = productData?.images?.[0] || null
       addToBucketEvent({
+        primary_image,
+        ...productData,
         ...productModal,
         article: productModal.article,
         size: selectedSize,
@@ -80,6 +83,8 @@ const ProductModal = () => {
       })
       console.log('addToBucket')
       console.log({
+        primary_image,
+        ...productData,
         ...productModal,
         article: productModal.article,
         size: selectedSize,
