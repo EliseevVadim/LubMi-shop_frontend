@@ -346,7 +346,7 @@ const ProductModal = () => {
         onOk={handleOk}
         onCancel={handleCancel}
         footer={null}
-        style={{top: 0}}
+        style={{top: 0, zIndex: 999}}
         width="100%"
         bodyStyle={{padding: 0}}
         centered={true}

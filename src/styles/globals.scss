@@ -157,7 +157,6 @@ input::placeholder {
   font-family: $fontBase,
 }
 
-
 .ant-select-arrow {
   display: none !important;
 }
@@ -206,13 +205,10 @@ input::placeholder {
   border-radius: 0 !important;
 }
 
-.ant-modal-mask {
-  z-index: 990 !important;
-}
 
-.ant-modal-wrap {
-  z-index: 990 !important;
-}
+//.ant-modal-wrap {
+//  z-index: 990 !important;
+//}
 
 .p-h20 {
   padding: 0 20px;
