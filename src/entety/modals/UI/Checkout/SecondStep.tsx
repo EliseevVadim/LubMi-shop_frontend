@@ -173,8 +173,8 @@ const SecondStep = ({
     const interval = setInterval(() => {
       CheckOrderPayedFx()
         .then((response: any) => {
-          console.log('response')
-          console.log(response?.data)
+          // console.log('response')
+          // console.log(response?.data)
 
           if (response?.data?.status === "CONFIRMED") {
             onSetNotification({
@@ -195,7 +195,8 @@ const SecondStep = ({
             response?.data?.status === "CANCELED" ||
             response?.data?.status === "DEADLINE_EXPIRED" ||
             response?.data?.status === "REJECTED" ||
-            response?.data?.status === "AUTH_FAIL"
+            response?.data?.status === "AUTH_FAIL" ||
+            response?.data?.status === "UNKNOWN"
           ) {
             onSetNotification({
               title: 'Произошла ошибка',

@@ -13,7 +13,7 @@ import {useRouter} from "next/router";
 import {$productModal, setProductModal} from "@/entety/modals/model";
 import {useUnit} from "effector-react";
 import {$favorites} from "@/entety/client/favorite/model";
-import {$bucket} from "@/entety/client/bucket/model";
+import {$bucket, changeActiveOrder} from "@/entety/client/bucket/model";
 
 
 const MainLayout: FC<PropsWithChildren<any>> = ({
@@ -25,6 +25,15 @@ const MainLayout: FC<PropsWithChildren<any>> = ({
   useEffect(() => {
     if (router.query.product) {
       setProductModal({...productModal, article: router.query.product});
+    }
+    if (router.query?.Success === 'true' && router.query?.PaymentId){
+      console.log('Success')
+      console.log(router.query)
+      changeActiveOrder(router.query?.PaymentId)
+    } else if(router.query?.Success === 'false' && router.query?.PaymentId) {
+      console.log('Error')
+      console.log(router.query)
+      changeActiveOrder(router.query?.PaymentId)
     }
   }, [router.query]);
 
