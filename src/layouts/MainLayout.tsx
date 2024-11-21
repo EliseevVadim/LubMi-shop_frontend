@@ -30,10 +30,14 @@ const MainLayout: FC<PropsWithChildren<any>> = ({
       console.log('Success')
       console.log(router.query)
       changeActiveOrder(router.query?.PaymentId)
+      router.replace(router.pathname, undefined, { shallow: true });
+
     } else if(router.query?.Success === 'false' && router.query?.PaymentId) {
       console.log('Error')
       console.log(router.query)
       changeActiveOrder(router.query?.PaymentId)
+      router.replace(router.pathname, undefined, { shallow: true });
+
     }
   }, [router.query]);
 
