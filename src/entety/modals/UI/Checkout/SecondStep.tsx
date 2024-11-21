@@ -177,20 +177,20 @@ const SecondStep = ({
           // console.log(response?.data)
 
           if (response?.data?.status === "CONFIRMED") {
-            onSetNotification({
-              title: 'Спасибо за покупку!',
-              message: 'Заказ успешно оплачен. Отправка заказов осуществляется еженедельно в понедельник и четверг.\n' +
-                'Отследить передвижение заказа вы можете в приложении транспортной компании.\n\n' +
-                'По дополнительным вопросам обращайтесь в службу поддержки.',
-              isCenter: true
-            })
-            form?.resetFields()
-            onSelectCity(null)
-            onSelectDelivery('cd')
-            onChangeIsOpenCheckout(false)
-            resetBucket()
-            changeActiveOrder(null)
-            onSelectPVS(null)
+            // onSetNotification({
+            //   title: 'Спасибо за покупку!',
+            //   message: 'Заказ успешно оплачен. Отправка заказов осуществляется еженедельно в понедельник и четверг.\n' +
+            //     'Отследить передвижение заказа вы можете в приложении транспортной компании.\n\n' +
+            //     'По дополнительным вопросам обращайтесь в службу поддержки.',
+            //   isCenter: true
+            // })
+            // form?.resetFields()
+            // onSelectCity(null)
+            // onSelectDelivery('cd')
+            // onChangeIsOpenCheckout(false)
+            // resetBucket()
+            // changeActiveOrder(null)
+            // onSelectPVS(null)
           } else if (
             response?.data?.status === "CANCELED" ||
             response?.data?.status === "DEADLINE_EXPIRED" ||
@@ -198,16 +198,16 @@ const SecondStep = ({
             response?.data?.status === "AUTH_FAIL" ||
             response?.data?.status === "UNKNOWN"
           ) {
-            onSetNotification({
-              title: 'Произошла ошибка',
-              message: 'Произошла ошибка при оплате заказа'
-            })
-            form?.resetFields()
-            onSelectCity(null)
-            onSelectDelivery('cd')
-            onChangeIsOpenCheckout(false)
-            resetBucket()
-            changeActiveOrder(null)
+            // onSetNotification({
+            //   title: 'Произошла ошибка',
+            //   message: 'Произошла ошибка при оплате заказа'
+            // })
+            // form?.resetFields()
+            // onSelectCity(null)
+            // onSelectDelivery('cd')
+            // onChangeIsOpenCheckout(false)
+            // resetBucket()
+            // changeActiveOrder(null)
           }
         })
         .catch((e) => {

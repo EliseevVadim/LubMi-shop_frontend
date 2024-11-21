@@ -10,10 +10,17 @@ import LeaveMessageModal from "../entety/modals/UI/LeaveMessageModal";
 import ProductModal from "../entety/modals/UI/ProductModal";
 import CheckoutModal from "../entety/modals/UI/CheckoutModal";
 import {useRouter} from "next/router";
-import {$productModal, setProductModal} from "@/entety/modals/model";
+import {$productModal, onChangeIsOpenCheckout, onSetNotification, setProductModal} from "@/entety/modals/model";
 import {useUnit} from "effector-react";
 import {$favorites} from "@/entety/client/favorite/model";
-import {$bucket, changeActiveOrder} from "@/entety/client/bucket/model";
+import {
+  $bucket,
+  changeActiveOrder,
+  onSelectCity,
+  onSelectDelivery,
+  onSelectPVS,
+  resetBucket
+} from "@/entety/client/bucket/model";
 
 
 const MainLayout: FC<PropsWithChildren<any>> = ({
@@ -27,17 +34,37 @@ const MainLayout: FC<PropsWithChildren<any>> = ({
       setProductModal({...productModal, article: router.query.product});
     }
     if (router.query?.Success === 'true' && router.query?.PaymentId){
-      console.log('Success')
-      console.log(router.query)
-      changeActiveOrder(router.query?.PaymentId)
+      onSetNotification({
+        title: 'Спасибо за покупку!',
+        message: 'Заказ успешно оплачен. Отправка заказов осуществляется еженедельно в понедельник и четверг.\n' +
+          'Отследить передвижение заказа вы можете в приложении транспортной компании.\n\n' +
+          'По дополнительным вопросам обращайтесь в службу поддержки.',
+        isCenter: true
+      })
+      onSelectCity(null)
+      onSelectDelivery('cd')
+      onChangeIsOpenCheckout(false)
+      resetBucket()
+      changeActiveOrder(null)
+      onSelectPVS(null)
+
+      changeActiveOrder(null)
       router.replace(router.pathname, undefined, { shallow: true });
 
     } else if(router.query?.Success === 'false' && router.query?.PaymentId) {
-      console.log('Error')
-      console.log(router.query)
-      changeActiveOrder(router.query?.PaymentId)
-      router.replace(router.pathname, undefined, { shallow: true });
 
+      onSetNotification({
+        title: 'Произошла ошибка',
+        message: 'Произошла ошибка при оплате заказа'
+      })
+      form?.resetFields()
+      onSelectCity(null)
+      onSelectDelivery('cd')
+      onChangeIsOpenCheckout(false)
+      resetBucket()
+
+      changeActiveOrder(null)
+      router.replace(router.pathname, undefined, { shallow: true });
     }
   }, [router.query]);
 
