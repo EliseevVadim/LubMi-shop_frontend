@@ -184,12 +184,12 @@ const SecondStep = ({
             //     'По дополнительным вопросам обращайтесь в службу поддержки.',
             //   isCenter: true
             // })
-            // form?.resetFields()
+            form?.resetFields()
             // onSelectCity(null)
             // onSelectDelivery('cd')
             // onChangeIsOpenCheckout(false)
             // resetBucket()
-            // changeActiveOrder(null)
+            changeActiveOrder(null)
             // onSelectPVS(null)
           } else if (
             response?.data?.status === "CANCELED" ||
@@ -202,12 +202,12 @@ const SecondStep = ({
             //   title: 'Произошла ошибка',
             //   message: 'Произошла ошибка при оплате заказа'
             // })
-            // form?.resetFields()
+            form?.resetFields()
             // onSelectCity(null)
             // onSelectDelivery('cd')
             // onChangeIsOpenCheckout(false)
             // resetBucket()
-            // changeActiveOrder(null)
+            changeActiveOrder(null)
           }
         })
         .catch((e) => {

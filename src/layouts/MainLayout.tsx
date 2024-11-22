@@ -47,8 +47,7 @@ const MainLayout: FC<PropsWithChildren<any>> = ({
       resetBucket()
       changeActiveOrder(null)
       onSelectPVS(null)
-
-      changeActiveOrder(null)
+      changeActiveOrder(router.query?.PaymentId)
       router.replace(router.pathname, undefined, { shallow: true });
 
     } else if(router.query?.Success === 'false' && router.query?.PaymentId) {
@@ -57,13 +56,11 @@ const MainLayout: FC<PropsWithChildren<any>> = ({
         title: 'Произошла ошибка',
         message: 'Произошла ошибка при оплате заказа'
       })
-      form?.resetFields()
       onSelectCity(null)
       onSelectDelivery('cd')
       onChangeIsOpenCheckout(false)
       resetBucket()
-
-      changeActiveOrder(null)
+      changeActiveOrder(router.query?.PaymentId)
       router.replace(router.pathname, undefined, { shallow: true });
     }
   }, [router.query]);
