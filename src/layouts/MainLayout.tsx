@@ -45,7 +45,6 @@ const MainLayout: FC<PropsWithChildren<any>> = ({
       onSelectDelivery('cd')
       onChangeIsOpenCheckout(false)
       resetBucket()
-      changeActiveOrder(null)
       onSelectPVS(null)
       changeActiveOrder(router.query?.PaymentId)
       router.replace(router.pathname, undefined, { shallow: true });
