@@ -169,15 +169,15 @@ const FirstStep = ({
                             </div>
                         </Radio>
                     }
-                    {
-                      bucketCalculated?.['pr']?.cost && isRussianPostAvaible &&
-                        <Radio value={'pr'}>
-                            <div className="checkout-modal-main-form-radio">
-                                Доставка почтой
-                                России, <span> от {bucketCalculated?.['pr']?.days} дней, от {bucketCalculated?.['pr']?.cost} руб.</span>
-                            </div>
-                        </Radio>
-                    }
+                    {/*{*/}
+                    {/*  bucketCalculated?.['pr']?.cost && isRussianPostAvaible &&*/}
+                    {/*    <Radio value={'pr'}>*/}
+                    {/*        <div className="checkout-modal-main-form-radio">*/}
+                    {/*            Доставка почтой*/}
+                    {/*            России, <span> от {bucketCalculated?.['pr']?.days} дней, от {bucketCalculated?.['pr']?.cost} руб.</span>*/}
+                    {/*        </div>*/}
+                    {/*    </Radio>*/}
+                    {/*}*/}
                   </Space>
                 </Radio.Group>
                 :
