@@ -27,6 +27,12 @@ const ContactContent = () => {
             Телефон клиентской поддержки:
             <a href="tel:+7 918 008 2891"> +7 918 008 2891</a>
           </div>
+          <div className="contact-inside-phone">
+            ИП МИШАНКОВА ЛЮБОВЬ АЛЕКСЕЕВНА<br/>
+            Юридический адрес: г. Краснодар, ул.Колхозная 5<br/>
+            ИНН 231015150686<br/>
+            ОГРНИП 323237500525672<br/>
+          </div>
           <div className="contact-inside-schedule">
             пн-пт с 11:00 до 21:00
           </div>

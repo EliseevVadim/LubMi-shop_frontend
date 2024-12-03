@@ -240,7 +240,7 @@ const FirstStep = ({
 
           <div className="checkout-modal-main-form-button">
             <CustomButton
-              disable={!selectedCities?.id}
+              disable={!selectedCities?.id || (!bucketCalculated?.['cd']?.cost && !bucketCalculated?.['cp']?.cost )}
               isLoading={isLoadingCheckout}
               title={'Продолжить'}
               padding={'24px 0'}
@@ -250,6 +250,14 @@ const FirstStep = ({
               onClick={() => setStep(false)}
             />
           </div>
+          {!isLoadingCalculate && !!selectedCities && bucketCalculated?.price && (!bucketCalculated?.['cd']?.cost && !bucketCalculated?.['cp']?.cost ) &&
+            <div style={{marginTop: 10}}>
+                К сожалению доставка в выбранный город на данный момент не осуществляется.
+
+                Обратитесь в наш <a href="https://t.me/lubmi_ru" style={{color: 'blue'}}>чат поддержки</a> мы решим эту проблему.
+            </div>
+
+          }
 
         </div>
 
