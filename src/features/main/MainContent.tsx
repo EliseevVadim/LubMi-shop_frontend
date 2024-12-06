@@ -61,7 +61,7 @@ const MainContent: FC = () => {
   const [data, setData] = useState<any>([])
   const [isLoading, setIsLoading] = useState<any>(true)
   const [page, setPage] = useState<any>(1)
-  const [limit, setLimit] = useState<any>(10)
+  const [limit, setLimit] = useState<number>(10)
   const [sort, setSort] = useState<any>('novelties-first')
   const [totalCount, setTotalCount] = useState<any>(0)
 
@@ -144,10 +144,13 @@ const MainContent: FC = () => {
       <div className="home-catalog">
         <Spin spinning={isLoading}>
           <Catalog
+            limit={limit}
             products={data}
             replaceUrl={false}
             totalCount={totalCount}
-            setSort={setSort}
+            setSort={(limit) =>{
+              setLimit(limit)
+            }}
           />
         </Spin>
       </div>
@@ -155,11 +158,14 @@ const MainContent: FC = () => {
       <div className="home-catalog">
         <Spin spinning={isLoading1}>
           <Catalog
+            limit={limit1}
             title={'Бестселлеры'}
             products={data1}
             replaceUrl={false}
             totalCount={totalCount1}
-            setSort={setSort1}
+            setSort={(limit) =>{
+              setLimit1(limit)
+            }}
             isWithSort={false}
           />
         </Spin>

@@ -1,9 +1,9 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, {FC, PropsWithChildren} from 'react';
 import MaxWithLayout from "../../../layouts/MaxWithLayout";
 import SortBloc from "./SortBloc";
 import Card from "./Card";
 import CustomButton from "../common/CustomButton";
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 
 const Catalog: FC<PropsWithChildren<{
   title?: string,
@@ -11,13 +11,15 @@ const Catalog: FC<PropsWithChildren<{
   replaceUrl?: boolean,
   isWithSort?: boolean,
   products?: any[]
-  setSort?: any
+  setSort?: (data: number) => void
+  limit?: number
 }>> = ({
          title = 'Каталог',
          products,
          replaceUrl = false,
          isWithSort = true,
          totalCount = 0,
+         limit = 10,
          setSort = () => {
          }
        }) => {
@@ -26,23 +28,26 @@ const Catalog: FC<PropsWithChildren<{
 
   const changePage = () => {
     if (replaceUrl) {
-      const { pathname, query } = router;
-      const newQuery = { ...query, limit: query?.limit ? Number(query?.limit) + 10 : 20 };
+      const {pathname, query} = router;
+      const newQuery = {...query, limit: query?.limit ? Number(query?.limit) + 10 : 20};
       const href = {
         pathname,
         query: newQuery,
       };
       router.push(href);
     } else {
-      setSort()
+      setSort(limit + 10)
     }
   }
+
+  console.log('products')
+  console.log(products)
 
   return (
     <MaxWithLayout>
       <div className='catalog'>
         <div className="catalog-line">
-          <div className="catalog-line-extra" />
+          <div className="catalog-line-extra"/>
         </div>
         <div className="catalog-top">
           <h2>
@@ -50,13 +55,13 @@ const Catalog: FC<PropsWithChildren<{
           </h2>
           {
             isWithSort &&
-            <SortBloc replaceUrl={replaceUrl} setCurrentSort={setSort} />
+              <SortBloc replaceUrl={replaceUrl} setCurrentSort={setSort}/>
           }
         </div>
         <div className="catalog-items">
           {
             products?.map((item: any) =>
-              <Card item={item} key={item?.article} />
+              <Card item={item} key={item?.article}/>
             )
           }
         </div>
