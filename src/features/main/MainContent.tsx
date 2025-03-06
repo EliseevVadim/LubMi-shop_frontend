@@ -108,7 +108,7 @@ const MainContent: FC = () => {
         <Slider {...settings} >
           {
             slides?.map((item: any, index: any) =>
-              <div className="home-slider-item">
+              <div className="home-slider-item" key={index}>
                 <div className="home-slider-item-img-desc">
                   <Image
                       layout={'fill'}
@@ -149,7 +149,13 @@ const MainContent: FC = () => {
             replaceUrl={false}
             totalCount={totalCount}
             setSort={(limit) =>{
-              setLimit(limit)
+              console.log('limit')
+              console.log(limit)
+              if (typeof limit === 'number'){
+                setLimit(limit)
+              } else {
+                setSort(limit)
+              }
             }}
           />
         </Spin>
