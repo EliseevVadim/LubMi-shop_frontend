@@ -4,7 +4,7 @@ import { $user, setUser } from "../entety/admin/user/model/index";
 
 const apiToken = axios.create({
   // baseURL: 'https://api.lubmi.ru/api', //prod
-  baseURL: 'http://193.168.49.60/api', //dev
+  baseURL: 'https://lubmi-backend.it-korobka.ru/api', //dev
   headers: {
     Accept: 'application/json',
     Cache: "no-cache",

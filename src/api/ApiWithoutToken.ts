@@ -5,7 +5,7 @@ import { message } from "antd";
 
 const api = axios.create({
   // baseURL: 'https://api.lubmi.ru/api', //prod
-  baseURL: 'http://193.168.49.60/api', //dev
+  baseURL: 'https://lubmi-backend.it-korobka.ru/api', //dev
   headers: {
     Accept: 'application/json',
     withCredentials: false,
