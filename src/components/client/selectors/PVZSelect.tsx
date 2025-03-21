@@ -80,10 +80,8 @@ const PVZSelect = ({
   const [bucket] = useUnit([$bucket])
 
   const totalWeight = bucket?.reduce((sum, item) => sum + item?.actual_weight * item?.quantity, 0);
-  console.log('bucket')
-  console.log(totalWeight)
   const options = searchPVSData
-    ?.filter((item: any) => item?.weight_max && Number(item?.weight_max) * 1000 <= totalWeight)
+    ?.filter((item: any) => item?.weight_max && Number(item?.weight_max) * 1000 >= totalWeight)
     ?.map((option: any) => ({
     value: option?.code?.toString(),
     label: option?.location?.address,
