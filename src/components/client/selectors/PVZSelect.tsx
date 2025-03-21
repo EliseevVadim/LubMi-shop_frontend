@@ -1,4 +1,6 @@
 import Select from 'react-select';
+import {$bucket} from "@/entety/client/bucket/model";
+import {useUnit} from "effector-react/effector-react.umd";
 
 const PVZSelect = ({
                      selectedPVS,
@@ -75,9 +77,17 @@ const PVZSelect = ({
     }),
   };
 
-  const options = searchPVSData?.map((option: any) => ({
+  const [bucket] = useUnit([$bucket])
+
+  const totalWeight = bucket?.reduce((sum, item) => sum + item?.actual_weight * item?.quantity, 0);
+  console.log('bucket')
+  console.log(totalWeight)
+  const options = searchPVSData
+    ?.filter(item => item?.weight_max && Number(item?.weight_max) * 1000 <= totalWeight)
+    ?.map((option: any) => ({
     value: option?.code?.toString(),
-    label: option?.location?.address
+    label: option?.location?.address,
+      weight_max: option?.weight_max
   }));
 
   // Обработчик изменений
@@ -102,7 +112,7 @@ const PVZSelect = ({
         isSearchable
         menuPlacement="auto"
         maxMenuHeight={200}
-        noOptionsMessage={() => 'ПВЗ не найден'}
+        noOptionsMessage={() => 'ПВЗ не найден или же максимальный вес товаров привешает допустимый верхний предел'}
         isClearable
       />
     </div>
