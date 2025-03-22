@@ -1,6 +1,7 @@
 import Select from 'react-select';
 import {$bucket} from "@/entety/client/bucket/model";
 import {useUnit} from "effector-react/effector-react.umd";
+import {useEffect} from "react";
 
 const PVZSelect = ({
                      selectedPVS,
@@ -89,8 +90,6 @@ const PVZSelect = ({
   }));
 
   console.log('totalWeight: ' + totalWeight)
-  console.log('options')
-  console.log(options)
 
   // Обработчик изменений
   const handleChange = (selectedOption: any) => {
@@ -102,12 +101,20 @@ const PVZSelect = ({
     setSearchPVS(inputValue);
   };
 
+  const selectedValue = options?.find((option: any) => option.value === selectedPVS?.id) || null
+
+  useEffect(() => {
+    if (options?.length === 0 ){
+      onSelectPVS(null)
+    }
+  }, [options]);
+
   return (
     <div className='select-block'>
       <Select
         styles={customStyles}
         placeholder={'Выберите ПВЗ'}
-        value={options?.find((option: any) => option.value === selectedPVS)}
+        value={selectedValue}
         onChange={handleChange}
         onInputChange={handleInputChange}
         options={options}

@@ -138,6 +138,14 @@ const SecondStep = ({
     if (selectedDelivery === 'cp') {
       // @ts-ignore
       data.delivery_point = selectedPVS?.id
+
+      if (!selectedPVS?.id){
+        onSetNotification({
+          title: 'Произошла ошибка',
+          message: 'ПВЗ не выбран'
+        })
+        return
+      }
     } else {
       data.cu_street = selectedStreet || null
       data.cu_building = selectedBuilding || null
