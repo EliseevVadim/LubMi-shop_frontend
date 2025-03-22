@@ -88,6 +88,10 @@ const PVZSelect = ({
       weight_max: option?.weight_max
   }));
 
+  console.log('totalWeight: ' + totalWeight)
+  console.log('options')
+  console.log(options)
+
   // Обработчик изменений
   const handleChange = (selectedOption: any) => {
     onSelectPVS({ id: selectedOption?.value } as any);
