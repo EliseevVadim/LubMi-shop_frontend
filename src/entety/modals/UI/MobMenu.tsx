@@ -31,7 +31,7 @@ const MobMenu = () => {
     {
       id: 4,
       path: '/care',
-      title: 'Уход'
+      title: 'Уход и состав'
     },
     {
       id: 5,
