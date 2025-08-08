@@ -6,7 +6,7 @@ import CareContent from "../../features/care/CareContent";
 const CarePage = () => {
 
   return (
-    <Meta title={'Уход'}>
+    <Meta title={'Уход и состав'}>
       <MainLayout>
         <CareContent />
       </MainLayout>
