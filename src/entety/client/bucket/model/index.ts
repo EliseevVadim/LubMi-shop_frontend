@@ -72,6 +72,11 @@ export const $pvs = createStore<any[]>([]);
 export const $streets = createStore<any[]>([]);
 export const $building = createStore<any[]>([]);
 export const $selectedCities = createStore<any>(null);
+persist({
+  store: $selectedCities,
+  key: "selectedCities",
+  keyPrefix: "v1",
+});
 export const $selectedPVS  = createStore<any>(null);
 export const $selectedStreet = createStore<any>(null);
 export const $selectedBuilding = createStore<any>(null);

@@ -76,9 +76,6 @@ const FirstStep = ({
     $isRussianPostAvaible,
   ])
 
-  console.log('bucketCalculated')
-  console.log(bucketCalculated)
-
   const [searchCity, setSearchCity] = useState<any>('');
   const [debouncedSearchCity] = useDebounce(searchCity, 500);
 

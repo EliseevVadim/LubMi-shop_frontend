@@ -8,8 +8,10 @@ export const bucketCheckout = async (data: any): Promise<any> => {
 };
 
 export const bucketCities = async (search: any): Promise<any> => {
-  const response = await api.get<any>(`/service/cities/${search}/`);
-  return response.data;
+  if (search){
+    const response = await api.get<any>(`/service/cities/${search}/`);
+    return response.data;
+  }
 };
 
 export const bucketPSVs = async (data: any): Promise<any> => {
@@ -20,7 +22,7 @@ export const bucketPSVs = async (data: any): Promise<any> => {
 };
 
 export const bucketStreet = async (data: any): Promise<any> => {
-  if ($selectedCities?.getState()?.id){
+  if ($selectedCities?.getState()?.id && data){
     const response = await api.get<any>(`/service/streets/${$selectedCities?.getState()?.id}/${data}/`);
     return response.data;
   }
