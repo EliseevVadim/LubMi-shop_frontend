@@ -264,7 +264,7 @@ const ProductModal = () => {
               </div>
               <div className="product-modal-main-text">
                 <h1>
-                  {productData?.title} ({productData?.color})
+                  {productData?.title} {productData?.color && `(${productData?.color})` }
                 </h1>
                 <h2>
                   Артикул: {productData?.article}
