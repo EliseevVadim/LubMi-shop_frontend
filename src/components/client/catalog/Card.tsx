@@ -77,7 +77,7 @@ const Card: FC<PropsWithChildren<{ item?: any }>> = ({ item }) => {
         className="card-title"
         onClick={() => goToProduct(item)}
       >
-        {item?.title} ({item?.color})
+        {item?.title} {item?.color ? `(${item?.color})` :''}
       </p>
       <div className="card-price">
         {item?.old_price &&

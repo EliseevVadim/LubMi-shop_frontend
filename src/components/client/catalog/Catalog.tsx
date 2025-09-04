@@ -40,9 +40,6 @@ const Catalog: FC<PropsWithChildren<{
     }
   }
 
-  console.log('products')
-  console.log(products)
-
   return (
     <MaxWithLayout>
       <div className='catalog'>
